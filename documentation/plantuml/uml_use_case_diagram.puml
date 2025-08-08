@@ -1,0 +1,258 @@
+@startuml Data Validation Tool - Use Case Diagram
+
+!theme plain
+skinparam usecase {
+    BackgroundColor LightBlue
+    BorderColor DarkBlue
+    ArrowColor DarkBlue
+}
+
+title Data Validation Tool - Use Case Diagram
+
+' Actors
+actor "Data Analyst" as DA
+actor "System Administrator" as SA
+actor "Configuration File" as CF
+actor "Input Data Files" as IDF
+actor "Output Files" as OF
+
+' System boundary
+rectangle "Data Validation System" {
+    
+    ' Main use cases
+    usecase "Configure Validation Pipeline" as UC1
+    usecase "Load Configuration" as UC2
+    usecase "Validate Configuration" as UC3
+    usecase "Enrich Configuration" as UC4
+    
+    ' Data preparation use cases
+    usecase "Prepare Data Frames" as UC5
+    usecase "Validate File Paths" as UC6
+    usecase "Load CSV Files" as UC7
+    usecase "Load Excel Files" as UC8
+    usecase "Clean Data" as UC9
+    usecase "Remove Unnamed Columns" as UC10
+    usecase "Clean Currency Values" as UC11
+    usecase "Detect Join Key Types" as UC12
+    usecase "Validate Data Types" as UC13
+    
+    ' Data joining use cases
+    usecase "Join Data Frames" as UC14
+    usecase "Extract Join Keys" as UC15
+    usecase "Validate Join Keys" as UC16
+    usecase "Perform Full Outer Join" as UC17
+    usecase "Validate Join Results" as UC18
+    
+    ' Data aggregation use cases
+    usecase "Apply Aggregation" as UC19
+    usecase "Validate Aggregation Config" as UC20
+    usecase "Extract Groupby Columns" as UC21
+    usecase "Execute Aggregation" as UC22
+    usecase "Validate Aggregation Results" as UC23
+    usecase "Skip Aggregation" as UC24
+    
+    ' Data comparison use cases
+    usecase "Compare Mapped Columns" as UC25
+    usecase "Extract Column Mapping" as UC26
+    usecase "Select Comparison Strategy" as UC27
+    usecase "Execute Comparison" as UC28
+    usecase "Calculate Differences" as UC29
+    usecase "Calculate Delta Percentages" as UC30
+    usecase "Validate Comparison Results" as UC31
+    usecase "Skip Comparison" as UC32
+    
+    ' Output writing use cases
+    usecase "Write Output File" as UC33
+    usecase "Validate Output Config" as UC34
+    usecase "Format Data" as UC35
+    usecase "Write CSV File" as UC36
+    usecase "Write Excel File" as UC37
+    usecase "Handle File Overwrite" as UC38
+    usecase "Validate Output Results" as UC39
+    
+    ' Factory and dependency injection use cases
+    usecase "Create Data Reader" as UC40
+    usecase "Create Data Writer" as UC41
+    usecase "Create File Validator" as UC42
+    usecase "Resolve Dependencies" as UC43
+    usecase "Initialize Pipeline Orchestrator" as UC44
+    
+    ' Error handling use cases
+    usecase "Handle Configuration Errors" as UC45
+    usecase "Handle File Not Found" as UC46
+    usecase "Handle Data Validation Errors" as UC47
+    usecase "Handle Join Errors" as UC48
+    usecase "Handle Aggregation Errors" as UC49
+    usecase "Handle Comparison Errors" as UC50
+    usecase "Handle Output Errors" as UC51
+    
+    ' Pipeline orchestration use cases
+    usecase "Execute Complete Pipeline" as UC52
+    usecase "Monitor Pipeline Progress" as UC53
+    usecase "Generate Execution Summary" as UC54
+    usecase "Handle Pipeline Failures" as UC55
+    
+    ' Interactive mode use cases
+    usecase "Run Interactive Mode" as UC56
+    usecase "Get User Input" as UC57
+    usecase "Display Sample Configuration" as UC58
+    usecase "Validate User Input" as UC59
+    
+    ' Future extensibility placeholders
+    usecase "Extend File Formats" as UC60
+    usecase "Add New Aggregation Types" as UC61
+    usecase "Add New Comparison Strategies" as UC62
+    usecase "Add New Output Formats" as UC63
+    usecase "Add Custom Validators" as UC64
+    usecase "Add Performance Monitoring" as UC65
+    usecase "Add Logging and Auditing" as UC66
+}
+
+' Relationships - Data Analyst
+DA --> UC1
+DA --> UC52
+DA --> UC56
+DA --> UC57
+DA --> UC58
+DA --> UC53
+DA --> UC54
+
+' Relationships - System Administrator
+SA --> UC45
+SA --> UC46
+SA --> UC47
+SA --> UC48
+SA --> UC49
+SA --> UC50
+SA --> UC51
+SA --> UC55
+
+' Relationships - Configuration File
+CF --> UC2
+CF --> UC3
+CF --> UC4
+
+' Relationships - Input Data Files
+IDF --> UC6
+IDF --> UC7
+IDF --> UC8
+IDF --> UC9
+IDF --> UC10
+IDF --> UC11
+IDF --> UC12
+IDF --> UC13
+
+' Relationships - Output Files
+OF --> UC33
+OF --> UC34
+OF --> UC35
+OF --> UC36
+OF --> UC37
+OF --> UC38
+OF --> UC39
+
+' Include relationships
+UC52 ..> UC2 : <<include>>
+UC52 ..> UC3 : <<include>>
+UC52 ..> UC4 : <<include>>
+UC52 ..> UC5 : <<include>>
+UC52 ..> UC14 : <<include>>
+UC52 ..> UC19 : <<include>>
+UC52 ..> UC25 : <<include>>
+UC52 ..> UC33 : <<include>>
+
+UC5 ..> UC6 : <<include>>
+UC5 ..> UC7 : <<include>>
+UC5 ..> UC8 : <<include>>
+UC5 ..> UC9 : <<include>>
+UC5 ..> UC12 : <<include>>
+
+UC9 ..> UC10 : <<include>>
+UC9 ..> UC11 : <<include>>
+
+UC14 ..> UC15 : <<include>>
+UC14 ..> UC16 : <<include>>
+UC14 ..> UC17 : <<include>>
+UC14 ..> UC18 : <<include>>
+
+UC19 ..> UC20 : <<include>>
+UC19 ..> UC21 : <<include>>
+UC19 ..> UC22 : <<include>>
+UC19 ..> UC23 : <<include>>
+
+UC25 ..> UC26 : <<include>>
+UC25 ..> UC27 : <<include>>
+UC25 ..> UC28 : <<include>>
+UC25 ..> UC31 : <<include>>
+
+UC28 ..> UC29 : <<include>>
+UC28 ..> UC30 : <<include>>
+
+UC33 ..> UC34 : <<include>>
+UC33 ..> UC35 : <<include>>
+UC33 ..> UC36 : <<include>>
+UC33 ..> UC37 : <<include>>
+UC33 ..> UC38 : <<include>>
+UC33 ..> UC39 : <<include>>
+
+UC44 ..> UC43 : <<include>>
+UC44 ..> UC40 : <<include>>
+UC44 ..> UC41 : <<include>>
+UC44 ..> UC42 : <<include>>
+
+' Extend relationships
+UC19 <.. UC24 : <<extend>>
+UC25 <.. UC32 : <<extend>>
+
+' Future extensibility relationships
+UC60 ..> UC40 : <<extend>>
+UC61 ..> UC22 : <<extend>>
+UC62 ..> UC27 : <<extend>>
+UC63 ..> UC36 : <<extend>>
+UC63 ..> UC37 : <<extend>>
+UC64 ..> UC42 : <<extend>>
+UC65 ..> UC53 : <<extend>>
+UC66 ..> UC54 : <<extend>>
+
+' Notes
+note right of UC52
+  Main pipeline orchestrates
+  all validation steps
+end note
+
+note right of UC60
+  Future: Support for JSON,
+  Parquet, XML, etc.
+end note
+
+note right of UC61
+  Future: Custom aggregation
+  functions
+end note
+
+note right of UC62
+  Future: Fuzzy matching,
+  custom comparison logic
+end note
+
+note right of UC63
+  Future: PDF, HTML, XML
+  output formats
+end note
+
+note right of UC64
+  Future: Custom validation
+  rules and constraints
+end note
+
+note right of UC65
+  Future: Performance metrics,
+  execution time tracking
+end note
+
+note right of UC66
+  Future: Detailed logging,
+  audit trails
+end note
+
+@enduml 

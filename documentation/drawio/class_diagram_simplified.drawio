@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="5.0" etag="class_diagram_simplified" version="22.1.16" type="device">
+  <diagram name="Data Validation Tool - Simplified Class Diagram" id="class_diagram_simplified">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title -->
+        <mxCell id="title" value="Data Validation Tool - Simplified Class Diagram" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="350" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Entry Point Package -->
+        <mxCell id="entry_point_package" value="Entry Point" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="run_validation" value="+ main(args: List[str]): void&#xa;+ run_interactive_mode(): void" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="entry_point_package">
+          <mxGeometry y="26" width="200" height="94" as="geometry" />
+        </mxCell>
+
+        <!-- Pipeline Orchestration Package -->
+        <mxCell id="pipeline_package" value="Pipeline Orchestration" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="280" y="80" width="280" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="validation_pipeline_orchestrator" value="+ execute_pipeline(config: Dict[str, Any]): Dict[str, Any]&#xa;- _prepare_data(config: Dict[str, Any]): Tuple[pd.DataFrame, pd.DataFrame]&#xa;- _join_data(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame&#xa;- _aggregate_data(df: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame&#xa;- _compare_data(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame&#xa;- _write_output(df: pd.DataFrame, config: Dict[str, Any]): str" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="pipeline_package">
+          <mxGeometry y="26" width="280" height="174" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dependency_container" value="+ register_service(service_type: str, service: Any): void&#xa;+ get_service(service_type: str): Any&#xa;+ register_factory(factory_type: str, factory: Any): void&#xa;+ get_factory(factory_type: str): Any" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="80" width="280" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Configuration Management Package -->
+        <mxCell id="config_package" value="Configuration Management" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="920" y="80" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="configuration_service" value="+ load_configuration(file_path: str): Dict[str, Any]&#xa;+ validate_configuration(config: Dict[str, Any]): bool&#xa;+ enrich_configuration(config: Dict[str, Any]): Dict[str, Any]" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="config_package">
+          <mxGeometry y="26" width="200" height="174" as="geometry" />
+        </mxCell>
+
+        <!-- Core Processing Package -->
+        <mxCell id="core_processing_package" value="Core Processing" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="400" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="data_preparer" value="+ prepare_data_frames(config: Dict[str, Any]): Tuple[pd.DataFrame, pd.DataFrame]" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="core_processing_package">
+          <mxGeometry y="26" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="data_joiner" value="+ join_dataframes(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="core_processing_package">
+          <mxGeometry y="56" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="data_aggregator" value="+ apply_aggregation(df: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="core_processing_package">
+          <mxGeometry y="86" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="data_comparer" value="+ compare_mapped_columns(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="core_processing_package">
+          <mxGeometry y="116" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="output_writer" value="+ write_output(df: pd.DataFrame, config: Dict[str, Any]): str" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="core_processing_package">
+          <mxGeometry y="146" width="400" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Factories Package -->
+        <mxCell id="factories_package" value="Factories" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="480" y="240" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="data_processor_factory" value="+ create_reader(file_path: str): IDataReader&#xa;+ create_writer(file_path: str): IDataWriter&#xa;+ create_validator(file_path: str): FileValidator" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="factories_package">
+          <mxGeometry y="26" width="200" height="94" as="geometry" />
+        </mxCell>
+
+        <!-- Readers & Writers Package -->
+        <mxCell id="readers_writers_package" value="Readers &amp; Writers" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="720" y="240" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="csv_reader" value="+ read_dataframe(file_path: str, sheet_name: Optional[str]): pd.DataFrame" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="readers_writers_package">
+          <mxGeometry y="26" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="excel_reader" value="+ read_dataframe(file_path: str, sheet_name: Optional[str]): pd.DataFrame" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="readers_writers_package">
+          <mxGeometry y="56" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="csv_writer" value="+ write_dataframe(df: pd.DataFrame, file_path: str, **kwargs): str" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="readers_writers_package">
+          <mxGeometry y="86" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="excel_writer" value="+ write_dataframe(df: pd.DataFrame, file_path: str, **kwargs): str" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="readers_writers_package">
+          <mxGeometry y="116" width="200" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Contracts Package -->
+        <mxCell id="contracts_package" value="Contracts (Interfaces)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="960" y="240" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="idata_preparer" value="&lt;interface&gt;&#xa;IDataPreparer&#xa;+ prepare_data_frames(config: Dict[str, Any]): Tuple[pd.DataFrame, pd.DataFrame]" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="contracts_package">
+          <mxGeometry y="26" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="idata_joiner" value="&lt;interface&gt;&#xa;IDataJoiner&#xa;+ join_dataframes(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="contracts_package">
+          <mxGeometry y="56" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="idata_aggregator" value="&lt;interface&gt;&#xa;IDataAggregator&#xa;+ apply_aggregation(df: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="contracts_package">
+          <mxGeometry y="86" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="idata_comparer" value="&lt;interface&gt;&#xa;IDataComparer&#xa;+ compare_mapped_columns(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="contracts_package">
+          <mxGeometry y="116" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ioutput_writer" value="&lt;interface&gt;&#xa;IOutputWriter&#xa;+ write_output(df: pd.DataFrame, config: Dict[str, Any]): str" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="contracts_package">
+          <mxGeometry y="146" width="200" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Exceptions Package -->
+        <mxCell id="exceptions_package" value="Exceptions" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="40" y="480" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="validation_error" value="ValidationError&#xa;+ message: str&#xa;+ __init__(message: str)" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="exceptions_package">
+          <mxGeometry y="26" width="200" height="94" as="geometry" />
+        </mxCell>
+
+        <!-- Relationships -->
+        <!-- Entry Point to Pipeline Orchestrator -->
+        <mxCell id="rel1" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="run_validation" target="validation_pipeline_orchestrator">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="290" y="180" as="sourcePoint" />
+            <mxPoint x="340" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel1_label" value="uses" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel1">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint x="1" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Pipeline Orchestrator to Dependency Container -->
+        <mxCell id="rel2" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="validation_pipeline_orchestrator" target="dependency_container">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="590" y="180" as="sourcePoint" />
+            <mxPoint x="640" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel2_label" value="uses" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel2">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint x="1" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Core Processing implements Contracts -->
+        <mxCell id="rel3" value="" style="endArrow=open;dashed=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="data_preparer" target="idata_preparer">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="470" y="255" as="sourcePoint" />
+            <mxPoint x="520" y="205" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel3_label" value="implements" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel3">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint x="1" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Factory creates Readers/Writers -->
+        <mxCell id="rel4" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="data_processor_factory" target="csv_reader">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="710" y="295" as="sourcePoint" />
+            <mxPoint x="760" y="245" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel4_label" value="creates" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel4">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint x="1" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Exception inheritance -->
+        <mxCell id="rel5" value="" style="endArrow=open;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="validation_error" target="validation_error">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="140" y="480" as="sourcePoint" />
+            <mxPoint x="190" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel5_label" value="extends" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rel5">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint x="1" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile> 

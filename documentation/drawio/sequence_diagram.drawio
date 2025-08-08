@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="5.0" etag="sequence_diagram" version="22.1.16" type="device">
+  <diagram name="Data Validation Tool - Sequence Diagram" id="sequence_diagram">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title -->
+        <mxCell id="title" value="Data Validation Tool - Sequence Diagram" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="20" width="400" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Lifelines -->
+        <!-- User -->
+        <mxCell id="user_lifeline" value="User" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="user_line" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="user_lifeline" target="user_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="110" y="120" as="sourcePoint" />
+            <mxPoint x="110" y="1600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Entry Point -->
+        <mxCell id="entry_lifeline" value="run_validation.py" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="80" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="entry_line" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="entry_lifeline" target="entry_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="260" y="120" as="sourcePoint" />
+            <mxPoint x="260" y="1600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Pipeline Orchestrator -->
+        <mxCell id="orchestrator_lifeline" value="ValidationPipelineOrchestrator" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="80" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="orchestrator_line" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="orchestrator_lifeline" target="orchestrator_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="480" y="120" as="sourcePoint" />
+            <mxPoint x="480" y="1600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Configuration Service -->
+        <mxCell id="config_lifeline" value="ConfigurationService" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="80" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="config_line" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="config_lifeline" target="config_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="720" y="120" as="sourcePoint" />
+            <mxPoint x="720" y="1600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Data Preparer -->
+        <mxCell id="preparer_lifeline" value="DataPreparer" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="860" y="80" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="preparer_line" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="preparer_lifeline" target="preparer_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="920" y="120" as="sourcePoint" />
+            <mxPoint x="920" y="1600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Data Joiner -->
+        <mxCell id="joiner_lifeline" value="DataJoiner" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="80" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="joiner_line" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="joiner_lifeline" target="joiner_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1100" y="120" as="sourcePoint" />
+            <mxPoint x="1100" y="1600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Data Aggregator -->
+        <mxCell id="aggregator_lifeline" value="DataAggregator" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="80" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aggregator_line" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="aggregator_lifeline" target="aggregator_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1290" y="120" as="sourcePoint" />
+            <mxPoint x="1290" y="1600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Data Comparer -->
+        <mxCell id="comparer_lifeline" value="DataComparer" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="80" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="comparer_line" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="comparer_lifeline" target="comparer_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1480" y="120" as="sourcePoint" />
+            <mxPoint x="1480" y="1600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Messages -->
+        <!-- User to Entry Point -->
+        <mxCell id="msg1" value="execute_pipeline(config_file)" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="user_lifeline" target="entry_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="150" y="200" as="sourcePoint" />
+            <mxPoint x="200" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Entry Point to Orchestrator -->
+        <mxCell id="msg2" value="execute_pipeline(config)" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="entry_lifeline" target="orchestrator_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="330" y="280" as="sourcePoint" />
+            <mxPoint x="380" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Orchestrator to Config Service -->
+        <mxCell id="msg3" value="load_configuration(config_path)" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="orchestrator_lifeline" target="config_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="590" y="360" as="sourcePoint" />
+            <mxPoint x="640" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Config Service Response -->
+        <mxCell id="msg4" value="return config_dict" style="endArrow=open;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="config_lifeline" target="orchestrator_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="640" y="440" as="sourcePoint" />
+            <mxPoint x="590" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Orchestrator to Config Service -->
+        <mxCell id="msg5" value="validate_configuration(config)" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="orchestrator_lifeline" target="config_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="590" y="520" as="sourcePoint" />
+            <mxPoint x="640" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Config Service Response -->
+        <mxCell id="msg6" value="return validation_result" style="endArrow=open;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="config_lifeline" target="orchestrator_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="640" y="600" as="sourcePoint" />
+            <mxPoint x="590" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Orchestrator to Data Preparer -->
+        <mxCell id="msg7" value="prepare_data_frames(config)" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="orchestrator_lifeline" target="preparer_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="590" y="680" as="sourcePoint" />
+            <mxPoint x="860" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Data Preparer Response -->
+        <mxCell id="msg8" value="return (df1, df2)" style="endArrow=open;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="preparer_lifeline" target="orchestrator_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="860" y="760" as="sourcePoint" />
+            <mxPoint x="590" y="760" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Orchestrator to Data Joiner -->
+        <mxCell id="msg9" value="join_dataframes(df1, df2, config)" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="orchestrator_lifeline" target="joiner_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="590" y="840" as="sourcePoint" />
+            <mxPoint x="1040" y="840" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Data Joiner Response -->
+        <mxCell id="msg10" value="return joined_df" style="endArrow=open;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="joiner_lifeline" target="orchestrator_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1040" y="920" as="sourcePoint" />
+            <mxPoint x="590" y="920" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Orchestrator to Data Aggregator (conditional) -->
+        <mxCell id="msg11" value="apply_aggregation(df, config)" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="orchestrator_lifeline" target="aggregator_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="590" y="1000" as="sourcePoint" />
+            <mxPoint x="1220" y="1000" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Data Aggregator Response -->
+        <mxCell id="msg12" value="return aggregated_df" style="endArrow=open;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="aggregator_lifeline" target="orchestrator_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1220" y="1080" as="sourcePoint" />
+            <mxPoint x="590" y="1080" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Orchestrator to Data Comparer -->
+        <mxCell id="msg13" value="compare_mapped_columns(df1, df2, config)" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="orchestrator_lifeline" target="comparer_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="590" y="1160" as="sourcePoint" />
+            <mxPoint x="1420" y="1160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Data Comparer Response -->
+        <mxCell id="msg14" value="return comparison_results" style="endArrow=open;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="comparer_lifeline" target="orchestrator_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1420" y="1240" as="sourcePoint" />
+            <mxPoint x="590" y="1240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Orchestrator to Output Writer -->
+        <mxCell id="msg15" value="write_output(results_df, config)" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="orchestrator_lifeline" target="orchestrator_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="590" y="1320" as="sourcePoint" />
+            <mxPoint x="590" y="1320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Output Writer Response -->
+        <mxCell id="msg16" value="return output_file_path" style="endArrow=open;dashed=1;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="orchestrator_lifeline" target="orchestrator_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="480" y="1400" as="sourcePoint" />
+            <mxPoint x="480" y="1400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Orchestrator to Entry Point -->
+        <mxCell id="msg17" value="return results" style="endArrow=open;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="orchestrator_lifeline" target="entry_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="380" y="1480" as="sourcePoint" />
+            <mxPoint x="330" y="1480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Entry Point to User -->
+        <mxCell id="msg18" value="display_success_message()" style="endArrow=open;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="entry_lifeline" target="user_lifeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="200" y="1560" as="sourcePoint" />
+            <mxPoint x="150" y="1560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Activation Bars -->
+        <!-- Entry Point Activation -->
+        <mxCell id="entry_activation" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="255" y="190" width="10" height="1390" as="geometry" />
+        </mxCell>
+
+        <!-- Orchestrator Activation -->
+        <mxCell id="orchestrator_activation" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="475" y="270" width="10" height="1230" as="geometry" />
+        </mxCell>
+
+        <!-- Config Service Activation -->
+        <mxCell id="config_activation" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="715" y="350" width="10" height="270" as="geometry" />
+        </mxCell>
+
+        <!-- Data Preparer Activation -->
+        <mxCell id="preparer_activation" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="915" y="670" width="10" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Data Joiner Activation -->
+        <mxCell id="joiner_activation" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1095" y="830" width="10" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Data Aggregator Activation -->
+        <mxCell id="aggregator_activation" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1285" y="990" width="10" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Data Comparer Activation -->
+        <mxCell id="comparer_activation" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1475" y="1150" width="10" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Notes -->
+        <!-- Aggregation Note -->
+        <mxCell id="agg_note" value="[aggregation_required]" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="600" y="990" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Error Handling Note -->
+        <mxCell id="error_note" value="[error_occurred]&#xa;Display error message&#xa;and terminate" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1650" width="150" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend" value="Legend" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1750" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_sync" value="Synchronous Call" style="text;strokeColor=#666666;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="legend">
+          <mxGeometry y="26" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_async" value="Response/Return" style="text;strokeColor=#666666;fillColor=#d5e8d4;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="legend">
+          <mxGeometry y="46" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_activation" value="Activation Bar" style="text;strokeColor=#666666;fillColor=#000000;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="legend">
+          <mxGeometry y="66" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_note" value="Conditional/Note" style="text;strokeColor=#666666;fillColor=#fff2cc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="legend">
+          <mxGeometry y="86" width="200" height="20" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile> 

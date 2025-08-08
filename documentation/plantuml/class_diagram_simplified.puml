@@ -1,0 +1,260 @@
+@startuml Data Validation Tool - Simplified Class Diagram
+
+!theme plain
+skinparam classAttributeIconSize 0
+skinparam classFontSize 10
+skinparam classFontName Arial
+skinparam packageFontSize 12
+skinparam packageFontName Arial-Bold
+
+title Data Validation Tool - Simplified Class Diagram
+
+' ========================================
+' MAIN PACKAGES
+' ========================================
+
+package "Entry Point" {
+    class run_validation {
+        + main(args: List[str]): void
+        + run_interactive_mode(): void
+    }
+}
+
+package "Pipeline Orchestration" {
+    class ValidationPipelineOrchestrator {
+        + execute_pipeline(config: Dict[str, Any]): Dict[str, Any]
+        - _prepare_data(config: Dict[str, Any]): Tuple[pd.DataFrame, pd.DataFrame]
+        - _join_data(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+        - _aggregate_data(df: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+        - _compare_data(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+        - _write_output(df: pd.DataFrame, config: Dict[str, Any]): str
+    }
+
+    class DependencyContainer {
+        + register_service(service_type: str, service: Any): void
+        + get_service(service_type: str): Any
+        + register_factory(factory_type: str, factory: Any): void
+        + get_factory(factory_type: str): Any
+    }
+}
+
+package "Configuration Management" {
+    class ConfigurationService {
+        + load_configuration(file_path: str): Dict[str, Any]
+        + validate_configuration(config: Dict[str, Any]): bool
+        + enrich_configuration(config: Dict[str, Any]): Dict[str, Any]
+    }
+
+    class ConfigValidator {
+        + validate_config(config: Dict[str, Any]): None
+    }
+
+    class ConfigEnricher {
+        + enrich_config(config: Dict[str, Any]): Dict[str, Any]
+    }
+
+    class FileReader {
+        + read_file(file_path: str): Dict[str, Any]
+        + read_dataframe(file_path: str, sheet_name: Optional[str]): Optional[pd.DataFrame]
+    }
+}
+
+package "Core Processing" {
+    class DataPreparer {
+        + prepare_data_frames(config: Dict[str, Any]): Tuple[pd.DataFrame, pd.DataFrame]
+    }
+
+    class DataJoiner {
+        + join_dataframes(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+    }
+
+    class DataAggregator {
+        + apply_aggregation(df: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+    }
+
+    class DataComparer {
+        + compare_mapped_columns(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+    }
+
+    class OutputWriter {
+        + write_output(df: pd.DataFrame, config: Dict[str, Any]): str
+    }
+}
+
+package "Factories" {
+    class DataProcessorFactory {
+        + create_reader(file_path: str): IDataReader
+        + create_writer(file_path: str): IDataWriter
+        + create_validator(file_path: str): FileValidator
+    }
+
+    class DataReaderFactory {
+        + create_reader(file_path: str): IDataReader
+        + register_reader(file_extension: str, reader_class: Type): void
+    }
+
+    class DataWriterFactory {
+        + create_writer(file_path: str): IDataWriter
+        + register_writer(file_extension: str, writer_class: Type): void
+    }
+}
+
+package "Readers & Writers" {
+    interface IDataReader {
+        + read_dataframe(file_path: str, sheet_name: Optional[str]): pd.DataFrame
+    }
+
+    interface IDataWriter {
+        + write_dataframe(df: pd.DataFrame, file_path: str, **kwargs): str
+    }
+
+    class CSVReader {
+        + read_dataframe(file_path: str, sheet_name: Optional[str]): pd.DataFrame
+    }
+
+    class ExcelReader {
+        + read_dataframe(file_path: str, sheet_name: Optional[str]): pd.DataFrame
+    }
+
+    class CSVFileWriter {
+        + write_dataframe(df: pd.DataFrame, file_path: str, **kwargs): str
+    }
+
+    class ExcelFileWriter {
+        + write_dataframe(df: pd.DataFrame, file_path: str, **kwargs): str
+    }
+}
+
+package "Validators" {
+    class FileValidator {
+        + validate_file(file_path: str): bool
+        + validate_file_format(file_path: str): bool
+    }
+
+    class StrictFileValidator {
+        + validate_file(file_path: str): bool
+    }
+
+    class PermissiveFileValidator {
+        + validate_file(file_path: str): bool
+    }
+}
+
+package "Contracts" {
+    interface IDataPreparer {
+        + prepare_data_frames(config: Dict[str, Any]): Tuple[pd.DataFrame, pd.DataFrame]
+    }
+
+    interface IDataJoiner {
+        + join_dataframes(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+    }
+
+    interface IDataAggregator {
+        + apply_aggregation(df: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+    }
+
+    interface IDataComparer {
+        + compare_mapped_columns(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+    }
+
+    interface IOutputWriter {
+        + write_output(df: pd.DataFrame, config: Dict[str, Any]): str
+    }
+
+    interface IConfigurationService {
+        + load_configuration(file_path: str): Dict[str, Any]
+        + validate_configuration(config: Dict[str, Any]): bool
+        + enrich_configuration(config: Dict[str, Any]): Dict[str, Any]
+    }
+}
+
+package "Exceptions" {
+    class ValidationError {
+        + message: str
+        + __init__(message: str)
+    }
+
+    class ConfigurationError {
+        + message: str
+        + __init__(message: str)
+    }
+
+    class DataValidationError {
+        + message: str
+        + __init__(message: str)
+    }
+
+    class ProcessingError {
+        + message: str
+        + __init__(message: str)
+    }
+}
+
+' ========================================
+' KEY RELATIONSHIPS
+' ========================================
+
+' Entry Point relationships
+run_validation --> ValidationPipelineOrchestrator : uses
+
+' Pipeline Orchestration relationships
+ValidationPipelineOrchestrator --> DependencyContainer : uses
+ValidationPipelineOrchestrator --> IDataPreparer : uses
+ValidationPipelineOrchestrator --> IDataJoiner : uses
+ValidationPipelineOrchestrator --> IDataAggregator : uses
+ValidationPipelineOrchestrator --> IDataComparer : uses
+ValidationPipelineOrchestrator --> IOutputWriter : uses
+ValidationPipelineOrchestrator --> IConfigurationService : uses
+
+' Configuration Management relationships
+ConfigurationService --> ConfigValidator : uses
+ConfigurationService --> ConfigEnricher : uses
+ConfigurationService --> FileReader : uses
+
+' Core Processing relationships
+DataPreparer ..|> IDataPreparer : implements
+DataJoiner ..|> IDataJoiner : implements
+DataAggregator ..|> IDataAggregator : implements
+DataComparer ..|> IDataComparer : implements
+OutputWriter ..|> IOutputWriter : implements
+
+' Factory relationships
+DataProcessorFactory --> DataReaderFactory : uses
+DataProcessorFactory --> DataWriterFactory : uses
+DataReaderFactory --> IDataReader : creates
+DataWriterFactory --> IDataWriter : creates
+
+' Reader/Writer relationships
+CSVReader ..|> IDataReader : implements
+ExcelReader ..|> IDataReader : implements
+CSVFileWriter ..|> IDataWriter : implements
+ExcelFileWriter ..|> IDataWriter : implements
+
+' Validator relationships
+StrictFileValidator --|> FileValidator : extends
+PermissiveFileValidator --|> FileValidator : extends
+
+' Exception relationships
+ConfigurationError --|> ValidationError : extends
+DataValidationError --|> ValidationError : extends
+ProcessingError --|> ValidationError : extends
+
+' Dependency Container registrations
+DependencyContainer --> IDataPreparer : manages
+DependencyContainer --> IDataJoiner : manages
+DependencyContainer --> IDataAggregator : manages
+DependencyContainer --> IDataComparer : manages
+DependencyContainer --> IOutputWriter : manages
+DependencyContainer --> IConfigurationService : manages
+DependencyContainer --> DataProcessorFactory : manages
+
+' Error handling
+ValidationPipelineOrchestrator --> ValidationError : throws
+ConfigurationService --> ConfigurationError : throws
+DataPreparer --> DataValidationError : throws
+DataJoiner --> ProcessingError : throws
+DataAggregator --> ProcessingError : throws
+DataComparer --> ProcessingError : throws
+OutputWriter --> ProcessingError : throws
+
+@enduml 

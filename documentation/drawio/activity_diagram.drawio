@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="5.0" etag="activity_diagram" version="22.1.16" type="device">
+  <diagram name="Data Validation Tool - Activity Diagram" id="activity_diagram">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title -->
+        <mxCell id="title" value="Data Validation Tool - Activity Diagram" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="20" width="400" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Start -->
+        <mxCell id="start" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="760" y="80" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="start_label" value="Start" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="780" y="115" width="40" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Parse Arguments -->
+        <mxCell id="parse_args" value="Parse Command Line Arguments" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="720" y="200" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Arguments Provided? -->
+        <mxCell id="args_decision" value="Arguments Provided?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="740" y="300" width="120" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Interactive Mode -->
+        <mxCell id="interactive_mode" value="Run Interactive Mode" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="920" y="310" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Load Configuration -->
+        <mxCell id="load_config" value="Load Configuration File" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="720" y="420" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Validate Configuration -->
+        <mxCell id="validate_config" value="Validate Configuration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="720" y="520" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Config Valid? -->
+        <mxCell id="config_decision" value="Configuration Valid?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="740" y="620" width="120" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Error Handling -->
+        <mxCell id="config_error" value="Display Configuration Error" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="920" y="630" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Prepare Data -->
+        <mxCell id="prepare_data" value="Prepare Data Frames" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="720" y="740" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Files Exist? -->
+        <mxCell id="files_decision" value="Files Exist and Valid?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="740" y="840" width="120" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- File Error -->
+        <mxCell id="file_error" value="Display File Error" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="920" y="850" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Join Data -->
+        <mxCell id="join_data" value="Join Data Frames" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="720" y="960" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Aggregation Required? -->
+        <mxCell id="agg_decision" value="Aggregation Required?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="740" y="1060" width="120" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Apply Aggregation -->
+        <mxCell id="apply_agg" value="Apply Aggregation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="920" y="1070" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Compare Data -->
+        <mxCell id="compare_data" value="Compare Data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="720" y="1180" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Write Output -->
+        <mxCell id="write_output" value="Write Output File" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="720" y="1280" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Success Message -->
+        <mxCell id="success_msg" value="Display Success Message" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="720" y="1380" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- End -->
+        <mxCell id="end" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="760" y="1480" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="end_label" value="End" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="780" y="1515" width="40" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Error End -->
+        <mxCell id="error_end" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="960" y="1480" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="error_end_label" value="End" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="980" y="1515" width="40" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Connections -->
+        <!-- Start to Parse Args -->
+        <mxCell id="conn1" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="start" target="parse_args">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="800" y="170" as="sourcePoint" />
+            <mxPoint x="800" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Parse Args to Decision -->
+        <mxCell id="conn2" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="parse_args" target="args_decision">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="800" y="270" as="sourcePoint" />
+            <mxPoint x="800" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Decision to Interactive Mode (Yes) -->
+        <mxCell id="conn3" value="Yes" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="args_decision" target="interactive_mode">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="860" y="340" as="sourcePoint" />
+            <mxPoint x="920" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Decision to Load Config (No) -->
+        <mxCell id="conn4" value="No" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="args_decision" target="load_config">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="800" y="390" as="sourcePoint" />
+            <mxPoint x="800" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Interactive Mode to Load Config -->
+        <mxCell id="conn5" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="interactive_mode" target="load_config">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="990" y="380" as="sourcePoint" />
+            <mxPoint x="880" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Load Config to Validate Config -->
+        <mxCell id="conn6" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="load_config" target="validate_config">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="800" y="490" as="sourcePoint" />
+            <mxPoint x="800" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Validate Config to Decision -->
+        <mxCell id="conn7" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="validate_config" target="config_decision">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="800" y="590" as="sourcePoint" />
+            <mxPoint x="800" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Config Decision to Error (No) -->
+        <mxCell id="conn8" value="No" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="config_decision" target="config_error">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="860" y="660" as="sourcePoint" />
+            <mxPoint x="920" y="660" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Config Decision to Prepare Data (Yes) -->
+        <mxCell id="conn9" value="Yes" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="config_decision" target="prepare_data">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="800" y="710" as="sourcePoint" />
+            <mxPoint x="800" y="740" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Prepare Data to Files Decision -->
+        <mxCell id="conn10" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="prepare_data" target="files_decision">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="800" y="810" as="sourcePoint" />
+            <mxPoint x="800" y="840" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Files Decision to Error (No) -->
+        <mxCell id="conn11" value="No" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="files_decision" target="file_error">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="860" y="880" as="sourcePoint" />
+            <mxPoint x="920" y="880" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Files Decision to Join Data (Yes) -->
+        <mxCell id="conn12" value="Yes" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="files_decision" target="join_data">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="800" y="930" as="sourcePoint" />
+            <mxPoint x="800" y="960" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Join Data to Agg Decision -->
+        <mxCell id="conn13" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="join_data" target="agg_decision">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="800" y="1030" as="sourcePoint" />
+            <mxPoint x="800" y="1060" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Agg Decision to Apply Agg (Yes) -->
+        <mxCell id="conn14" value="Yes" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="agg_decision" target="apply_agg">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="860" y="1100" as="sourcePoint" />
+            <mxPoint x="920" y="1100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Agg Decision to Compare Data (No) -->
+        <mxCell id="conn15" value="No" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="agg_decision" target="compare_data">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="800" y="1150" as="sourcePoint" />
+            <mxPoint x="800" y="1180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Apply Agg to Compare Data -->
+        <mxCell id="conn16" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="apply_agg" target="compare_data">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="990" y="1140" as="sourcePoint" />
+            <mxPoint x="880" y="1210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Compare Data to Write Output -->
+        <mxCell id="conn17" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="compare_data" target="write_output">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="800" y="1250" as="sourcePoint" />
+            <mxPoint x="800" y="1280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Write Output to Success Message -->
+        <mxCell id="conn18" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="write_output" target="success_msg">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="800" y="1350" as="sourcePoint" />
+            <mxPoint x="800" y="1380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Success Message to End -->
+        <mxCell id="conn19" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="success_msg" target="end">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="800" y="1450" as="sourcePoint" />
+            <mxPoint x="800" y="1480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Error paths to Error End -->
+        <mxCell id="conn20" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="config_error" target="error_end">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1000" y="700" as="sourcePoint" />
+            <mxPoint x="1000" y="1480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="conn21" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="file_error" target="error_end">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1000" y="920" as="sourcePoint" />
+            <mxPoint x="1000" y="1480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend" value="Legend" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_start" value="Start/End (Green/Red)" style="text;strokeColor=#666666;fillColor=#d5e8d4;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="legend">
+          <mxGeometry y="26" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_process" value="Process (Blue)" style="text;strokeColor=#666666;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="legend">
+          <mxGeometry y="46" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_decision" value="Decision (Yellow)" style="text;strokeColor=#666666;fillColor=#fff2cc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="legend">
+          <mxGeometry y="66" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_error" value="Error Handling (Red)" style="text;strokeColor=#666666;fillColor=#f8cecc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="legend">
+          <mxGeometry y="86" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_interactive" value="Interactive Mode (Purple)" style="text;strokeColor=#666666;fillColor=#e1d5e7;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="legend">
+          <mxGeometry y="106" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_data" value="Data Processing (Green)" style="text;strokeColor=#666666;fillColor=#d5e8d4;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="legend">
+          <mxGeometry y="126" width="200" height="20" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile> 

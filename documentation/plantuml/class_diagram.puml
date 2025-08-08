@@ -1,0 +1,590 @@
+@startuml Data Validation Tool - Class Diagram
+
+!theme plain
+skinparam classAttributeIconSize 0
+skinparam classFontSize 10
+skinparam classFontName Arial
+skinparam packageFontSize 12
+skinparam packageFontName Arial-Bold
+
+title Data Validation Tool - Class Diagram
+
+' ========================================
+' PACKAGES
+' ========================================
+
+package "Entry Point" {
+    class run_validation {
+        + main(args: List[str]): void
+        + parse_arguments(): argparse.Namespace
+        + run_interactive_mode(): void
+        + display_sample_configuration(): void
+    }
+}
+
+package "Pipeline Orchestration" {
+    class ValidationPipelineOrchestrator {
+        - _dependency_container: DependencyContainer
+        - _data_preparer: IDataPreparer
+        - _data_joiner: IDataJoiner
+        - _data_aggregator: IDataAggregator
+        - _data_comparer: IDataComparer
+        - _output_writer: IOutputWriter
+        - _configuration_service: IConfigurationService
+        + __init__(dependency_container: DependencyContainer)
+        + execute_pipeline(config: Dict[str, Any]): Dict[str, Any]
+        - _prepare_data(config: Dict[str, Any]): Tuple[pd.DataFrame, pd.DataFrame]
+        - _join_data(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+        - _aggregate_data(df: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+        - _compare_data(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+        - _write_output(df: pd.DataFrame, config: Dict[str, Any]): str
+    }
+
+    class DependencyContainer {
+        - _services: Dict[str, Any]
+        - _factories: Dict[str, Any]
+        + __init__()
+        + register_service(service_type: str, service: Any): void
+        + get_service(service_type: str): Any
+        + register_factory(factory_type: str, factory: Any): void
+        + get_factory(factory_type: str): Any
+        - _initialize_services(): void
+        - _initialize_factories(): void
+    }
+}
+
+package "Configuration Management" {
+    class ConfigurationService {
+        - _validator: ConfigValidator
+        - _enricher: ConfigEnricher
+        - _processor: ConfigProcessor
+        - _file_reader: FileReader
+        + __init__(validator: ConfigValidator, enricher: ConfigEnricher, processor: ConfigProcessor, file_reader: FileReader)
+        + load_configuration(file_path: str): Dict[str, Any]
+        + validate_configuration(config: Dict[str, Any]): bool
+        + enrich_configuration(config: Dict[str, Any]): Dict[str, Any]
+        + process_configuration(config: Dict[str, Any]): Dict[str, Any]
+    }
+
+    class ConfigValidator {
+        + validate_config(config: Dict[str, Any]): None
+        - _validate_required_fields(config: Dict[str, Any]): void
+        - _validate_file_paths(config: Dict[str, Any]): void
+        - _validate_join_keys(config: Dict[str, Any]): void
+        - _validate_column_mappings(config: Dict[str, Any]): void
+        - _validate_aggregation_config(config: Dict[str, Any]): void
+        - _validate_output_config(config: Dict[str, Any]): void
+    }
+
+    class ConfigEnricher {
+        + enrich_config(config: Dict[str, Any]): Dict[str, Any]
+        - _add_default_values(config: Dict[str, Any]): void
+        - _enrich_join_keys(config: Dict[str, Any]): void
+        - _enrich_column_mappings(config: Dict[str, Any]): void
+        - _enrich_aggregation_config(config: Dict[str, Any]): void
+        - _enrich_output_config(config: Dict[str, Any]): void
+    }
+
+    class ConfigProcessor {
+        + process_config(config: Dict[str, Any]): Dict[str, Any]
+        - _process_file_config(config: Dict[str, Any]): void
+        - _process_join_config(config: Dict[str, Any]): void
+        - _process_aggregation_config(config: Dict[str, Any]): void
+        - _process_comparison_config(config: Dict[str, Any]): void
+        - _process_output_config(config: Dict[str, Any]): void
+    }
+
+    class FileReader {
+        + read_file(file_path: str): Dict[str, Any]
+        + read_dataframe(file_path: str, sheet_name: Optional[str]): Optional[pd.DataFrame]
+    }
+}
+
+package "Data Preparation" {
+    class DataPreparer {
+        - _data_validator: DataValidator
+        - _data_loader: DataLoader
+        - _data_cleaner: DataCleaner
+        - _type_detection_service: TypeDetectionService
+        + __init__(data_validator: DataValidator, data_loader: DataLoader, data_cleaner: DataCleaner, type_detection_service: TypeDetectionService)
+        + prepare_data_frames(config: Dict[str, Any]): Tuple[pd.DataFrame, pd.DataFrame]
+        - _validate_file_paths(config: Dict[str, Any]): void
+        - _load_dataframes(config: Dict[str, Any]): Tuple[pd.DataFrame, pd.DataFrame]
+        - _clean_dataframes(df1: pd.DataFrame, df2: pd.DataFrame): Tuple[pd.DataFrame, pd.DataFrame]
+        - _detect_and_validate_join_key_types(config: Dict[str, Any], df1: pd.DataFrame, df2: pd.DataFrame): Dict[str, str]
+    }
+
+    class DataValidator {
+        + validate_data_integrity(df: pd.DataFrame, file_path: str): void
+        + validate_data_structure(df: pd.DataFrame, expected_columns: List[str]): void
+        - _check_for_empty_dataframe(df: pd.DataFrame): void
+        - _check_for_required_columns(df: pd.DataFrame, required_columns: List[str]): void
+        - _check_for_data_types(df: pd.DataFrame, column_types: Dict[str, str]): void
+    }
+
+    class DataLoader {
+        + load_dataframe(file_path: str, sheet_name: Optional[str]): pd.DataFrame
+        - _detect_file_type(file_path: str): str
+        - _load_csv_file(file_path: str): pd.DataFrame
+        - _load_excel_file(file_path: str, sheet_name: Optional[str]): pd.DataFrame
+    }
+
+    class DataCleaner {
+        + clean_dataframe(df: pd.DataFrame): pd.DataFrame
+        - _remove_unnamed_columns(df: pd.DataFrame): pd.DataFrame
+        - _clean_currency_values(df: pd.DataFrame): pd.DataFrame
+        - _standardize_column_names(df: pd.DataFrame): pd.DataFrame
+        - _handle_missing_values(df: pd.DataFrame): pd.DataFrame
+    }
+
+    class TypeDetectionService {
+        + detect_column_types(df: pd.DataFrame): Dict[str, str]
+        + validate_join_key_types(df1: pd.DataFrame, df2: pd.DataFrame, join_keys: Dict[str, str]): Dict[str, str]
+        - _detect_numeric_columns(df: pd.DataFrame): List[str]
+        - _detect_string_columns(df: pd.DataFrame): List[str]
+        - _detect_date_columns(df: pd.DataFrame): List[str]
+    }
+}
+
+package "Data Joining" {
+    class DataJoiner {
+        - _join_key_extractor: JoinKeyExtractor
+        - _join_key_validator: JoinKeyValidator
+        - _join_executor: JoinExecutor
+        - _join_result_validator: JoinResultValidator
+        + __init__(join_key_extractor: JoinKeyExtractor, join_key_validator: JoinKeyValidator, join_executor: JoinExecutor, join_result_validator: JoinResultValidator)
+        + join_dataframes(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+        - _extract_join_keys(config: Dict[str, Any]): Dict[str, str]
+        - _validate_join_keys(df1: pd.DataFrame, df2: pd.DataFrame, join_keys: Dict[str, str]): void
+        - _execute_join(df1: pd.DataFrame, df2: pd.DataFrame, join_keys: Dict[str, str]): pd.DataFrame
+        - _validate_join_results(df: pd.DataFrame, df1: pd.DataFrame, df2: pd.DataFrame): void
+    }
+
+    class JoinKeyExtractor {
+        + extract_join_keys(config: Dict[str, Any]): Dict[str, str]
+        - _validate_join_key_config(config: Dict[str, Any]): void
+        - _extract_join_key_mappings(config: Dict[str, Any]): Dict[str, str]
+    }
+
+    class JoinKeyValidator {
+        + validate_join_keys(df1: pd.DataFrame, df2: pd.DataFrame, join_keys: Dict[str, str]): void
+        - _check_join_keys_exist(df: pd.DataFrame, join_keys: List[str]): void
+        - _check_join_key_data_types(df1: pd.DataFrame, df2: pd.DataFrame, join_keys: Dict[str, str]): void
+    }
+
+    class JoinExecutor {
+        + execute_join(df1: pd.DataFrame, df2: pd.DataFrame, join_keys: Dict[str, str]): pd.DataFrame
+        - _prepare_join_keys(df1: pd.DataFrame, df2: pd.DataFrame, join_keys: Dict[str, str]): Tuple[pd.DataFrame, pd.DataFrame]
+        - _perform_full_outer_join(df1: pd.DataFrame, df2: pd.DataFrame, join_keys: Dict[str, str]): pd.DataFrame
+    }
+
+    class JoinResultValidator {
+        + validate_join_results(df: pd.DataFrame, df1: pd.DataFrame, df2: pd.DataFrame): void
+        - _check_join_result_not_empty(df: pd.DataFrame): void
+        - _check_join_result_structure(df: pd.DataFrame, df1: pd.DataFrame, df2: pd.DataFrame): void
+    }
+}
+
+package "Data Aggregation" {
+    class DataAggregator {
+        - _aggregation_config_validator: AggregationConfigValidator
+        - _aggregation_config_extractor: AggregationConfigExtractor
+        - _aggregation_executor: AggregationExecutor
+        - _aggregation_result_validator: AggregationResultValidator
+        + __init__(aggregation_config_validator: AggregationConfigValidator, aggregation_config_extractor: AggregationConfigExtractor, aggregation_executor: AggregationExecutor, aggregation_result_validator: AggregationResultValidator)
+        + apply_aggregation(df: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+        - _validate_aggregation_config(config: Dict[str, Any]): void
+        - _extract_aggregation_parameters(config: Dict[str, Any]): Dict[str, Any]
+        - _execute_aggregation(df: pd.DataFrame, aggregation_params: Dict[str, Any]): pd.DataFrame
+        - _validate_aggregation_results(df: pd.DataFrame, original_df: pd.DataFrame): void
+    }
+
+    class AggregationConfigValidator {
+        + validate_aggregation_config(config: Dict[str, Any]): void
+        - _check_aggregation_field_exists(config: Dict[str, Any]): void
+        - _check_aggregation_type_valid(config: Dict[str, Any]): void
+        - _check_groupby_columns_exist(config: Dict[str, Any], df: pd.DataFrame): void
+    }
+
+    class AggregationConfigExtractor {
+        + extract_aggregation_parameters(config: Dict[str, Any]): Dict[str, Any]
+        - _extract_groupby_columns(config: Dict[str, Any]): List[str]
+        - _extract_aggregation_columns(config: Dict[str, Any]): Dict[str, List[str]]
+        - _extract_aggregation_types(config: Dict[str, Any]): Dict[str, str]
+    }
+
+    class AggregationExecutor {
+        + execute_aggregation(df: pd.DataFrame, groupby_columns: List[str], aggregation_columns: Dict[str, List[str]]): pd.DataFrame
+        - _prepare_groupby_columns(df: pd.DataFrame, groupby_columns: List[str]): pd.DataFrame
+        - _apply_aggregation_functions(df: pd.DataFrame, aggregation_columns: Dict[str, List[str]]): pd.DataFrame
+    }
+
+    class AggregationResultValidator {
+        + validate_aggregation_results(df: pd.DataFrame, original_df: pd.DataFrame): void
+        - _check_aggregation_result_not_empty(df: pd.DataFrame): void
+        - _check_aggregation_result_structure(df: pd.DataFrame, original_df: pd.DataFrame): void
+    }
+}
+
+package "Data Comparison" {
+    class DataComparer {
+        - _comparison_config_validator: ComparisonConfigValidator
+        - _comparison_config_extractor: ComparisonConfigExtractor
+        - _comparison_strategy_selector: ComparisonStrategySelector
+        - _comparison_executor: ComparisonExecutor
+        - _comparison_result_validator: ComparisonResultValidator
+        + __init__(comparison_config_validator: ComparisonConfigValidator, comparison_config_extractor: ComparisonConfigExtractor, comparison_strategy_selector: ComparisonStrategySelector, comparison_executor: ComparisonExecutor, comparison_result_validator: ComparisonResultValidator)
+        + compare_mapped_columns(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+        - _validate_comparison_config(config: Dict[str, Any]): void
+        - _extract_comparison_parameters(config: Dict[str, Any]): Dict[str, Any]
+        - _select_comparison_strategy(comparison_params: Dict[str, Any]): str
+        - _execute_comparison(df1: pd.DataFrame, df2: pd.DataFrame, comparison_params: Dict[str, Any]): pd.DataFrame
+        - _validate_comparison_results(df: pd.DataFrame): void
+    }
+
+    class ComparisonConfigValidator {
+        + validate_comparison_config(config: Dict[str, Any]): void
+        - _check_column_mapping_exists(config: Dict[str, Any]): void
+        - _check_column_mapping_valid(config: Dict[str, Any]): void
+    }
+
+    class ComparisonConfigExtractor {
+        + extract_comparison_parameters(config: Dict[str, Any]): Dict[str, Any]
+        - _extract_column_mappings(config: Dict[str, Any]): Dict[str, str]
+        - _extract_comparison_tolerance(config: Dict[str, Any]): float
+    }
+
+    class ComparisonStrategySelector {
+        + select_comparison_strategy(comparison_params: Dict[str, Any]): str
+        - _determine_numeric_comparison(comparison_params: Dict[str, Any]): bool
+        - _determine_string_comparison(comparison_params: Dict[str, Any]): bool
+    }
+
+    class ComparisonExecutor {
+        + execute_comparison(df1: pd.DataFrame, df2: pd.DataFrame, comparison_params: Dict[str, Any]): pd.DataFrame
+        - _compare_numeric_columns(df1: pd.DataFrame, df2: pd.DataFrame, column_mappings: Dict[str, str], tolerance: float): pd.DataFrame
+        - _compare_string_columns(df1: pd.DataFrame, df2: pd.DataFrame, column_mappings: Dict[str, str]): pd.DataFrame
+        - _calculate_differences(df1: pd.DataFrame, df2: pd.DataFrame, column_mappings: Dict[str, str]): pd.DataFrame
+        - _calculate_delta_percentages(df1: pd.DataFrame, df2: pd.DataFrame, column_mappings: Dict[str, str]): pd.DataFrame
+    }
+
+    class ComparisonResultValidator {
+        + validate_comparison_results(df: pd.DataFrame): void
+        - _check_comparison_result_not_empty(df: pd.DataFrame): void
+        - _check_comparison_result_structure(df: pd.DataFrame): void
+    }
+}
+
+package "Output Writing" {
+    class OutputWriter {
+        - _output_config_validator: OutputConfigValidator
+        - _output_config_extractor: OutputConfigExtractor
+        - _data_formatter: DataFormatter
+        - _file_writer: FileWriter
+        - _output_result_validator: OutputResultValidator
+        + __init__(output_config_validator: OutputConfigValidator, output_config_extractor: OutputConfigExtractor, data_formatter: DataFormatter, file_writer: FileWriter, output_result_validator: OutputResultValidator)
+        + write_output(df: pd.DataFrame, config: Dict[str, Any]): str
+        - _validate_output_config(config: Dict[str, Any]): void
+        - _extract_output_parameters(config: Dict[str, Any]): Dict[str, Any]
+        - _format_data_for_output(df: pd.DataFrame, output_params: Dict[str, Any]): pd.DataFrame
+        - _write_file(df: pd.DataFrame, output_params: Dict[str, Any]): str
+        - _validate_output_results(file_path: str): void
+    }
+
+    class OutputConfigValidator {
+        + validate_output_config(config: Dict[str, Any]): void
+        - _check_output_file_path_exists(config: Dict[str, Any]): void
+        - _check_output_format_valid(config: Dict[str, Any]): void
+    }
+
+    class OutputConfigExtractor {
+        + extract_output_parameters(config: Dict[str, Any]): Dict[str, Any]
+        - _extract_output_file_path(config: Dict[str, Any]): str
+        - _extract_output_format(config: Dict[str, Any]): str
+        - _extract_output_options(config: Dict[str, Any]): Dict[str, Any]
+    }
+
+    class DataFormatter {
+        + format_data_for_output(df: pd.DataFrame, output_params: Dict[str, Any]): pd.DataFrame
+        - _format_numeric_columns(df: pd.DataFrame): pd.DataFrame
+        - _format_date_columns(df: pd.DataFrame): pd.DataFrame
+        - _reorder_columns(df: pd.DataFrame, column_order: List[str]): pd.DataFrame
+    }
+
+    class FileWriter {
+        + write_file(df: pd.DataFrame, file_path: str, file_format: str, options: Dict[str, Any]): str
+        - _detect_file_format(file_path: str): str
+        - _write_csv_file(df: pd.DataFrame, file_path: str, options: Dict[str, Any]): str
+        - _write_excel_file(df: pd.DataFrame, file_path: str, options: Dict[str, Any]): str
+    }
+
+    class OutputResultValidator {
+        + validate_output_results(file_path: str): void
+        - _check_file_exists(file_path: str): void
+        - _check_file_not_empty(file_path: str): void
+    }
+}
+
+package "Factories" {
+    class DataProcessorFactory {
+        - _data_reader_factory: DataReaderFactory
+        - _data_writer_factory: DataWriterFactory
+        - _file_validator_factory: FileValidatorFactory
+        + __init__(data_reader_factory: DataReaderFactory, data_writer_factory: DataWriterFactory, file_validator_factory: FileValidatorFactory)
+        + create_reader(file_path: str): IDataReader
+        + create_writer(file_path: str): IDataWriter
+        + create_validator(file_path: str): FileValidator
+    }
+
+    class DataReaderFactory {
+        - _readers: Dict[str, Type]
+        + __init__()
+        + create_reader(file_path: str): IDataReader
+        + register_reader(file_extension: str, reader_class: Type): void
+        - _get_file_extension(file_path: str): str
+    }
+
+    class DataWriterFactory {
+        - _writers: Dict[str, Type]
+        + __init__()
+        + create_writer(file_path: str): IDataWriter
+        + register_writer(file_extension: str, writer_class: Type): void
+        - _get_file_extension(file_path: str): str
+    }
+
+    class FileValidatorFactory {
+        - _validators: Dict[str, Type]
+        + __init__()
+        + create_validator(file_path: str): FileValidator
+        + register_validator(file_extension: str, validator_class: Type): void
+        - _get_file_extension(file_path: str): str
+    }
+}
+
+package "Readers" {
+    interface IDataReader {
+        + read_dataframe(file_path: str, sheet_name: Optional[str]): pd.DataFrame
+    }
+
+    class CSVReader {
+        + read_dataframe(file_path: str, sheet_name: Optional[str]): pd.DataFrame
+        - _validate_file_path(file_path: str): void
+        - _read_csv_data(file_path: str): pd.DataFrame
+    }
+
+    class ExcelReader {
+        + read_dataframe(file_path: str, sheet_name: Optional[str]): pd.DataFrame
+        - _validate_file_path(file_path: str): void
+        - _read_excel_data(file_path: str, sheet_name: Optional[str]): pd.DataFrame
+        - _get_sheet_names(file_path: str): List[str]
+    }
+}
+
+package "Writers" {
+    interface IDataWriter {
+        + write_dataframe(df: pd.DataFrame, file_path: str, **kwargs): str
+    }
+
+    class CSVFileWriter {
+        + write_dataframe(df: pd.DataFrame, file_path: str, **kwargs): str
+        - _validate_file_path(file_path: str): void
+        - _write_csv_data(df: pd.DataFrame, file_path: str, **kwargs): str
+    }
+
+    class ExcelFileWriter {
+        + write_dataframe(df: pd.DataFrame, file_path: str, **kwargs): str
+        - _validate_file_path(file_path: str): void
+        - _write_excel_data(df: pd.DataFrame, file_path: str, **kwargs): str
+        - _handle_existing_file(file_path: str): void
+    }
+}
+
+package "Validators" {
+    class FileValidator {
+        + validate_file(file_path: str): bool
+        + validate_file_format(file_path: str): bool
+        + validate_file_access(file_path: str): bool
+    }
+
+    class StrictFileValidator {
+        + validate_file(file_path: str): bool
+        - _check_file_exists(file_path: str): void
+        - _check_file_readable(file_path: str): void
+        - _check_file_format(file_path: str): void
+    }
+
+    class PermissiveFileValidator {
+        + validate_file(file_path: str): bool
+        - _check_file_exists(file_path: str): void
+        - _check_file_readable(file_path: str): void
+    }
+}
+
+package "Contracts" {
+    interface IDataPreparer {
+        + prepare_data_frames(config: Dict[str, Any]): Tuple[pd.DataFrame, pd.DataFrame]
+    }
+
+    interface IDataJoiner {
+        + join_dataframes(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+    }
+
+    interface IDataAggregator {
+        + apply_aggregation(df: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+    }
+
+    interface IDataComparer {
+        + compare_mapped_columns(df1: pd.DataFrame, df2: pd.DataFrame, config: Dict[str, Any]): pd.DataFrame
+    }
+
+    interface IOutputWriter {
+        + write_output(df: pd.DataFrame, config: Dict[str, Any]): str
+    }
+
+    interface IConfigurationService {
+        + load_configuration(file_path: str): Dict[str, Any]
+        + validate_configuration(config: Dict[str, Any]): bool
+        + enrich_configuration(config: Dict[str, Any]): Dict[str, Any]
+        + process_configuration(config: Dict[str, Any]): Dict[str, Any]
+    }
+}
+
+package "Exceptions" {
+    class ValidationError {
+        + message: str
+        + __init__(message: str)
+        + __str__(): str
+    }
+
+    class ConfigurationError {
+        + message: str
+        + __init__(message: str)
+    }
+
+    class DataValidationError {
+        + message: str
+        + __init__(message: str)
+    }
+
+    class FileValidationError {
+        + message: str
+        + __init__(message: str)
+    }
+
+    class ProcessingError {
+        + message: str
+        + __init__(message: str)
+    }
+}
+
+' ========================================
+' RELATIONSHIPS
+' ========================================
+
+' Entry Point relationships
+run_validation --> ValidationPipelineOrchestrator : uses
+
+' Pipeline Orchestration relationships
+ValidationPipelineOrchestrator --> DependencyContainer : uses
+ValidationPipelineOrchestrator --> IDataPreparer : uses
+ValidationPipelineOrchestrator --> IDataJoiner : uses
+ValidationPipelineOrchestrator --> IDataAggregator : uses
+ValidationPipelineOrchestrator --> IDataComparer : uses
+ValidationPipelineOrchestrator --> IOutputWriter : uses
+ValidationPipelineOrchestrator --> IConfigurationService : uses
+
+' Configuration Management relationships
+ConfigurationService --> ConfigValidator : uses
+ConfigurationService --> ConfigEnricher : uses
+ConfigurationService --> ConfigProcessor : uses
+ConfigurationService --> FileReader : uses
+
+' Data Preparation relationships
+DataPreparer ..|> IDataPreparer : implements
+DataPreparer --> DataValidator : uses
+DataPreparer --> DataLoader : uses
+DataPreparer --> DataCleaner : uses
+DataPreparer --> TypeDetectionService : uses
+
+' Data Joining relationships
+DataJoiner ..|> IDataJoiner : implements
+DataJoiner --> JoinKeyExtractor : uses
+DataJoiner --> JoinKeyValidator : uses
+DataJoiner --> JoinExecutor : uses
+DataJoiner --> JoinResultValidator : uses
+
+' Data Aggregation relationships
+DataAggregator ..|> IDataAggregator : implements
+DataAggregator --> AggregationConfigValidator : uses
+DataAggregator --> AggregationConfigExtractor : uses
+DataAggregator --> AggregationExecutor : uses
+DataAggregator --> AggregationResultValidator : uses
+
+' Data Comparison relationships
+DataComparer ..|> IDataComparer : implements
+DataComparer --> ComparisonConfigValidator : uses
+DataComparer --> ComparisonConfigExtractor : uses
+DataComparer --> ComparisonStrategySelector : uses
+DataComparer --> ComparisonExecutor : uses
+DataComparer --> ComparisonResultValidator : uses
+
+' Output Writing relationships
+OutputWriter ..|> IOutputWriter : implements
+OutputWriter --> OutputConfigValidator : uses
+OutputWriter --> OutputConfigExtractor : uses
+OutputWriter --> DataFormatter : uses
+OutputWriter --> FileWriter : uses
+OutputWriter --> OutputResultValidator : uses
+
+' Factory relationships
+DataProcessorFactory --> DataReaderFactory : uses
+DataProcessorFactory --> DataWriterFactory : uses
+DataProcessorFactory --> FileValidatorFactory : uses
+DataReaderFactory --> IDataReader : creates
+DataWriterFactory --> IDataWriter : creates
+FileValidatorFactory --> FileValidator : creates
+
+' Reader relationships
+CSVReader ..|> IDataReader : implements
+ExcelReader ..|> IDataReader : implements
+
+' Writer relationships
+CSVFileWriter ..|> IDataWriter : implements
+ExcelFileWriter ..|> IDataWriter : implements
+
+' Validator relationships
+StrictFileValidator --|> FileValidator : extends
+PermissiveFileValidator --|> FileValidator : extends
+
+' Exception relationships
+ConfigurationError --|> ValidationError : extends
+DataValidationError --|> ValidationError : extends
+FileValidationError --|> ValidationError : extends
+ProcessingError --|> ValidationError : extends
+
+' Dependency Container registrations
+DependencyContainer --> IDataPreparer : manages
+DependencyContainer --> IDataJoiner : manages
+DependencyContainer --> IDataAggregator : manages
+DependencyContainer --> IDataComparer : manages
+DependencyContainer --> IOutputWriter : manages
+DependencyContainer --> IConfigurationService : manages
+DependencyContainer --> DataProcessorFactory : manages
+
+' Data Loader uses Readers
+DataLoader --> IDataReader : uses
+
+' File Writer uses Writers
+FileWriter --> IDataWriter : uses
+
+' Error handling throughout the system
+ValidationPipelineOrchestrator --> ValidationError : throws
+ConfigurationService --> ConfigurationError : throws
+DataPreparer --> DataValidationError : throws
+DataJoiner --> ProcessingError : throws
+DataAggregator --> ProcessingError : throws
+DataComparer --> ProcessingError : throws
+OutputWriter --> ProcessingError : throws
+FileValidator --> FileValidationError : throws
+
+@enduml 
