@@ -10,8 +10,10 @@ import pandas as pd
 from readers.reader_contract import IDataReader
 from readers.csv_reader import CSVReader
 from readers.excel_reader import ExcelReader
+from readers.json_reader import JSONReader
 from writers.csv_writer import CSVFileWriter
 from writers.excel_writer import ExcelFileWriter
+from writers.json_writer import JSONFileWriter
 from validation.file_validators import FileValidator, StrictFileValidator, PermissiveFileValidator
 from validation.contracts.data_aggregator_contracts import IAggregator
 from validation.contracts.data_comparer_contracts import IDataComparer
@@ -31,7 +33,7 @@ from validation.data_joiner import DataJoiner, JoinKeyExtractor, JoinExecutor, J
 from validation.data_preparer import DataPreparer, DataValidator, DataLoader, DataCleaner, TypeDetectionService
 from validation.output_writer import OutputWriter, OutputConfigValidator, OutputConfigExtractor, DataFormatter, FileWriter, OutputResultValidator
 from config_ops.configuration_service import ConfigurationService
-from constants import CSV_EXTENSION, EXCEL_EXTENSIONS
+from constants import CSV_EXTENSION, JSON_EXTENSION, EXCEL_EXTENSIONS
 
 
 class IDataReaderFactory(ABC):
@@ -48,6 +50,7 @@ class DataReaderFactory:
     
     _readers: Dict[str, Type] = {
         CSV_EXTENSION: CSVReader,
+        JSON_EXTENSION: JSONReader,
         EXCEL_EXTENSIONS[0]: ExcelReader,  # .xlsx
         EXCEL_EXTENSIONS[1]: ExcelReader   # .xls
     }
@@ -88,6 +91,7 @@ class DataWriterFactory:
     
     _writers: Dict[str, Type] = {
         CSV_EXTENSION: CSVFileWriter,
+        JSON_EXTENSION: JSONFileWriter,
         EXCEL_EXTENSIONS[0]: ExcelFileWriter,  # .xlsx
         EXCEL_EXTENSIONS[1]: ExcelFileWriter   # .xls
     }

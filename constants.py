@@ -1,7 +1,8 @@
 # File Extensions and Formats
-SUPPORTED_EXTENSIONS = ['.csv', '.xlsx', '.xls']
-VALID_FILE_FORMATS = ['.csv', '.xlsx', 'mixed']
+SUPPORTED_EXTENSIONS = ['.csv', '.xlsx', '.xls', '.json']
+VALID_FILE_FORMATS = ['.csv', '.xlsx', '.json', 'mixed']
 CSV_EXTENSION = '.csv'
+JSON_EXTENSION = '.json'
 EXCEL_EXTENSIONS = ['.xlsx', '.xls']
 
 # File Counts

@@ -2,7 +2,8 @@ import os
 from typing import Dict, Type
 from .csv_handler import CSVHandler
 from .excel_handler import ExcelHandler
-from constants import CSV_EXTENSION, EXCEL_EXTENSIONS
+from .json_handler import JSONHandler
+from constants import CSV_EXTENSION, JSON_EXTENSION, EXCEL_EXTENSIONS
 
 
 class FileTypeFactory:
@@ -10,6 +11,7 @@ class FileTypeFactory:
     
     _handlers: Dict[str, Type] = {
         CSV_EXTENSION: CSVHandler,
+        JSON_EXTENSION: JSONHandler,
         EXCEL_EXTENSIONS[0]: ExcelHandler,  # .xlsx
         EXCEL_EXTENSIONS[1]: ExcelHandler   # .xls
     }

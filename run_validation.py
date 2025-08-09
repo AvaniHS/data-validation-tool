@@ -4,30 +4,53 @@ import os
 import sys
 import json
 import argparse
+import time
 from typing import Dict, Any
 
 from validation.dependency_container import get_pipeline_orchestrator
 from validation.pipeline_orchestrator import PipelineResult
 from services.user_interaction.console import ConsoleUserInputProvider
 from services.user_interaction.interaction import UserInteraction
+from services.logging.logger_service import LoggerService
 
 
 def run_validation_pipeline(config_path: str) -> PipelineResult:
+    # Setup logging for the session
+    logger = LoggerService("main_pipeline")
+    start_time = time.time()
+    
     try:
         print("=" * 80)
         print("DATA VALIDATION PIPELINE")
         print("=" * 80)
         
-        orchestrator = get_pipeline_orchestrator()
-        result = orchestrator.execute_pipeline(config_path)
+        # Log session start
+        LoggerService.log_session_start(config_path)
+        logger.log_operation_start("validation_pipeline", {"config_path": config_path})
+        
+        with logger.performance_context("pipeline_execution"):
+            orchestrator = get_pipeline_orchestrator()
+            result = orchestrator.execute_pipeline(config_path)
         
         if result.success:
             config = result.execution_summary.get('config', {})
             orchestrator.print_pipeline_summary(result, config)
+            
+            duration = time.time() - start_time
+            logger.log_operation_success("validation_pipeline", duration)
+            LoggerService.log_session_end(True, duration)
+        else:
+            duration = time.time() - start_time
+            logger.log_operation_failure("validation_pipeline", Exception(result.error_message))
+            LoggerService.log_session_end(False, duration)
         
         return result
         
     except Exception as e:
+        duration = time.time() - start_time
+        logger.critical(f"Critical error during validation pipeline", e)
+        LoggerService.log_session_end(False, duration)
+        
         print(f"\n❌ Error during validation: {e}")
         return PipelineResult(
             success=False,
@@ -68,6 +91,13 @@ def create_sample_config() -> Dict[str, Any]:
 
 
 def main():
+    # Setup application logging first
+    LoggerService.setup_application_logging(
+        log_level=os.getenv('LOG_LEVEL', 'INFO'),
+        log_dir=os.getenv('LOG_DIR', 'logs'),
+        enable_console=True
+    )
+    
     parser = argparse.ArgumentParser(
         description='Data Validation Tool - Complete pipeline for data comparison and validation',
         formatter_class=argparse.RawDescriptionHelpFormatter,
