@@ -47,10 +47,6 @@ class IFileValidator(IValidator):
     @abstractmethod
     def validate_file_readable(self, file_path: str, file_label: str) -> bool:
         pass
-    
-    @abstractmethod
-    def read_dataframe(self, file_path: str, sheet_name: Optional[str] = None) -> Optional[pd.DataFrame]:
-        pass
 
 
 class IConfigValidator(IValidator):
