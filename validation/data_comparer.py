@@ -17,10 +17,10 @@ class StringComparisonStrategy(IComparisonStrategy):
         if pd.isna(value1) or pd.isna(value2):
             return "no match", 100.0
         
-        str1 = str(value1).strip().lower()
-        str2 = str(value2).strip().lower()
+        normalized_value1 = str(value1).strip().lower()
+        normalized_value2 = str(value2).strip().lower()
         
-        if str1 == str2:
+        if normalized_value1 == normalized_value2:
             return "match", 0.0
         else:
             return "no match", 100.0
@@ -36,17 +36,17 @@ class NumericComparisonStrategy(IComparisonStrategy):
             return "null", 100.0
         
         try:
-            num1 = float(value1)
-            num2 = float(value2)
+            numeric_value1 = float(value1)
+            numeric_value2 = float(value2)
             
-            difference = num1 - num2
+            absolute_difference = numeric_value1 - numeric_value2
             
-            if num1 != 0:
-                delta_percentage = (difference / num1) * 100
+            if numeric_value1 != 0:
+                percentage_difference = (absolute_difference / numeric_value1) * 100
             else:
-                delta_percentage = float('inf') if difference != 0 else 0.0
+                percentage_difference = float('inf') if absolute_difference != 0 else 0.0
             
-            return str(difference), delta_percentage
+            return str(absolute_difference), percentage_difference
                 
         except (ValueError, TypeError):
             return "null", 100.0
@@ -96,7 +96,7 @@ class IComparisonStrategySelector(ABC):
 
 class ComparisonStrategySelector(IComparisonStrategySelector):
     def __init__(self):
-        self._strategies = {
+        self._available_strategies = {
             'string': StringComparisonStrategy(),
             'numeric': NumericComparisonStrategy()
         }
@@ -105,13 +105,13 @@ class ComparisonStrategySelector(IComparisonStrategySelector):
         comparison_types = config.get('comparison_types', {})
         if comparison_types and file1_col in comparison_types:
             strategy_type = comparison_types[file1_col]
-            if strategy_type in self._strategies:
-                return self._strategies[strategy_type]
+            if strategy_type in self._available_strategies:
+                return self._available_strategies[strategy_type]
         
         if self._is_numeric_series(series1) and self._is_numeric_series(series2):
-            return self._strategies['numeric']
+            return self._available_strategies['numeric']
         else:
-            return self._strategies['string']
+            return self._available_strategies['string']
     
     def _is_numeric_series(self, series: pd.Series) -> bool:
         try:
@@ -132,43 +132,43 @@ class ComparisonExecutor(IComparisonExecutor):
     def execute_comparison(self, df: pd.DataFrame, column_mapping: Dict[str, str], 
                           strategy_selector: IComparisonStrategySelector, config: Dict[str, Any]) -> pd.DataFrame:
         try:
-            result_df = df.copy()
+            result_dataframe = df.copy()
             
-            for file1_col, file2_col in column_mapping.items():
-                file1_col_suffixed = f"{file1_col}_file1"
-                file2_col_suffixed = f"{file2_col}_file2"
+            for file1_column, file2_column in column_mapping.items():
+                file1_suffixed_column = f"{file1_column}_file1"
+                file2_suffixed_column = f"{file2_column}_file2"
                 
-                actual_file1_col = file1_col_suffixed if file1_col_suffixed in df.columns else file1_col
-                actual_file2_col = file2_col_suffixed if file2_col_suffixed in df.columns else file2_col
+                actual_file1_column = file1_suffixed_column if file1_suffixed_column in df.columns else file1_column
+                actual_file2_column = file2_suffixed_column if file2_suffixed_column in df.columns else file2_column
                 
-                if actual_file1_col not in df.columns or actual_file2_col not in df.columns:
-                    print(f"⚠️  Warning: Column mapping {file1_col} -> {file2_col} not found in dataframe")
-                    print(f"  Looking for: {actual_file1_col}, {actual_file2_col}")
+                if actual_file1_column not in df.columns or actual_file2_column not in df.columns:
+                    print(f"⚠️  Warning: Column mapping {file1_column} -> {file2_column} not found in dataframe")
+                    print(f"  Looking for: {actual_file1_column}, {actual_file2_column}")
                     print(f"  Available columns: {list(df.columns)}")
                     continue
                 
-                strategy = strategy_selector.select_strategy(
-                    df[actual_file1_col], df[actual_file2_col], config, file1_col
+                selected_strategy = strategy_selector.select_strategy(
+                    df[actual_file1_column], df[actual_file2_column], config, file1_column
                 )
                 
                 comparison_results = []
                 delta_results = []
                 
-                for idx in range(len(df)):
-                    value1 = df.loc[idx, actual_file1_col]
-                    value2 = df.loc[idx, actual_file2_col]
+                for row_index in range(len(df)):
+                    value_from_file1 = df.loc[row_index, actual_file1_column]
+                    value_from_file2 = df.loc[row_index, actual_file2_column]
                     
-                    comparison_result, delta = strategy.compare(value1, value2)
+                    comparison_result, delta_value = selected_strategy.compare(value_from_file1, value_from_file2)
                     comparison_results.append(comparison_result)
-                    delta_results.append(delta)
+                    delta_results.append(delta_value)
                 
-                comparison_col = f"{file1_col}_vs_{file2_col}_comparison"
-                delta_col = f"{file1_col}_vs_{file2_col}_delta"
+                comparison_column_name = f"{file1_column}_vs_{file2_column}_comparison"
+                delta_column_name = f"{file1_column}_vs_{file2_column}_delta"
                 
-                result_df[comparison_col] = comparison_results
-                result_df[delta_col] = delta_results
+                result_dataframe[comparison_column_name] = comparison_results
+                result_dataframe[delta_column_name] = delta_results
             
-            return result_df
+            return result_dataframe
             
         except Exception as e:
             raise DataComparisonError(f"Failed to execute comparison: {str(e)}")
@@ -188,7 +188,6 @@ class ComparisonResultValidator(IComparisonResultValidator):
         if result_df.empty:
             print("⚠️  Warning: Comparison resulted in empty dataframe")
         
-        # Check if comparison preserved original data
         if len(result_df) != len(original_df):
             raise DataComparisonError(f"Comparison result has different number of rows ({len(result_df)}) than original ({len(original_df)})")
 
@@ -211,15 +210,15 @@ class DataComparer(IDataComparer):
                 print("✓ No comparison required")
                 return df
             
-            result_df = self._executor.execute_comparison(df, column_mapping, self._strategy_selector, config)
-            self._result_validator.validate_result(result_df, df)
+            comparison_result = self._executor.execute_comparison(df, column_mapping, self._strategy_selector, config)
+            self._result_validator.validate_result(comparison_result, df)
             
             print(f"✓ Data comparison completed successfully")
             print(f"  Original dataframe: {len(df)} rows, {len(df.columns)} columns")
-            print(f"  Comparison result: {len(result_df)} rows, {len(result_df.columns)} columns")
+            print(f"  Comparison result: {len(comparison_result)} rows, {len(comparison_result.columns)} columns")
             print(f"  Column mappings: {len(column_mapping)} pairs compared")
             
-            return result_df
+            return comparison_result
             
         except (InvalidConfigurationError, DataComparisonError):
             raise

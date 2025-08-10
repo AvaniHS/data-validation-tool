@@ -1,8 +1,3 @@
-"""
-Centralized DataFrame reading utility for the data validation tool.
-Eliminates code duplication between different file reading components.
-"""
-
 import pandas as pd
 import json
 import os
@@ -12,30 +7,11 @@ from services.logging.logger_service import get_logger
 
 
 class DataFrameReader:
-    """
-    Centralized utility for reading DataFrames from different file formats.
-    Handles CSV, Excel, and JSON files with consistent error handling.
-    """
     
     def __init__(self):
         self.logger = get_logger("dataframe_reader")
     
     def read_dataframe(self, file_path: str, sheet_name: Optional[str] = None) -> Optional[pd.DataFrame]:
-        """
-        Read a DataFrame from file, supporting CSV, Excel, and JSON formats.
-        
-        Args:
-            file_path: Path to the file to read
-            sheet_name: Sheet name for Excel files (optional)
-            
-        Returns:
-            DataFrame if successful, None if failed
-            
-        Raises:
-            FileNotFoundError: If file doesn't exist
-            PermissionError: If file is not readable
-            ValueError: If file format is unsupported or data is malformed
-        """
         self.logger.debug(f"Reading DataFrame from: {file_path}")
         
         try:
@@ -55,20 +31,17 @@ class DataFrameReader:
             raise
     
     def _read_csv(self, file_path: str) -> pd.DataFrame:
-        """Read CSV file into DataFrame"""
         self.logger.debug(f"Reading CSV file: {file_path}")
         df = pd.read_csv(file_path)
         self.logger.info(f"Successfully read CSV: {df.shape[0]} rows × {df.shape[1]} columns")
         return df
     
     def _read_json(self, file_path: str) -> pd.DataFrame:
-        """Read JSON file into DataFrame"""
         self.logger.debug(f"Reading JSON file: {file_path}")
         
         with open(file_path, 'r', encoding='utf-8') as file:
             json_data = json.load(file)
         
-        # Convert JSON to DataFrame based on structure
         if isinstance(json_data, list):
             df = pd.DataFrame(json_data)
             self.logger.debug("Processed JSON as list of objects")
@@ -92,23 +65,12 @@ class DataFrameReader:
         return df
     
     def _read_excel(self, file_path: str, sheet_name: Optional[str] = None) -> pd.DataFrame:
-        """Read Excel file into DataFrame"""
         self.logger.debug(f"Reading Excel file: {file_path}, sheet: {sheet_name or 'default'}")
         df = pd.read_excel(file_path, sheet_name=sheet_name, engine='openpyxl')
         self.logger.info(f"Successfully read Excel: {df.shape[0]} rows × {df.shape[1]} columns")
         return df
     
     def get_file_columns(self, file_path: str, sheet_name: Optional[str] = None) -> Optional[set]:
-        """
-        Get column names from a file.
-        
-        Args:
-            file_path: Path to the file
-            sheet_name: Sheet name for Excel files (optional)
-            
-        Returns:
-            Set of column names if successful, None if failed
-        """
         try:
             df = self.read_dataframe(file_path, sheet_name)
             if df is not None:
@@ -121,15 +83,6 @@ class DataFrameReader:
             return None
     
     def validate_file_readable(self, file_path: str) -> bool:
-        """
-        Check if a file exists and is readable.
-        
-        Args:
-            file_path: Path to the file
-            
-        Returns:
-            True if file is readable, False otherwise
-        """
         if not os.path.exists(file_path):
             self.logger.error(f"File not found: {file_path}")
             return False
@@ -141,5 +94,4 @@ class DataFrameReader:
         return True
 
 
-# Global instance for easy access
 dataframe_reader = DataFrameReader()

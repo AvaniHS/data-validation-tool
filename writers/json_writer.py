@@ -7,29 +7,16 @@ from services.logging.logger_service import get_logger
 
 
 class JSONFileWriter:
-    """Writer for JSON files that converts pandas DataFrame to JSON format"""
     
     def __init__(self):
         self.logger = get_logger("json_writer")
     
     def write(self, df: pd.DataFrame, file_path: str, **kwargs):
-        """
-        Write DataFrame to JSON file
-        
-        Args:
-            df: DataFrame to write
-            file_path: Path where to save the JSON file
-            **kwargs: Additional options:
-                - orient: JSON orientation ('records', 'index', 'values', 'split', 'table')
-                - indent: JSON indentation (default: 2)
-                - date_format: Date format for datetime columns
-        """
         self.logger.log_operation_start("write_json_file", {"file_path": file_path, "dataframe_shape": df.shape})
         
         try:
             self._ensure_file_writable(file_path)
             
-            # Handle file overwrite confirmation
             if os.path.exists(file_path):
                 self.logger.warning(f"File already exists: {file_path}")
                 while True:
@@ -53,22 +40,19 @@ class JSONFileWriter:
                     else:
                         print("Invalid choice. Please enter 'o', 'r', or 'exit'.")
             
-            # Extract JSON writing options
-            orient = kwargs.get('orient', 'records')  # Default to records format
-            indent = kwargs.get('indent', 2)  # Pretty formatting by default
+            orient = kwargs.get('orient', 'records')
+            indent = kwargs.get('indent', 2)
             date_format = kwargs.get('date_format', 'iso')
             
             self.logger.debug(f"JSON write options: orient={orient}, indent={indent}, date_format={date_format}")
             
-            # Convert DataFrame to JSON
             json_str = df.to_json(
                 orient=orient,
                 date_format=date_format,
                 indent=indent,
-                force_ascii=False  # Allow unicode characters
+                force_ascii=False
             )
             
-            # Write to file
             with open(file_path, 'w', encoding='utf-8') as file:
                 file.write(json_str)
             
@@ -82,7 +66,6 @@ class JSONFileWriter:
             raise ValueError(error_msg)
     
     def _ensure_file_writable(self, file_path: str) -> None:
-        """Validate that the file can be written"""
         if os.path.exists(file_path):
             if not os.access(file_path, os.W_OK):
                 raise PermissionError(f"Permission denied: Cannot write to file {file_path}")

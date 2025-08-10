@@ -15,7 +15,6 @@ from services.logging.logger_service import LoggerService
 
 
 def run_validation_pipeline(config_path: str) -> PipelineResult:
-    # Setup logging for the session
     logger = LoggerService("main_pipeline")
     start_time = time.time()
     
@@ -24,7 +23,6 @@ def run_validation_pipeline(config_path: str) -> PipelineResult:
         print("DATA VALIDATION PIPELINE")
         print("=" * 80)
         
-        # Log session start
         LoggerService.log_session_start(config_path)
         logger.log_operation_start("validation_pipeline", {"config_path": config_path})
         
@@ -36,20 +34,20 @@ def run_validation_pipeline(config_path: str) -> PipelineResult:
             config = result.execution_summary.get('config', {})
             orchestrator.print_pipeline_summary(result, config)
             
-            duration = time.time() - start_time
-            logger.log_operation_success("validation_pipeline", duration)
-            LoggerService.log_session_end(True, duration)
+            execution_duration = time.time() - start_time
+            logger.log_operation_success("validation_pipeline", execution_duration)
+            LoggerService.log_session_end(True, execution_duration)
         else:
-            duration = time.time() - start_time
+            execution_duration = time.time() - start_time
             logger.log_operation_failure("validation_pipeline", Exception(result.error_message))
-            LoggerService.log_session_end(False, duration)
+            LoggerService.log_session_end(False, execution_duration)
         
         return result
         
     except Exception as e:
-        duration = time.time() - start_time
+        execution_duration = time.time() - start_time
         logger.critical(f"Critical error during validation pipeline", e)
-        LoggerService.log_session_end(False, duration)
+        LoggerService.log_session_end(False, execution_duration)
         
         print(f"\n❌ Error during validation: {e}")
         return PipelineResult(
@@ -91,7 +89,6 @@ def create_sample_config() -> Dict[str, Any]:
 
 
 def main():
-    # Setup application logging first
     LoggerService.setup_application_logging(
         log_level=os.getenv('LOG_LEVEL', 'INFO'),
         log_dir=os.getenv('LOG_DIR', 'logs'),

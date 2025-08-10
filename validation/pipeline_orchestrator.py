@@ -68,7 +68,6 @@ class ValidationPipelineOrchestrator(IPipelineOrchestrator):
             execution_summary['detected_types'] = {}
             print(f"✓ Join key type detection completed!")
             
-            # Step 3: Join data frames
             print("\n3. Joining data frames...")
             joined_df = self._data_joiner.join_dataframes(df1, df2, config)
             execution_summary['data_joined'] = True
@@ -76,7 +75,6 @@ class ValidationPipelineOrchestrator(IPipelineOrchestrator):
             print(f"✓ Data joining successful!")
             print(f"  Joined df shape: {joined_df.shape}")
             
-            # Step 4: Apply aggregation
             print("\n4. Applying aggregation...")
             aggregated_df = self._data_aggregator.apply_aggregation(joined_df, config)
             execution_summary['data_aggregated'] = True
@@ -84,7 +82,6 @@ class ValidationPipelineOrchestrator(IPipelineOrchestrator):
             print(f"✓ Data aggregation successful!")
             print(f"  Aggregated df shape: {aggregated_df.shape}")
             
-            # Step 5: Apply comparison
             print("\n5. Applying comparison...")
             compared_df = self._data_comparer.compare_mapped_columns(aggregated_df, config)
             execution_summary['data_compared'] = True
@@ -92,13 +89,11 @@ class ValidationPipelineOrchestrator(IPipelineOrchestrator):
             print(f"✓ Data comparison successful!")
             print(f"  Compared df shape: {compared_df.shape}")
             
-            # Step 6: Write output file
             print("\n6. Writing output file...")
             self._output_writer.write_output(compared_df, config)
             execution_summary['output_written'] = True
             print(f"✓ Output writing successful!")
             
-            # Create final summary
             execution_summary['final_shape'] = compared_df.shape
             execution_summary['comparison_columns'] = [
                 col for col in compared_df.columns if 'diff' in col or 'delta' in col
@@ -119,7 +114,6 @@ class ValidationPipelineOrchestrator(IPipelineOrchestrator):
             )
     
     def print_pipeline_summary(self, result: PipelineResult, config: Dict[str, Any]) -> None:
-        """Print pipeline execution summary"""
         if not result.success:
             return
         
