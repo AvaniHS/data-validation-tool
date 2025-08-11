@@ -5,7 +5,6 @@ import shutil
 import pandas as pd
 from typing import List, Tuple, Dict, Any, Optional
 from datetime import datetime
-# Import validation modules directly to avoid circular imports
 from config_ops.config_processor import ConfigValidator
 from constants import (
     EXIT_COMMANDS, VALIDATION_MESSAGES, CONSOLE_MESSAGES, 
@@ -29,7 +28,6 @@ class UserInteraction:
             user_input = self.input_provider.get_input(prompt)
             self._handle_exit_command(user_input)
             
-            # Handle empty input
             if not user_input.strip():
                 if default is not None:
                     return default
@@ -48,12 +46,10 @@ class UserInteraction:
             if not file_path and not required:
                 return None
             
-            # Strip quotes from the file path
             file_path = file_path.strip().strip('"').strip("'")
             
             try:
                 if file_path and os.path.exists(file_path):
-                    # Check if this is a configuration file prompt and validate file type
                     if "configuration" in prompt.lower() and "json" in prompt.lower():
                         if not file_path.lower().endswith('.json'):
                             print(f"Error: Configuration file must be a JSON file (.json extension). You entered: {file_path}")
@@ -87,7 +83,7 @@ class UserInteraction:
                     "Enter path to your configuration JSON file", required=True
                 )
                 
-                if not config_file:  # User chose to exit
+                if not config_file:
                     return None, None, None
                 
                 config = ConfigValidator.validate_config_file(config_file)
@@ -135,24 +131,20 @@ class UserInteraction:
     def _download_sample_configs(self):
         print("Downloading sample files...")
         
-        # Create downloads directory if it doesn't exist
         downloads_dir = PATHS['DOWNLOADS_DIR']
         if not os.path.exists(downloads_dir):
             os.makedirs(downloads_dir)
             print(f"Created directory: {downloads_dir}")
         
         try:
-            # Import template functions
             from config_ops.templates import get_configuration_template, get_configuration_guidelines
             
-            # Generate configuration template JSON
             config_template = get_configuration_template()
             template_path = os.path.join(downloads_dir, PATHS['CONFIG_TEMPLATE_JSON'])
             with open(template_path, 'w', encoding='utf-8') as f:
                 json.dump(config_template, f, indent=4)
             print(f"Downloaded: {template_path}")
             
-            # Generate configuration guidelines JSON
             guidelines_content = get_configuration_guidelines()
             guidelines_path = os.path.join(downloads_dir, PATHS['CONFIG_GUIDELINES_JSONC'])
             with open(guidelines_path, 'w', encoding='utf-8') as f:
@@ -172,7 +164,6 @@ class UserInteraction:
                 self._download_sample_configs()
             elif choice.lower() in ['e', 'exit']:
                 return
-            # Default is continue
         
         print(f"Sample files downloaded to '{downloads_dir}/' directory")
 
@@ -184,7 +175,7 @@ class UserInteraction:
         
         config_file = args.file1 or self.get_valid_file_path("Enter path to your configuration JSON file", required=True)
         
-        if not config_file:  # User chose to exit
+        if not config_file:
             return None, None, None, None, None, None, None
         
         while True:
@@ -212,13 +203,13 @@ class UserInteraction:
                 
                 if choice.lower() in ['r', 'retry']:
                     config_file = self.get_valid_file_path("Enter path to your configuration JSON file", required=True)
-                    if not config_file:  # User chose to exit
+                    if not config_file:
                         return None, None, None, None, None, None, None
                     continue
                 elif choice.lower() in ['d', 'download']:
                     self._download_sample_configs()
                     config_file = self.get_valid_file_path("Enter path to your configuration JSON file", required=True)
-                    if not config_file:  # User chose to exit
+                    if not config_file:
                         return None, None, None, None, None, None, None
                     continue
                 elif choice.lower() in ['e', 'exit']:

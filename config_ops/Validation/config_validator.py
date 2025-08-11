@@ -1,5 +1,3 @@
-"""Main configuration validator that orchestrates all validation components."""
-
 import os
 import json
 from typing import Dict, Any, List
@@ -11,7 +9,6 @@ from constants import (
 
 
 class ConfigValidator(BaseValidator):
-    """Main configuration validator that orchestrates all validation components."""
     
     def __init__(self):
         super().__init__()
@@ -20,14 +17,12 @@ class ConfigValidator(BaseValidator):
     
     @staticmethod
     def validate_config_file(config_file_path: str) -> Dict[str, Any]:
-        """Main entry point for configuration validation."""
         validator = ConfigValidator()
         return validator._validate_config_file(config_file_path)
     
     def _validate_config_file(self, config_file_path: str) -> Dict[str, Any]:
         try:
             self._validate_file_access(config_file_path)
-            # Load config for validation (this is the only place we need file loading in validation)
             with open(config_file_path, 'r', encoding='utf-8') as f:
                 config = json.load(f)
             self.validate_config(config)
@@ -39,7 +34,6 @@ class ConfigValidator(BaseValidator):
             raise ValueError(ERROR_MESSAGES['CONFIGURATION_VALIDATION_ERROR'].format(str(e)))
     
     def validate_config(self, config: Dict[str, Any]) -> None:
-        """Validate configuration data (without file loading)."""
         try:
             self._validate_basic_structure(config)
             self._run_validators(config)
@@ -68,7 +62,6 @@ class ConfigValidator(BaseValidator):
             self.add_error(ERROR_MESSAGES['MISSING_REQUIRED_FIELDS'].format(missing_fields))
     
     def _run_validators(self, config: Dict[str, Any]) -> None:
-        # Run validators in order: file -> schema -> data -> output
         validator_order = ['file', 'schema', 'data', 'output']
         
         for validator_name in validator_order:
@@ -84,5 +77,3 @@ class ConfigValidator(BaseValidator):
         
         for warning in validator.get_warnings():
             self.add_warning(warning)
-    
- 

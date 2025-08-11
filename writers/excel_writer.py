@@ -89,20 +89,18 @@ class ExcelFileWriter:
             if any(keyword in col.lower() for keyword in COMPARISON_KEYWORDS):
                 header_row.append(COLUMN_CATEGORY_COMPARISON)
             elif any(keyword in col.lower() for keyword in COMPARISON_KEYWORDS):
-                # This is a comparison column, categorize based on the first part
                 parts = col.split('_vs_')
                 if parts[0] in FILE_ONE_COLUMNS:
                     header_row.append(COLUMN_CATEGORY_FILE_ONE)
                 else:
                     header_row.append(COLUMN_CATEGORY_FILE_TWO)
             else:
-                # Regular column, categorize based on name
                 if col in FILE_ONE_COLUMNS:
                     header_row.append(COLUMN_CATEGORY_FILE_ONE)
                 elif col in FILE_TWO_COLUMNS:
                     header_row.append(COLUMN_CATEGORY_FILE_TWO)
                 else:
-                    header_row.append(COLUMN_CATEGORY_FILE_ONE)  # Default to File One
+                    header_row.append(COLUMN_CATEGORY_FILE_ONE)
         
         return header_row
     

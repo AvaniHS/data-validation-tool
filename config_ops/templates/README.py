@@ -1,8 +1,4 @@
-"""README documentation for configuration templates."""
-
-
 def get_templates_readme() -> str:
-    """Return the README documentation for configuration templates."""
     return """
 # Sample Configuration Files
 
@@ -30,11 +26,8 @@ This directory contains sample configuration files for the Data Validation Tool.
 ## 📋 Example Workflow
 
 ```bash
-# 1. Run the tool and download samples
 python run_validation.py
 
-# 2. Edit the downloaded template file
-# 3. Run validation with your configuration
 python run_validation.py --file1 your_config.json
 ```
 

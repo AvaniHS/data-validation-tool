@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import os
 import sys
 import json
@@ -100,16 +98,12 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Run with configuration file
   python run_validation.py --config config.json
   
-  # Show sample configuration
   python run_validation.py --sample-config
   
-  # Run interactively (no arguments)
   python run_validation.py
   
-  # Run with sample files
   python run_validation.py --config tests/sample/config_two_csv_files.json
         """
     )
