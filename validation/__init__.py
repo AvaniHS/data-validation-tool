@@ -58,10 +58,13 @@ from .contracts import (
     IAggregationResultValidator,
     IAggregator,
     
-    IComparisonStrategy,
     IDataComparer,
     
     IOutputWriter
+)
+
+from .interfaces.comparison_strategies import (
+    IComparisonStrategy
 )
 
 __all__ = [

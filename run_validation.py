@@ -53,7 +53,6 @@ def run_validation_pipeline(config_path: str) -> PipelineResult:
             error_message=str(e)
         )
 
-
 def create_sample_config() -> Dict[str, Any]:
     return {
         "file_format": ".csv",

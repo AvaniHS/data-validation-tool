@@ -16,15 +16,40 @@ class JoinKeyExtractor(IJoinKeyExtractor):
     def extract_join_keys(self, config: Dict[str, Any]) -> Tuple[List[str], List[str]]:
         join_keys = config.get('join_keys', {})
         column_mapping = config.get('column_mapping', {})
+        file1_metric_list = config.get('file1_metric_list', [])
+        file2_metric_list = config.get('file2_metric_list', [])
         
+        # Priority 1: If join_keys are specified, use them
         if join_keys and join_keys != DEFAULT_NA_VALUE and isinstance(join_keys, dict):
             return self._extract_from_join_keys(join_keys)
+        
+        # Priority 2: If metrics are specified, ignore them and use other mapped columns
+        elif file1_metric_list or file2_metric_list:
+            return self._extract_from_column_mapping_excluding_metrics(column_mapping, file1_metric_list, file2_metric_list)
+        
+        # Priority 3: Use all mapped columns to join
         else:
             return self._extract_from_column_mapping(column_mapping)
     
     def _extract_from_join_keys(self, join_keys: Dict[str, str]) -> Tuple[List[str], List[str]]:
         left_keys = list(join_keys.keys())
         right_keys = list(join_keys.values())
+        return left_keys, right_keys
+    
+    def _extract_from_column_mapping_excluding_metrics(self, column_mapping: Dict[str, str], 
+                                                      file1_metrics: List[str], file2_metrics: List[str]) -> Tuple[List[str], List[str]]:
+        # Get all metrics (from both file1 and file2 metric lists)
+        all_metrics = set(file1_metrics + file2_metrics)
+        
+        # Filter out metric columns from column mapping
+        filtered_mapping = {k: v for k, v in column_mapping.items() if k not in all_metrics and v not in all_metrics}
+        
+        if not filtered_mapping:
+            # If no non-metric columns, fall back to all columns
+            return self._extract_from_column_mapping(column_mapping)
+        
+        left_keys = list(filtered_mapping.keys())
+        right_keys = list(filtered_mapping.values())
         return left_keys, right_keys
     
     def _extract_from_column_mapping(self, column_mapping: Dict[str, str]) -> Tuple[List[str], List[str]]:
@@ -72,14 +97,23 @@ class JoinExecutor(IJoinExecutor):
             df1_copy = df1.copy()
             df2_copy = df2.copy()
             
+            # Rename join keys to force suffixed columns
             for left_key, right_key in zip(left_keys, right_keys):
-                df1_copy[left_key] = df1_copy[left_key].astype(str)
-                df2_copy[right_key] = df2_copy[right_key].astype(str)
+                df1_copy = df1_copy.rename(columns={left_key: f"{left_key}{left_suffix}"})
+                df2_copy = df2_copy.rename(columns={right_key: f"{right_key}{right_suffix}"})
+                
+                # Convert to string for consistent joining
+                df1_copy[f"{left_key}{left_suffix}"] = df1_copy[f"{left_key}{left_suffix}"].astype(str)
+                df2_copy[f"{right_key}{right_suffix}"] = df2_copy[f"{right_key}{right_suffix}"].astype(str)
+            
+            # Create new key lists with suffixed names
+            left_keys_suffixed = [f"{key}{left_suffix}" for key in left_keys]
+            right_keys_suffixed = [f"{key}{right_suffix}" for key in right_keys]
             
             joined_df = df1_copy.merge(
                 df2_copy,
-                left_on=left_keys,
-                right_on=right_keys,
+                left_on=left_keys_suffixed,
+                right_on=right_keys_suffixed,
                 how='outer',
                 suffixes=(left_suffix, right_suffix)
             )
@@ -99,16 +133,37 @@ class JoinExecutor(IJoinExecutor):
         return df
     
     def _add_join_keys_status(self, df: pd.DataFrame, left_keys: List[str], right_keys: List[str]) -> pd.DataFrame:
-        for left_key, right_key in zip(left_keys, right_keys):
-            status_col = f"{left_key}_join_status"
-            df[status_col] = 'matched'
+        # Create a combined join status column
+        df['Join_status'] = 'matched'
+        
+        # Check for any suffixed columns to determine status
+        file1_cols = [col for col in df.columns if col.endswith('_file1')]
+        file2_cols = [col for col in df.columns if col.endswith('_file2')]
+        
+        if file1_cols and file2_cols:
+            # Use the first available suffixed column to determine status
+            file1_col = file1_cols[0]
+            file2_col = file2_cols[0]
             
-            left_key_file1 = f"{left_key}_file1"
-            right_key_file2 = f"{right_key}_file2"
+            # Set status based on which file has data
+            df.loc[df[file1_col].isna(), 'Join_status'] = 'only_in_file2'
+            df.loc[df[file2_col].isna(), 'Join_status'] = 'only_in_file1'
             
-            if left_key_file1 in df.columns and right_key_file2 in df.columns:
-                df.loc[df[left_key_file1].isna(), status_col] = 'only_in_file2'
-                df.loc[df[right_key_file2].isna(), status_col] = 'only_in_file1'
+            # For rows where both files have data, check if values match
+            both_present = df[file1_col].notna() & df[file2_col].notna()
+            if both_present.any():
+                # Check if all join key values match
+                all_match = True
+                for left_key, right_key in zip(left_keys, right_keys):
+                    left_key_col = f"{left_key}_file1"
+                    right_key_col = f"{right_key}_file2"
+                    if left_key_col in df.columns and right_key_col in df.columns:
+                        if not (df.loc[both_present, left_key_col] == df.loc[both_present, right_key_col]).all():
+                            all_match = False
+                            break
+                
+                if not all_match:
+                    df.loc[both_present, 'Join_status'] = 'key_mismatch'
         
         return df
 

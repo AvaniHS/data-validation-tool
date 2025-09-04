@@ -69,16 +69,13 @@ class DataFormatter(IDataFormatter):
         if 'JoinKeys' not in df.columns:
             return df
         
-        join_keys = config.get('join_keys', {})
+        # Use the same join key extraction logic as the joiner
+        from validation.data_joiner import JoinKeyExtractor
+        extractor = JoinKeyExtractor()
+        left_keys, right_keys = extractor.extract_join_keys(config)
+        
         column_mapping = config.get('column_mapping', {})
         aggregation = config.get('aggregation', {})
-        
-        if join_keys and join_keys != 'NA' and isinstance(join_keys, dict) and len(join_keys) > 0:
-            left_keys = list(join_keys.keys())
-            right_keys = list(join_keys.values())
-        else:
-            left_keys = list(column_mapping.keys())
-            right_keys = list(column_mapping.values())
         
         metric_columns = self._get_metric_columns_from_config(aggregation, left_keys, right_keys)
         

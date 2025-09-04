@@ -1,12 +1,18 @@
-from abc import ABC, abstractmethod
 from typing import Dict, Any, List, Tuple, Optional
 import pandas as pd
 import numpy as np
 from validation.exceptions import DataComparisonError, InvalidConfigurationError
-from validation.contracts import (
+from validation.contracts import IDataComparer
+from validation.interfaces.comparison_strategies import (
     IComparisonStrategy,
-    IDataComparer
+    IComparisonConfigValidator,
+    IComparisonConfigExtractor,
+    IComparisonStrategySelector,
+    IComparisonExecutor,
+    IComparisonResultValidator
 )
+from validation.interfaces.dataframe_validator import IDataFrameValidator
+from validation.validators import DataFrameValidator
 from constants import DEFAULT_NA_VALUE
 
 
@@ -52,10 +58,7 @@ class NumericComparisonStrategy(IComparisonStrategy):
             return "null", 100.0
 
 
-class IComparisonConfigValidator(ABC):
-    @abstractmethod
-    def validate_configuration(self, config: Dict[str, Any]) -> None:
-        pass
+
 
 
 class ComparisonConfigValidator(IComparisonConfigValidator):
@@ -72,10 +75,7 @@ class ComparisonConfigValidator(IComparisonConfigValidator):
             raise InvalidConfigurationError("Column mapping cannot be empty")
 
 
-class IComparisonConfigExtractor(ABC):
-    @abstractmethod
-    def extract_column_mapping(self, config: Dict[str, Any]) -> Dict[str, str]:
-        pass
+
 
 
 class ComparisonConfigExtractor(IComparisonConfigExtractor):
@@ -88,10 +88,7 @@ class ComparisonConfigExtractor(IComparisonConfigExtractor):
         return column_mapping.copy()
 
 
-class IComparisonStrategySelector(ABC):
-    @abstractmethod
-    def select_strategy(self, series1: pd.Series, series2: pd.Series, config: Dict[str, Any], file1_col: str) -> IComparisonStrategy:
-        pass
+
 
 
 class ComparisonStrategySelector(IComparisonStrategySelector):
@@ -108,7 +105,8 @@ class ComparisonStrategySelector(IComparisonStrategySelector):
             if strategy_type in self._available_strategies:
                 return self._available_strategies[strategy_type]
         
-        if self._is_numeric_series(series1) and self._is_numeric_series(series2):
+        metrics = config.get('metrics', [])
+        if file1_col in metrics and self._is_numeric_series(series1) and self._is_numeric_series(series2):
             return self._available_strategies['numeric']
         else:
             return self._available_strategies['string']
@@ -121,11 +119,7 @@ class ComparisonStrategySelector(IComparisonStrategySelector):
             return False
 
 
-class IComparisonExecutor(ABC):
-    @abstractmethod
-    def execute_comparison(self, df: pd.DataFrame, column_mapping: Dict[str, str], 
-                          strategy_selector: IComparisonStrategySelector, config: Dict[str, Any]) -> pd.DataFrame:
-        pass
+
 
 
 class ComparisonExecutor(IComparisonExecutor):
@@ -163,10 +157,11 @@ class ComparisonExecutor(IComparisonExecutor):
                     delta_results.append(delta_value)
                 
                 comparison_column_name = f"{file1_column}_vs_{file2_column}_comparison"
-                delta_column_name = f"{file1_column}_vs_{file2_column}_delta"
-                
                 result_dataframe[comparison_column_name] = comparison_results
-                result_dataframe[delta_column_name] = delta_results
+                
+                if isinstance(selected_strategy, NumericComparisonStrategy):
+                    delta_column_name = f"{file1_column}_vs_{file2_column}_delta"
+                    result_dataframe[delta_column_name] = delta_results
             
             return result_dataframe
             
@@ -174,10 +169,7 @@ class ComparisonExecutor(IComparisonExecutor):
             raise DataComparisonError(f"Failed to execute comparison: {str(e)}")
 
 
-class IComparisonResultValidator(ABC):
-    @abstractmethod
-    def validate_result(self, result_df: pd.DataFrame, original_df: pd.DataFrame) -> None:
-        pass
+
 
 
 class ComparisonResultValidator(IComparisonResultValidator):
@@ -194,15 +186,16 @@ class ComparisonResultValidator(IComparisonResultValidator):
 
 class DataComparer(IDataComparer):
     def __init__(self):
-        self._config_validator = ComparisonConfigValidator()
-        self._config_extractor = ComparisonConfigExtractor()
-        self._strategy_selector = ComparisonStrategySelector()
-        self._executor = ComparisonExecutor()
-        self._result_validator = ComparisonResultValidator()
+        self._dataframe_validator: IDataFrameValidator = DataFrameValidator()
+        self._config_validator: IComparisonConfigValidator = ComparisonConfigValidator()
+        self._config_extractor: IComparisonConfigExtractor = ComparisonConfigExtractor()
+        self._strategy_selector: IComparisonStrategySelector = ComparisonStrategySelector()
+        self._executor: IComparisonExecutor = ComparisonExecutor()
+        self._result_validator: IComparisonResultValidator = ComparisonResultValidator()
     
     def compare_mapped_columns(self, df: pd.DataFrame, config: Dict[str, Any]) -> pd.DataFrame:
         try:
-            self._ensure_dataframe_valid(df)
+            self._dataframe_validator.validate_dataframe(df)
             self._config_validator.validate_configuration(config)
             column_mapping = self._config_extractor.extract_column_mapping(config)
             
@@ -225,12 +218,4 @@ class DataComparer(IDataComparer):
         except Exception as e:
             raise DataComparisonError(f"Failed to compare mapped columns: {str(e)}")
     
-    def _ensure_dataframe_valid(self, df: pd.DataFrame) -> None:
-        if df is None:
-            raise DataComparisonError("Input dataframe cannot be None")
-        
-        if df.empty:
-            raise DataComparisonError("Input dataframe is empty")
-        
-        if len(df.columns) == 0:
-            raise DataComparisonError("Input dataframe has no columns") 
+ 

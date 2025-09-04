@@ -131,3 +131,389 @@
 2025-08-10 05:03:06 | INFO     | session              | log_session_end | Total duration: 189.27 seconds
 2025-08-10 05:03:06 | INFO     | session              | log_session_end | Session end time: 2025-08-10T05:03:06.983253
 2025-08-10 05:03:06 | INFO     | session              | log_session_end | ================================================================================
+2025-09-01 15:27:10 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 94819 rows × 11 columns
+2025-09-01 15:27:17 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 94819 rows × 12 columns
+2025-09-01 15:27:17 | INFO     | session              | log_session_start | ================================================================================
+2025-09-01 15:27:17 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250901_152717
+2025-09-01 15:27:17 | INFO     | session              | log_session_start | ================================================================================
+2025-09-01 15:27:17 | INFO     | session              | log_session_start | Configuration file: D:\\Projects\\HP-RnA(CSP-nextgen) ReportingAnd Analytics+Customer and Sales Performance\\KYC\\Jira\\CSPNG-2783_ChannelVault_data_validation\\CSPNG-2791_HWcMPS\\config.json
+2025-09-01 15:27:17 | INFO     | session              | log_session_start | Session start time: 2025-09-01T15:27:17.437544
+2025-09-01 15:27:17 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:\\Projects\\HP-RnA(CSP-nextgen) ReportingAnd Analytics+Customer and Sales Performance\\KYC\\Jira\\CSPNG-2783_ChannelVault_data_validation\\CSPNG-2791_HWcMPS\\config.json
+2025-09-01 15:27:17 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-01 15:27:25 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 94819 rows × 11 columns
+2025-09-01 15:27:31 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 94819 rows × 12 columns
+2025-09-01 15:33:42 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 385.30s
+2025-09-01 15:33:42 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 385.31s
+2025-09-01 15:33:42 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2025-09-01 15:33:42 | INFO     | session              | log_session_end | Total duration: 385.31 seconds
+2025-09-01 15:33:42 | INFO     | session              | log_session_end | Session end time: 2025-09-01T15:33:42.743133
+2025-09-01 15:33:42 | INFO     | session              | log_session_end | ================================================================================
+2025-09-02 09:51:54 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 94819 rows × 11 columns
+2025-09-02 09:52:04 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 94819 rows × 12 columns
+2025-09-02 09:52:04 | INFO     | session              | log_session_start | ================================================================================
+2025-09-02 09:52:04 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250902_095204
+2025-09-02 09:52:04 | INFO     | session              | log_session_start | ================================================================================
+2025-09-02 09:52:04 | INFO     | session              | log_session_start | Configuration file: D:\\Projects\\HP-RnA(CSP-nextgen) ReportingAnd Analytics+Customer and Sales Performance\\KYC\\Jira\\CSPNG-2783_ChannelVault_data_validation\\CSPNG-2791_HWcMPS\\config.json
+2025-09-02 09:52:04 | INFO     | session              | log_session_start | Session start time: 2025-09-02T09:52:04.063494
+2025-09-02 09:52:04 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:\\Projects\\HP-RnA(CSP-nextgen) ReportingAnd Analytics+Customer and Sales Performance\\KYC\\Jira\\CSPNG-2783_ChannelVault_data_validation\\CSPNG-2791_HWcMPS\\config.json
+2025-09-02 09:52:04 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-02 09:52:12 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 94819 rows × 11 columns
+2025-09-02 09:52:21 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 94819 rows × 12 columns
+2025-09-04 14:32:48 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:32:48 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:32:48 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 14:32:48 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_143248
+2025-09-04 14:32:48 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 14:32:48 | INFO     | session              | log_session_start | Configuration file: D:/Projects/TL/Projects/data-validation-tool/tests/sample/AvaniTestConfig.json
+2025-09-04 14:32:48 | INFO     | session              | log_session_start | Session start time: 2025-09-04T14:32:48.597326
+2025-09-04 14:32:48 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/TL/Projects/data-validation-tool/tests/sample/AvaniTestConfig.json
+2025-09-04 14:32:48 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 14:32:48 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:32:48 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:36:38 | WARNING  | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' failed after 230.32s: 0
+2025-09-04 14:36:57 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 14:36:57 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_143657
+2025-09-04 14:36:57 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 14:36:57 | INFO     | session              | log_session_start | Configuration file: tests/sample/config_two_csv_files.json
+2025-09-04 14:36:57 | INFO     | session              | log_session_start | Session start time: 2025-09-04T14:36:57.751825
+2025-09-04 14:36:57 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/config_two_csv_files.json
+2025-09-04 14:36:57 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 14:36:57 | INFO     | dataframe_reader     | _log_with_extra | Successfully read CSV: 94819 rows × 12 columns
+2025-09-04 14:36:58 | INFO     | dataframe_reader     | _log_with_extra | Successfully read CSV: 94819 rows × 11 columns
+2025-09-04 14:36:58 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 0.40s
+2025-09-04 14:36:58 | ERROR    | main_pipeline        | _log_with_extra | Failed validation_pipeline | Exception: Pipeline execution failed: Configuration validation failed: Configuration validation error: Configuration validation failed:
+Column mapping validation failed:
+  Missing in file1: customer_id, product_id, quantity, price
+  Missing in file2: customer_id, product_code, qty, amount
+
+Join keys validation failed:
+  Missing in file1: customer_id, product_id
+  Missing in file2: customer_id, product_code
+
+Missing additional columns in additional_columns_file1: date, region, category
+Missing additional columns in additional_columns_file2: transaction_date, location, product_category
+Missing aggregation columns in file1_columns: quantity (in sum), price (in sum)
+Missing aggregation columns in file2_columns: qty (in sum), amount (in sum)
+Missing groupby columns: customer_id (in groupby_columns), product_id (in groupby_columns) | Traceback: NoneType: None
+
+2025-09-04 14:36:58 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: FAILED
+2025-09-04 14:36:58 | INFO     | session              | log_session_end | Total duration: 0.40 seconds
+2025-09-04 14:36:58 | INFO     | session              | log_session_end | Session end time: 2025-09-04T14:36:58.151850
+2025-09-04 14:36:58 | INFO     | session              | log_session_end | ================================================================================
+2025-09-04 14:53:06 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:53:06 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:53:06 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 14:53:06 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_145306
+2025-09-04 14:53:06 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 14:53:06 | INFO     | session              | log_session_start | Configuration file: D:\Projects\TL\Projects\data-validation-tool\tests\sample\AvaniTestConfig.json
+2025-09-04 14:53:06 | INFO     | session              | log_session_start | Session start time: 2025-09-04T14:53:06.433538
+2025-09-04 14:53:06 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:\Projects\TL\Projects\data-validation-tool\tests\sample\AvaniTestConfig.json
+2025-09-04 14:53:06 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 14:53:06 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:53:06 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:54:30 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 14:54:30 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_145430
+2025-09-04 14:54:30 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 14:54:30 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig.json
+2025-09-04 14:54:30 | INFO     | session              | log_session_start | Session start time: 2025-09-04T14:54:30.591157
+2025-09-04 14:54:30 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig.json
+2025-09-04 14:54:30 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 14:54:30 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:54:30 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:54:31 | WARNING  | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' failed after 1.23s: 
+2025-09-04 14:54:48 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 14:54:48 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_145448
+2025-09-04 14:54:48 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 14:54:48 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig.json
+2025-09-04 14:54:48 | INFO     | session              | log_session_start | Session start time: 2025-09-04T14:54:48.858700
+2025-09-04 14:54:48 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig.json
+2025-09-04 14:54:48 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 14:54:48 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:54:48 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:54:49 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 0.20s
+2025-09-04 14:54:49 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 0.20s
+2025-09-04 14:54:49 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2025-09-04 14:54:49 | INFO     | session              | log_session_end | Total duration: 0.20 seconds
+2025-09-04 14:54:49 | INFO     | session              | log_session_end | Session end time: 2025-09-04T14:54:49.056641
+2025-09-04 14:54:49 | INFO     | session              | log_session_end | ================================================================================
+2025-09-04 14:55:38 | WARNING  | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' failed after 151.75s: 
+2025-09-04 14:55:47 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:55:47 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:55:47 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 14:55:47 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_145547
+2025-09-04 14:55:47 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 14:55:47 | INFO     | session              | log_session_start | Configuration file: D:\Projects\TL\Projects\data-validation-tool\tests\sample\AvaniTestConfig.json
+2025-09-04 14:55:47 | INFO     | session              | log_session_start | Session start time: 2025-09-04T14:55:47.824311
+2025-09-04 14:55:47 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:\Projects\TL\Projects\data-validation-tool\tests\sample\AvaniTestConfig.json
+2025-09-04 14:55:47 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 14:55:47 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:55:47 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:55:58 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 10.57s
+2025-09-04 14:55:58 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 10.57s
+2025-09-04 14:55:58 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2025-09-04 14:55:58 | INFO     | session              | log_session_end | Total duration: 10.57 seconds
+2025-09-04 14:55:58 | INFO     | session              | log_session_end | Session end time: 2025-09-04T14:55:58.397664
+2025-09-04 14:55:58 | INFO     | session              | log_session_end | ================================================================================
+2025-09-04 14:58:38 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 14:58:38 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_145838
+2025-09-04 14:58:38 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 14:58:38 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig.json
+2025-09-04 14:58:38 | INFO     | session              | log_session_start | Session start time: 2025-09-04T14:58:38.773514
+2025-09-04 14:58:38 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig.json
+2025-09-04 14:58:38 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 14:58:38 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:58:38 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:58:40 | WARNING  | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' failed after 1.70s: 
+2025-09-04 14:59:05 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 14:59:05 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_145905
+2025-09-04 14:59:05 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 14:59:05 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig.json
+2025-09-04 14:59:05 | INFO     | session              | log_session_start | Session start time: 2025-09-04T14:59:05.875765
+2025-09-04 14:59:05 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig.json
+2025-09-04 14:59:05 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 14:59:05 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:59:05 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 14:59:07 | WARNING  | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' failed after 1.26s: 
+2025-09-04 15:03:54 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:03:54 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_150354
+2025-09-04 15:03:54 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:03:54 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig.json
+2025-09-04 15:03:54 | INFO     | session              | log_session_start | Session start time: 2025-09-04T15:03:54.803585
+2025-09-04 15:03:54 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig.json
+2025-09-04 15:03:54 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 15:03:54 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:03:54 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:03:56 | WARNING  | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' failed after 1.67s: 
+2025-09-04 15:07:31 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:07:31 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_150731
+2025-09-04 15:07:31 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:07:31 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig.json
+2025-09-04 15:07:31 | INFO     | session              | log_session_start | Session start time: 2025-09-04T15:07:31.660856
+2025-09-04 15:07:31 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig.json
+2025-09-04 15:07:31 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 15:07:31 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:07:31 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:07:50 | WARNING  | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' failed after 18.83s: 0
+2025-09-04 15:07:58 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:07:58 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_150758
+2025-09-04 15:07:58 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:07:58 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig.json
+2025-09-04 15:07:58 | INFO     | session              | log_session_start | Session start time: 2025-09-04T15:07:58.988693
+2025-09-04 15:07:58 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig.json
+2025-09-04 15:07:58 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 15:07:59 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:07:59 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:08:01 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 2.61s
+2025-09-04 15:08:01 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 2.61s
+2025-09-04 15:08:01 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2025-09-04 15:08:01 | INFO     | session              | log_session_end | Total duration: 2.61 seconds
+2025-09-04 15:08:01 | INFO     | session              | log_session_end | Session end time: 2025-09-04T15:08:01.600212
+2025-09-04 15:08:01 | INFO     | session              | log_session_end | ================================================================================
+2025-09-04 15:08:36 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:08:36 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_150836
+2025-09-04 15:08:36 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:08:36 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig_NoJoinKeys.json
+2025-09-04 15:08:36 | INFO     | session              | log_session_start | Session start time: 2025-09-04T15:08:36.978229
+2025-09-04 15:08:36 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig_NoJoinKeys.json
+2025-09-04 15:08:36 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 15:08:36 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:08:37 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:08:37 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 0.08s
+2025-09-04 15:08:37 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 0.08s
+2025-09-04 15:08:37 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2025-09-04 15:08:37 | INFO     | session              | log_session_end | Total duration: 0.08 seconds
+2025-09-04 15:08:37 | INFO     | session              | log_session_end | Session end time: 2025-09-04T15:08:37.061937
+2025-09-04 15:08:37 | INFO     | session              | log_session_end | ================================================================================
+2025-09-04 15:27:32 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:27:32 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:27:32 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:27:32 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_152732
+2025-09-04 15:27:32 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:27:32 | INFO     | session              | log_session_start | Configuration file: D:\Projects\TL\Projects\data-validation-tool\tests\sample\AvaniTestConfig.json
+2025-09-04 15:27:32 | INFO     | session              | log_session_start | Session start time: 2025-09-04T15:27:32.721803
+2025-09-04 15:27:32 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:\Projects\TL\Projects\data-validation-tool\tests\sample\AvaniTestConfig.json
+2025-09-04 15:27:32 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 15:27:32 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:27:32 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:27:35 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 2.72s
+2025-09-04 15:27:35 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 2.72s
+2025-09-04 15:27:35 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2025-09-04 15:27:35 | INFO     | session              | log_session_end | Total duration: 2.72 seconds
+2025-09-04 15:27:35 | INFO     | session              | log_session_end | Session end time: 2025-09-04T15:27:35.445636
+2025-09-04 15:27:35 | INFO     | session              | log_session_end | ================================================================================
+2025-09-04 15:29:18 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:29:18 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_152918
+2025-09-04 15:29:18 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:29:18 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig.json
+2025-09-04 15:29:18 | INFO     | session              | log_session_start | Session start time: 2025-09-04T15:29:18.009491
+2025-09-04 15:29:18 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig.json
+2025-09-04 15:29:18 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 15:29:18 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:29:18 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:29:19 | WARNING  | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' failed after 1.39s: 
+2025-09-04 15:29:54 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:29:54 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_152954
+2025-09-04 15:29:54 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:29:54 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig.json
+2025-09-04 15:29:54 | INFO     | session              | log_session_start | Session start time: 2025-09-04T15:29:54.718785
+2025-09-04 15:29:54 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig.json
+2025-09-04 15:29:54 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 15:29:54 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:29:54 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:30:02 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 7.68s
+2025-09-04 15:30:02 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 7.68s
+2025-09-04 15:30:02 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2025-09-04 15:30:02 | INFO     | session              | log_session_end | Total duration: 7.68 seconds
+2025-09-04 15:30:02 | INFO     | session              | log_session_end | Session end time: 2025-09-04T15:30:02.402994
+2025-09-04 15:30:02 | INFO     | session              | log_session_end | ================================================================================
+2025-09-04 15:31:39 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:31:39 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:31:39 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:31:39 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_153139
+2025-09-04 15:31:39 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:31:39 | INFO     | session              | log_session_start | Configuration file: D:\Projects\TL\Projects\data-validation-tool\tests\sample\AvaniTestConfig.json
+2025-09-04 15:31:39 | INFO     | session              | log_session_start | Session start time: 2025-09-04T15:31:39.671158
+2025-09-04 15:31:39 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:\Projects\TL\Projects\data-validation-tool\tests\sample\AvaniTestConfig.json
+2025-09-04 15:31:39 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 15:31:39 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:31:39 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:31:41 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 2.09s
+2025-09-04 15:31:41 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 2.09s
+2025-09-04 15:31:41 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2025-09-04 15:31:41 | INFO     | session              | log_session_end | Total duration: 2.09 seconds
+2025-09-04 15:31:41 | INFO     | session              | log_session_end | Session end time: 2025-09-04T15:31:41.758797
+2025-09-04 15:31:41 | INFO     | session              | log_session_end | ================================================================================
+2025-09-04 15:33:17 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:33:17 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_153317
+2025-09-04 15:33:17 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:33:17 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig.json
+2025-09-04 15:33:17 | INFO     | session              | log_session_start | Session start time: 2025-09-04T15:33:17.369741
+2025-09-04 15:33:17 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig.json
+2025-09-04 15:33:17 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 15:33:17 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:33:17 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:33:19 | WARNING  | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' failed after 1.95s: 
+2025-09-04 15:40:07 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:40:07 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_154007
+2025-09-04 15:40:07 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 15:40:07 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig.json
+2025-09-04 15:40:07 | INFO     | session              | log_session_start | Session start time: 2025-09-04T15:40:07.091841
+2025-09-04 15:40:07 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig.json
+2025-09-04 15:40:07 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 15:40:07 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:40:07 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 15:40:40 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 33.71s
+2025-09-04 15:40:40 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 33.72s
+2025-09-04 15:40:40 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2025-09-04 15:40:40 | INFO     | session              | log_session_end | Total duration: 33.72 seconds
+2025-09-04 15:40:40 | INFO     | session              | log_session_end | Session end time: 2025-09-04T15:40:40.807906
+2025-09-04 15:40:40 | INFO     | session              | log_session_end | ================================================================================
+2025-09-04 17:16:51 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 17:16:51 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_171651
+2025-09-04 17:16:51 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 17:16:51 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig.json
+2025-09-04 17:16:51 | INFO     | session              | log_session_start | Session start time: 2025-09-04T17:16:51.166543
+2025-09-04 17:16:51 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig.json
+2025-09-04 17:16:51 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 17:16:51 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:16:51 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:16:54 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 3.02s
+2025-09-04 17:16:54 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 3.02s
+2025-09-04 17:16:54 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2025-09-04 17:16:54 | INFO     | session              | log_session_end | Total duration: 3.02 seconds
+2025-09-04 17:16:54 | INFO     | session              | log_session_end | Session end time: 2025-09-04T17:16:54.184321
+2025-09-04 17:16:54 | INFO     | session              | log_session_end | ================================================================================
+2025-09-04 17:21:16 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:21:16 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:21:16 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 17:21:16 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_172116
+2025-09-04 17:21:16 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 17:21:16 | INFO     | session              | log_session_start | Configuration file: D:/Projects/TL/Projects/data-validation-tool/tests/sample/AvaniTestConfig.json
+2025-09-04 17:21:16 | INFO     | session              | log_session_start | Session start time: 2025-09-04T17:21:16.808236
+2025-09-04 17:21:16 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/TL/Projects/data-validation-tool/tests/sample/AvaniTestConfig.json
+2025-09-04 17:21:16 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 17:21:16 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:21:16 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:21:18 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.78s
+2025-09-04 17:21:18 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.78s
+2025-09-04 17:21:18 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2025-09-04 17:21:18 | INFO     | session              | log_session_end | Total duration: 1.78 seconds
+2025-09-04 17:21:18 | INFO     | session              | log_session_end | Session end time: 2025-09-04T17:21:18.588756
+2025-09-04 17:21:18 | INFO     | session              | log_session_end | ================================================================================
+2025-09-04 17:22:38 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:22:38 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:22:38 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 17:22:38 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_172238
+2025-09-04 17:22:38 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 17:22:38 | INFO     | session              | log_session_start | Configuration file: D:/Projects/TL/Projects/data-validation-tool/tests/sample/AvaniTestConfig.json
+2025-09-04 17:22:38 | INFO     | session              | log_session_start | Session start time: 2025-09-04T17:22:38.903500
+2025-09-04 17:22:38 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/TL/Projects/data-validation-tool/tests/sample/AvaniTestConfig.json
+2025-09-04 17:22:38 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 17:22:38 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:22:38 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:22:40 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.63s
+2025-09-04 17:22:40 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.64s
+2025-09-04 17:22:40 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2025-09-04 17:22:40 | INFO     | session              | log_session_end | Total duration: 1.64 seconds
+2025-09-04 17:22:40 | INFO     | session              | log_session_end | Session end time: 2025-09-04T17:22:40.538561
+2025-09-04 17:22:40 | INFO     | session              | log_session_end | ================================================================================
+2025-09-04 17:35:22 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 17:35:22 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_173522
+2025-09-04 17:35:22 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 17:35:22 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig.json
+2025-09-04 17:35:22 | INFO     | session              | log_session_start | Session start time: 2025-09-04T17:35:22.764208
+2025-09-04 17:35:22 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig.json
+2025-09-04 17:35:22 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 17:35:22 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:35:22 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:35:50 | WARNING  | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' failed after 28.20s: 
+2025-09-04 17:35:57 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 17:35:57 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_173557
+2025-09-04 17:35:57 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 17:35:57 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig.json
+2025-09-04 17:35:57 | INFO     | session              | log_session_start | Session start time: 2025-09-04T17:35:57.980538
+2025-09-04 17:35:57 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig.json
+2025-09-04 17:35:57 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 17:35:57 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:35:58 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:35:59 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.33s
+2025-09-04 17:35:59 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.33s
+2025-09-04 17:35:59 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2025-09-04 17:35:59 | INFO     | session              | log_session_end | Total duration: 1.33 seconds
+2025-09-04 17:35:59 | INFO     | session              | log_session_end | Session end time: 2025-09-04T17:35:59.309235
+2025-09-04 17:35:59 | INFO     | session              | log_session_end | ================================================================================
+2025-09-04 17:40:46 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 17:40:46 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_174046
+2025-09-04 17:40:46 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 17:40:46 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig.json
+2025-09-04 17:40:46 | INFO     | session              | log_session_start | Session start time: 2025-09-04T17:40:46.120165
+2025-09-04 17:40:46 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig.json
+2025-09-04 17:40:46 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 17:40:46 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:40:46 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:41:02 | WARNING  | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' failed after 16.11s: 0
+2025-09-04 17:41:07 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 17:41:07 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_174107
+2025-09-04 17:41:07 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 17:41:07 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig.json
+2025-09-04 17:41:07 | INFO     | session              | log_session_start | Session start time: 2025-09-04T17:41:07.482076
+2025-09-04 17:41:07 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig.json
+2025-09-04 17:41:07 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 17:41:07 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:41:07 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:41:17 | WARNING  | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' failed after 10.38s: 
+2025-09-04 17:41:21 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 17:41:21 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20250904_174121
+2025-09-04 17:41:21 | INFO     | session              | log_session_start | ================================================================================
+2025-09-04 17:41:21 | INFO     | session              | log_session_start | Configuration file: tests/sample/AvaniTestConfig.json
+2025-09-04 17:41:21 | INFO     | session              | log_session_start | Session start time: 2025-09-04T17:41:21.631343
+2025-09-04 17:41:21 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=tests/sample/AvaniTestConfig.json
+2025-09-04 17:41:21 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2025-09-04 17:41:21 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:41:21 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 5 rows × 4 columns
+2025-09-04 17:41:22 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.01s
+2025-09-04 17:41:22 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.01s
+2025-09-04 17:41:22 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2025-09-04 17:41:22 | INFO     | session              | log_session_end | Total duration: 1.01 seconds
+2025-09-04 17:41:22 | INFO     | session              | log_session_end | Session end time: 2025-09-04T17:41:22.645297
+2025-09-04 17:41:22 | INFO     | session              | log_session_end | ================================================================================

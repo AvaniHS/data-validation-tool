@@ -85,11 +85,14 @@ class DataCleaner(IDataCleaner):
     def _clean_currency_values(self, df: pd.DataFrame) -> pd.DataFrame:
         for col in df.columns:
             if df[col].dtype == 'object':
-                df[col] = df[col].astype(str).str.replace('$', '').str.replace(',', '')
-                try:
-                    df[col] = pd.to_numeric(df[col], errors='coerce')
-                except:
-                    pass
+                # Only clean columns that contain literal dollar signs
+                has_dollar = any('$' in str(val) for val in df[col].values if pd.notna(val))
+                if has_dollar:
+                    df[col] = df[col].astype(str).str.replace('$', '').str.replace(',', '')
+                    try:
+                        df[col] = pd.to_numeric(df[col], errors='coerce')
+                    except:
+                        pass
         return df
 
 

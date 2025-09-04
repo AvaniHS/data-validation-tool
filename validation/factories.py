@@ -17,7 +17,7 @@ from validation.contracts.data_preparer_contracts import IDataPreparer
 from validation.contracts.output_writer_contracts import IOutputWriter
 from validation.contracts.configuration_service_contracts import IConfigurationService
 from validation.contracts.data_aggregator_contracts import IAggregationConfigValidator, IAggregationConfigExtractor, IAggregationExecutor, IAggregationResultValidator
-from validation.contracts.data_comparer_contracts import IComparisonStrategy, IComparisonExecutor, IComparisonResultValidator
+from validation.interfaces.comparison_strategies import IComparisonStrategy, IComparisonExecutor, IComparisonResultValidator
 from validation.contracts.data_joiner_contracts import IJoinKeyExtractor, IJoinExecutor, IJoinResultValidator
 from validation.contracts.data_preparer_contracts import IDataValidator, IDataLoader, IDataCleaner, ITypeDetector
 from validation.contracts.output_writer_contracts import IOutputConfigValidator, IOutputConfigExtractor, IDataFormatter, IFileWriter, IOutputResultValidator
