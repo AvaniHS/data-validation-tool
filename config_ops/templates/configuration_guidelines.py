@@ -100,7 +100,10 @@ OPTIONAL FIELDS - Use "NA" or empty arrays/objects if not needed
 
 OPTIONAL - Metric lists for additional analysis
 "file1_metric_list": ["metric1", "metric2", "metric3"],    // Array of metrics for file1
-"file2_metric_list": ["metric1", "metric2", "metric3"]     // Array of metrics for file2
+"file2_metric_list": ["metric1", "metric2", "metric3"],    // Array of metrics for file2
+
+OPTIONAL - Join analysis settings
+"detailed_join_analysis": "no"                              // CHOICES: "yes" or "no" - Enable detailed join analysis
 
 ======================================================================
 CONFIGURATION EXAMPLES:

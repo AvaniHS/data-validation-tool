@@ -31,5 +31,6 @@ def get_configuration_template() -> Dict[str, Any]:
         },
         "aggregation": "NA",
         "file1_metric_list": [],
-        "file2_metric_list": []
+        "file2_metric_list": [],
+        "detailed_join_analysis": "no"
     } 

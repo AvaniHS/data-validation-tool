@@ -68,6 +68,41 @@ CONSOLE_MESSAGES = {
     'DATASET_SUMMARY_FOOTER': '=== END SUMMARY ==='
 }
 
+# Pipeline Messages
+PIPELINE_HEADER = "DATA VALIDATION PIPELINE"
+PIPELINE_BORDER_WIDTH = 80
+SAMPLE_CONFIG_HEADER = "Sample Configuration Format:"
+SAMPLE_CONFIG_BORDER_WIDTH = 50
+SAMPLE_CONFIG_FOOTER = "For more examples, see files in tests/sample/ directory"
+INTERACTIVE_MODE_HEADER = "🚀 Starting Data Validation Tool in Interactive Mode"
+INTERACTIVE_MODE_BORDER_WIDTH = 60
+EXIT_MESSAGE = "👋 Exiting..."
+CONFIG_FILE_NOT_FOUND = "Configuration file not found:"
+VALIDATION_ERROR = "Error during validation:"
+
+# Environment Variables
+LOG_LEVEL_ENV = 'LOG_LEVEL'
+LOG_DIR_ENV = 'LOG_DIR'
+DEFAULT_LOG_LEVEL = 'INFO'
+DEFAULT_LOG_DIR = 'logs'
+
+# Exit Codes
+EXIT_SUCCESS = 0
+EXIT_ERROR = 1
+
+# Help Text
+HELP_DESCRIPTION = "Data Validation Tool - Complete pipeline for data comparison and validation"
+HELP_EXAMPLES = """
+Examples:
+  python run_validation.py --config config.json
+  
+  python run_validation.py --sample-config
+  
+  python run_validation.py
+  
+  python run_validation.py --config tests/sample/config_two_csv_files.json
+"""
+
 ERROR_MESSAGES = {
     'MISSING_REQUIRED_FIELDS': 'Missing required fields in configuration: {}',
     'INVALID_FILE_FORMAT': 'Invalid file_format: {}. Must be {}.',

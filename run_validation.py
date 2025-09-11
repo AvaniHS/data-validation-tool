@@ -10,6 +10,14 @@ from validation.pipeline_orchestrator import PipelineResult
 from services.user_interaction.console import ConsoleUserInputProvider
 from services.user_interaction.interaction import UserInteraction
 from services.logging.logger_service import LoggerService
+from config_ops.sample_configuration import get_sample_configuration
+from constants import (
+    PIPELINE_HEADER, PIPELINE_BORDER_WIDTH, SAMPLE_CONFIG_HEADER, 
+    SAMPLE_CONFIG_BORDER_WIDTH, SAMPLE_CONFIG_FOOTER, INTERACTIVE_MODE_HEADER,
+    INTERACTIVE_MODE_BORDER_WIDTH, EXIT_MESSAGE, CONFIG_FILE_NOT_FOUND,
+    VALIDATION_ERROR, LOG_LEVEL_ENV, LOG_DIR_ENV, DEFAULT_LOG_LEVEL,
+    DEFAULT_LOG_DIR, EXIT_SUCCESS, EXIT_ERROR, HELP_DESCRIPTION, HELP_EXAMPLES
+)
 
 
 def run_validation_pipeline(config_path: str) -> PipelineResult:
@@ -17,9 +25,9 @@ def run_validation_pipeline(config_path: str) -> PipelineResult:
     start_time = time.time()
     
     try:
-        print("=" * 80)
-        print("DATA VALIDATION PIPELINE")
-        print("=" * 80)
+        print("=" * PIPELINE_BORDER_WIDTH)
+        print(PIPELINE_HEADER)
+        print("=" * PIPELINE_BORDER_WIDTH)
         
         LoggerService.log_session_start(config_path)
         logger.log_operation_start("validation_pipeline", {"config_path": config_path})
@@ -47,64 +55,24 @@ def run_validation_pipeline(config_path: str) -> PipelineResult:
         logger.critical(f"Critical error during validation pipeline", e)
         LoggerService.log_session_end(False, execution_duration)
         
-        print(f"\n❌ Error during validation: {e}")
+        print(f"\n❌ {VALIDATION_ERROR} {e}")
         return PipelineResult(
             success=False,
             error_message=str(e)
         )
 
-def create_sample_config() -> Dict[str, Any]:
-    return {
-        "file_format": ".csv",
-        "number_of_files": 2,
-        "file1_path": "path/to/file1.csv",
-        "file2_path": "path/to/file2.csv",
-        "file1_sheet1": "NA",
-        "file1_sheet2": "NA",
-        "file2_sheet": "NA",
-        "output_path": "path/to/output.xlsx",
-        "output_sheet": "Results",
-        "column_mapping": {
-            "column1": "column1",
-            "column2": "column2"
-        },
-
-        "join_keys": {
-            "key1": "key1"
-        },
-        "join_keys_types": {
-            "key1": "NA"
-        },
-        "additional_columns_file1": "NA",
-        "additional_columns_file1_types": "NA",
-        "additional_columns_file2": "NA",
-        "additional_columns_file2_types": "NA",
-        "aggregation": "NA",
-        "file1_metric_list": [],
-        "file2_metric_list": []
-    }
-
 
 def main():
     LoggerService.setup_application_logging(
-        log_level=os.getenv('LOG_LEVEL', 'INFO'),
-        log_dir=os.getenv('LOG_DIR', 'logs'),
+        log_level=os.getenv(LOG_LEVEL_ENV, DEFAULT_LOG_LEVEL),
+        log_dir=os.getenv(LOG_DIR_ENV, DEFAULT_LOG_DIR),
         enable_console=True
     )
     
     parser = argparse.ArgumentParser(
-        description='Data Validation Tool - Complete pipeline for data comparison and validation',
+        description=HELP_DESCRIPTION,
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Examples:
-  python run_validation.py --config config.json
-  
-  python run_validation.py --sample-config
-  
-  python run_validation.py
-  
-  python run_validation.py --config tests/sample/config_two_csv_files.json
-        """
+        epilog=HELP_EXAMPLES
     )
     
     parser.add_argument(
@@ -127,40 +95,40 @@ Examples:
     args = parser.parse_args()
     
     if args.sample_config:
-        print("Sample Configuration Format:")
-        print("=" * 50)
-        print(json.dumps(create_sample_config(), indent=2))
-        print("\nFor more examples, see files in tests/sample/ directory")
+        print(SAMPLE_CONFIG_HEADER)
+        print("=" * SAMPLE_CONFIG_BORDER_WIDTH)
+        print(json.dumps(get_sample_configuration(), indent=2))
+        print(f"\n{SAMPLE_CONFIG_FOOTER}")
         return
     
     if not args.config:
-        print("🚀 Starting Data Validation Tool in Interactive Mode")
-        print("=" * 60)
+        print(INTERACTIVE_MODE_HEADER)
+        print("=" * INTERACTIVE_MODE_BORDER_WIDTH)
         
         user_interaction = UserInteraction(ConsoleUserInputProvider())
         result = user_interaction.get_input_files()
         
         if not result or not result[0]:
-            print("👋 Exiting...")
-            sys.exit(0)
+            print(EXIT_MESSAGE)
+            sys.exit(EXIT_SUCCESS)
         
         config_file = result[0]
         
         if not os.path.exists(config_file):
-            print(f"❌ Error: Configuration file not found: {config_file}")
-            sys.exit(1)
+            print(f"❌ {CONFIG_FILE_NOT_FOUND} {config_file}")
+            sys.exit(EXIT_ERROR)
         
         result = run_validation_pipeline(config_file)
         if not result.success:
-            sys.exit(1)
+            sys.exit(EXIT_ERROR)
     else:
         if not os.path.exists(args.config):
-            print(f"❌ Error: Configuration file not found: {args.config}")
-            sys.exit(1)
+            print(f"❌ {CONFIG_FILE_NOT_FOUND} {args.config}")
+            sys.exit(EXIT_ERROR)
         
         result = run_validation_pipeline(args.config)
         if not result.success:
-            sys.exit(1)
+            sys.exit(EXIT_ERROR)
 
 
 if __name__ == '__main__':
