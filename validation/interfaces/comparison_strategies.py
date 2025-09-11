@@ -9,6 +9,12 @@ class IComparisonStrategy(ABC):
         pass
 
 
+class INumericComparisonStrategy(ABC):
+    @abstractmethod
+    def compare(self, value1: Any, value2: Any) -> Tuple[str, Optional[float], Optional[float]]:
+        pass
+
+
 class IComparisonConfigValidator(ABC):
     @abstractmethod
     def validate_configuration(self, config: Dict[str, Any]) -> None:

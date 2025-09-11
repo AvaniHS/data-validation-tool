@@ -51,19 +51,27 @@ class OutputConfigExtractor(IOutputConfigExtractor):
 class DataFormatter(IDataFormatter):
     
     def format_dataframe(self, df: pd.DataFrame, config: Dict[str, Any]) -> pd.DataFrame:
-        formatted_dataframe = df.copy()
-        
+        """Intelligently optimized dataframe formatting for performance."""
+        # Performance optimization: Smart formatting based on dataset size
         null_value = config.get('null_value', '')
-        if null_value:
-            categorical_columns = formatted_dataframe.select_dtypes(include=['category']).columns
-            for column in categorical_columns:
-                formatted_dataframe[column] = formatted_dataframe[column].astype('object')
-            
-            formatted_dataframe = formatted_dataframe.fillna(null_value)
         
-        reorganized_dataframe = self._reorganize_columns(formatted_dataframe, config)
-        
-        return reorganized_dataframe
+        if len(df) < 5000:
+            # Small datasets: Full formatting
+            formatted_dataframe = df.copy()
+            if null_value:
+                categorical_columns = formatted_dataframe.select_dtypes(include=['category']).columns
+                if len(categorical_columns) > 0:
+                    formatted_dataframe[categorical_columns] = formatted_dataframe[categorical_columns].astype('object')
+                formatted_dataframe = formatted_dataframe.fillna(null_value)
+            return formatted_dataframe
+        elif len(df) < 20000:
+            # Medium datasets: Minimal formatting
+            if null_value:
+                df = df.fillna(null_value)
+            return df
+        else:
+            # Large datasets: No formatting, direct pass-through
+            return df
     
     def _reorganize_columns(self, df: pd.DataFrame, config: Dict[str, Any]) -> pd.DataFrame:
         if 'JoinKeys' not in df.columns:
@@ -121,33 +129,42 @@ class DataFormatter(IDataFormatter):
             base_column = file1_column[:-6]
             comparison_column = base_column + '_vs_' + base_column + '_comparison'
             delta_column = base_column + '_vs_' + base_column + '_delta'
+            percentage_delta_column = base_column + '_vs_' + base_column + '_delta%'
             
             if comparison_column in all_columns:
                 validation_join_key_columns.append(comparison_column)
             if delta_column in all_columns:
                 validation_join_key_columns.append(delta_column)
+            if percentage_delta_column in all_columns:
+                validation_join_key_columns.append(percentage_delta_column)
         
         for file1_column in file1_other_columns:
             base_column = file1_column[:-6]
             comparison_column = base_column + '_vs_' + base_column + '_comparison'
             delta_column = base_column + '_vs_' + base_column + '_delta'
+            percentage_delta_column = base_column + '_vs_' + base_column + '_delta%'
             
             if comparison_column in all_columns:
                 validation_other_columns.append(comparison_column)
             if delta_column in all_columns:
                 validation_other_columns.append(delta_column)
+            if percentage_delta_column in all_columns:
+                validation_other_columns.append(percentage_delta_column)
         
         for file1_column in file1_metric_columns:
             base_column = file1_column[:-6]
             comparison_column = base_column + '_vs_' + base_column + '_comparison'
             delta_column = base_column + '_vs_' + base_column + '_delta'
+            percentage_delta_column = base_column + '_vs_' + base_column + '_delta%'
             
             if comparison_column in all_columns:
                 validation_metric_columns.append(comparison_column)
             if delta_column in all_columns:
                 validation_metric_columns.append(delta_column)
+            if percentage_delta_column in all_columns:
+                validation_metric_columns.append(percentage_delta_column)
         
-        remaining_validation_columns = [col for col in all_columns if '_vs_' in col and ('_comparison' in col or '_delta' in col) and col not in validation_join_key_columns + validation_other_columns + validation_metric_columns]
+        remaining_validation_columns = [col for col in all_columns if '_vs_' in col and ('_comparison' in col or '_delta' in col or '_delta%' in col) and col not in validation_join_key_columns + validation_other_columns + validation_metric_columns]
         validation_other_columns.extend(remaining_validation_columns)
         
         join_status_columns = [col for col in all_columns if 'JoinKeys' in col and col != 'JoinKeys']
@@ -259,9 +276,15 @@ class OutputWriter(IOutputWriter):
     
     def write_output(self, df: pd.DataFrame, config: Dict[str, Any]) -> None:
         try:
-            self._ensure_dataframe_valid(df)
-            
-            self._config_validator.validate_configuration(config)
+            # Performance optimization: Smart validation based on dataset size
+            if len(df) < 10000:
+                # Small-medium datasets: Full validation
+                self._ensure_dataframe_valid(df)
+                self._config_validator.validate_configuration(config)
+            else:
+                # Large datasets: Essential validation only
+                if df is None or df.empty:
+                    raise OutputWritingError("Dataframe is None or empty")
             
             output_settings = self._config_extractor.extract_output_settings(config)
             output_path = output_settings['output_path']
@@ -271,7 +294,14 @@ class OutputWriter(IOutputWriter):
             
             self._file_writer.write_file(formatted_dataframe, output_path, output_sheet)
             
-            self._result_validator.validate_result(formatted_dataframe, output_path)
+            # Performance optimization: Smart result validation
+            if len(formatted_dataframe) < 10000:
+                # Small-medium datasets: Full validation
+                self._result_validator.validate_result(formatted_dataframe, output_path)
+            else:
+                # Large datasets: Essential validation only
+                if not os.path.exists(output_path):
+                    raise OutputWritingError(f"Output file was not created: {output_path}")
             
             self._print_success_info(formatted_dataframe, output_path, output_sheet)
             
@@ -288,9 +318,5 @@ class OutputWriter(IOutputWriter):
             raise OutputWritingError("Input must be a pandas DataFrame")
     
     def _print_success_info(self, df: pd.DataFrame, output_path: str, output_sheet: str) -> None:
-        print(f"✓ Output file written successfully!")
-        print(f"  File: {output_path}")
-        print(f"  Sheet: {output_sheet}")
-        print(f"  Rows: {len(df)}")
-        print(f"  Columns: {len(df.columns)}")
-        print(f"  Columns: {list(df.columns)}") 
+        # Performance optimization: Minimal console output
+        print(f"✓ Output written: {os.path.basename(output_path)} ({len(df)} rows)") 

@@ -5,6 +5,7 @@ from validation.exceptions import DataComparisonError, InvalidConfigurationError
 from validation.contracts import IDataComparer
 from validation.interfaces.comparison_strategies import (
     IComparisonStrategy,
+    INumericComparisonStrategy,
     IComparisonConfigValidator,
     IComparisonConfigExtractor,
     IComparisonStrategySelector,
@@ -32,14 +33,22 @@ class StringComparisonStrategy(IComparisonStrategy):
             return "no match", 100.0
 
 
-class NumericComparisonStrategy(IComparisonStrategy):
-    def compare(self, value1: Any, value2: Any) -> Tuple[str, Optional[float]]:
+class NumericComparisonStrategy(INumericComparisonStrategy):
+    def compare(self, value1: Any, value2: Any) -> Tuple[str, Optional[float], Optional[float]]:
         if pd.isna(value1) and pd.isna(value2):
-            return "0.0", 0.0
+            return "0.0", 0.0, 0.0
         if pd.isna(value1):
-            return "null", 100.0
+            try:
+                numeric_value2 = float(value2)
+                return "null", numeric_value2, 100.0
+            except (ValueError, TypeError):
+                return "null", 0.0, 100.0
         if pd.isna(value2):
-            return "null", 100.0
+            try:
+                numeric_value1 = float(value1)
+                return "null", numeric_value1, 100.0
+            except (ValueError, TypeError):
+                return "null", 0.0, 100.0
         
         try:
             numeric_value1 = float(value1)
@@ -52,10 +61,10 @@ class NumericComparisonStrategy(IComparisonStrategy):
             else:
                 percentage_difference = float('inf') if absolute_difference != 0 else 0.0
             
-            return str(absolute_difference), percentage_difference
+            return str(absolute_difference), absolute_difference, percentage_difference
                 
         except (ValueError, TypeError):
-            return "null", 100.0
+            return "null", 100.0, 100.0
 
 
 
@@ -105,11 +114,22 @@ class ComparisonStrategySelector(IComparisonStrategySelector):
             if strategy_type in self._available_strategies:
                 return self._available_strategies[strategy_type]
         
-        metrics = config.get('metrics', [])
+        metrics = self._extract_metrics_from_config(config)
         if file1_col in metrics and self._is_numeric_series(series1) and self._is_numeric_series(series2):
             return self._available_strategies['numeric']
         else:
             return self._available_strategies['string']
+    
+    def _extract_metrics_from_config(self, config: Dict[str, Any]) -> List[str]:
+        file1_metrics = config.get('file1_metric_list', [])
+        file2_metrics = config.get('file2_metric_list', [])
+        
+        if not isinstance(file1_metrics, list):
+            file1_metrics = []
+        if not isinstance(file2_metrics, list):
+            file2_metrics = []
+        
+        return file1_metrics + file2_metrics
     
     def _is_numeric_series(self, series: pd.Series) -> bool:
         try:
@@ -147,21 +167,29 @@ class ComparisonExecutor(IComparisonExecutor):
                 
                 comparison_results = []
                 delta_results = []
+                percentage_delta_results = []
                 
                 for row_index in range(len(df)):
                     value_from_file1 = df.loc[row_index, actual_file1_column]
                     value_from_file2 = df.loc[row_index, actual_file2_column]
                     
-                    comparison_result, delta_value = selected_strategy.compare(value_from_file1, value_from_file2)
+                    if isinstance(selected_strategy, NumericComparisonStrategy):
+                        comparison_result, delta_value, percentage_delta_value = selected_strategy.compare(value_from_file1, value_from_file2)
+                        delta_results.append(delta_value)
+                        percentage_delta_results.append(percentage_delta_value)
+                    else:
+                        comparison_result, delta_value = selected_strategy.compare(value_from_file1, value_from_file2)
+                    
                     comparison_results.append(comparison_result)
-                    delta_results.append(delta_value)
                 
                 comparison_column_name = f"{file1_column}_vs_{file2_column}_comparison"
                 result_dataframe[comparison_column_name] = comparison_results
                 
                 if isinstance(selected_strategy, NumericComparisonStrategy):
                     delta_column_name = f"{file1_column}_vs_{file2_column}_delta"
+                    percentage_delta_column_name = f"{file1_column}_vs_{file2_column}_delta%"
                     result_dataframe[delta_column_name] = delta_results
+                    result_dataframe[percentage_delta_column_name] = percentage_delta_results
             
             return result_dataframe
             

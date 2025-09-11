@@ -9,6 +9,7 @@ from validation.data_joiner import IDataJoiner
 from validation.data_aggregator import IAggregator
 from validation.data_comparer import IDataComparer
 from validation.output_writer import IOutputWriter
+from validation.join_analysis import JoinAnalysisGenerator, JoinAnalysisOutputHandler
 from config_ops import IConfigurationService
 
 
@@ -42,6 +43,8 @@ class ValidationPipelineOrchestrator(IPipelineOrchestrator):
         self._data_comparer = data_comparer
         self._output_writer = output_writer
         self._config_processor = config_processor
+        self._join_analysis_generator = JoinAnalysisGenerator()
+        self._join_analysis_output_handler = JoinAnalysisOutputHandler()
     
     def execute_pipeline(self, config_path: str) -> PipelineResult:
         try:
@@ -92,7 +95,22 @@ class ValidationPipelineOrchestrator(IPipelineOrchestrator):
             print("\n6. Writing output file...")
             self._output_writer.write_output(compared_df, config)
             execution_summary['output_written'] = True
-            print(f"✓ Output writing successful!")
+            
+            print("\n7. Generating join analysis...")
+            join_analysis_df = self._join_analysis_generator.generate_join_analysis(compared_df, config)
+            if not join_analysis_df.empty:
+                # Performance optimization: Write join analysis sheet directly without additional file operations
+                output_settings = {
+                    'output_path': config.get('output_path', ''),
+                    'output_sheet': config.get('output_sheet', 'ValidationSummary')
+                }
+                self._join_analysis_output_handler.handle_join_analysis_output(join_analysis_df, output_settings)
+                execution_summary['join_analysis_generated'] = True
+                execution_summary['join_analysis_shape'] = join_analysis_df.shape
+                print(f"✓ Join analysis completed ({len(join_analysis_df)} records)")
+            else:
+                execution_summary['join_analysis_generated'] = False
+                print(f"✓ No join analysis required")
             
             execution_summary['final_shape'] = compared_df.shape
             execution_summary['comparison_columns'] = [
