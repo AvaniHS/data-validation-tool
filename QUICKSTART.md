@@ -84,6 +84,8 @@ The tool will guide you through:
 - Setting up join keys
 - Configuring output options
 
+**Note:** If you choose to download a template, it will be saved in the `downloads` folder of this project repository.
+
 ## 📊 Common Use Cases
 
 ### Compare Two CSV Files
