@@ -1,8 +1,3 @@
-"""
-Data Validation Tool - Main Package
-"""
-
-# Export exceptions
 from .exceptions import (
     FileOperationError,
     FileValidationError,
@@ -18,14 +13,12 @@ from .exceptions import (
     InvalidConfigurationError
 )
 
-# Export pipeline orchestrator components
 from .pipeline_orchestrator import (
     ValidationPipelineOrchestrator,
     IPipelineOrchestrator,
     PipelineResult
 )
 
-# Export dependency injection components
 from .dependency_container import (
     DependencyContainer,
     get_container,
@@ -33,7 +26,6 @@ from .dependency_container import (
     register_service
 )
 
-# Export factory components
 from .factories import (
     DataReaderFactory,
     DataWriterFactory,
@@ -46,23 +38,19 @@ from .factories import (
     ConfigurationServiceFactory
 )
 
-# Export contracts
 from .contracts import (
-    # Data Preparer Contracts
     IDataValidator,
     IDataLoader,
     IDataCleaner,
     ITypeDetector,
     IDataPreparer,
     
-    # Data Joiner Contracts
     IJoinKeyExtractor,
     IJoinKeyValidator,
     IJoinExecutor,
     IJoinResultValidator,
     IDataJoiner,
     
-    # Data Aggregator Contracts
     IAggregationStrategy,
     IAggregationConfigValidator,
     IAggregationConfigExtractor,
@@ -70,16 +58,16 @@ from .contracts import (
     IAggregationResultValidator,
     IAggregator,
     
-    # Data Comparer Contracts
-    IComparisonStrategy,
     IDataComparer,
     
-    # Output Writer Contracts
     IOutputWriter
 )
 
+from .interfaces.comparison_strategies import (
+    IComparisonStrategy
+)
+
 __all__ = [
-    # Exceptions
     'FileOperationError',
     'FileValidationError',
     'ConfigValidationError',
@@ -93,18 +81,15 @@ __all__ = [
     'FileNotFoundError',
     'InvalidConfigurationError',
     
-    # Pipeline Orchestrator
     'ValidationPipelineOrchestrator',
     'IPipelineOrchestrator',
     'PipelineResult',
     
-    # Dependency Injection
     'DependencyContainer',
     'get_container',
     'get_pipeline_orchestrator',
     'register_service',
     
-    # Factories
     'DataReaderFactory',
     'DataWriterFactory',
     'FileValidatorFactory',
@@ -115,21 +100,18 @@ __all__ = [
     'OutputWriterFactory',
     'ConfigurationServiceFactory',
     
-    # Data Preparer Contracts
     'IDataValidator',
     'IDataLoader',
     'IDataCleaner',
     'ITypeDetector',
     'IDataPreparer',
     
-    # Data Joiner Contracts
     'IJoinKeyExtractor',
     'IJoinKeyValidator',
     'IJoinExecutor',
     'IJoinResultValidator',
     'IDataJoiner',
     
-    # Data Aggregator Contracts
     'IAggregationStrategy',
     'IAggregationConfigValidator',
     'IAggregationConfigExtractor',
@@ -137,10 +119,8 @@ __all__ = [
     'IAggregationResultValidator',
     'IAggregator',
     
-    # Data Comparer Contracts
     'IComparisonStrategy',
     'IDataComparer',
     
-    # Output Writer Contracts
     'IOutputWriter'
 ]

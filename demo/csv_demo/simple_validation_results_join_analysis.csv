@@ -1,0 +1,9 @@
+File_1_keys,File_2_keys,File1_Value,File2_Value,count
+ID,ID,NULL,99,1
+ID,ID,3,NULL,1
+ID,ID,6,NULL,1
+ID,ID,NULL,6,1
+Name,Name,NULL,Charlie,1
+Name,Name,Charlie,NULL,1
+Name,Name,Frank,NULL,1
+Name,Name,NULL,Franklin,1

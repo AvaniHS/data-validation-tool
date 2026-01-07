@@ -1,7 +1,3 @@
-"""
-Input validation module for data validation tool.
-"""
-
 import os
 from typing import List, Tuple, Dict, Any
 import pandas as pd
@@ -15,7 +11,7 @@ class InputValidator:
     
     @staticmethod
     def is_supported_filetype(path: str) -> bool:
-        return any(path.lower().endswith(ext) for ext in SUPPORTED_EXTENSIONS)
+        return any(path.lower().endswith(extension) for extension in SUPPORTED_EXTENSIONS)
     
     @staticmethod
     def validate_file_path(file_path: str, required: bool = True) -> str:
@@ -40,10 +36,10 @@ class InputValidator:
     @staticmethod
     def validate_json_mapping(mapping_input: str) -> Dict[str, str]:
         try:
-            mapping = json.loads(mapping_input)
+            parsed_mapping = json.loads(mapping_input)
             
-            if isinstance(mapping, dict):
-                return mapping
+            if isinstance(parsed_mapping, dict):
+                return parsed_mapping
             else:
                 raise ValueError("Mapping must be a JSON object (dictionary).")
         except json.JSONDecodeError:
@@ -51,18 +47,18 @@ class InputValidator:
     
     @staticmethod
     def validate_column_selection(column_numbers: List[int], available_columns: List[str]) -> List[str]:
-        if not all(1 <= num <= len(available_columns) for num in column_numbers):
+        if not all(1 <= number <= len(available_columns) for number in column_numbers):
             raise ValueError("Invalid column numbers. Please enter valid numbers.")
         
-        return [available_columns[num - 1] for num in column_numbers]
+        return [available_columns[number - 1] for number in column_numbers]
     
     @staticmethod
     def validate_dataframe_compatibility(df1: pd.DataFrame, df2: pd.DataFrame, 
                                        column_mapping: Dict[str, str]) -> bool:
-        missing_in_df1 = [col for col in column_mapping.keys() if col not in df1.columns]
-        missing_in_df2 = [col for col in column_mapping.values() if col not in df2.columns]
+        missing_columns_in_df1 = [column for column in column_mapping.keys() if column not in df1.columns]
+        missing_columns_in_df2 = [column for column in column_mapping.values() if column not in df2.columns]
         
-        if missing_in_df1 or missing_in_df2:
+        if missing_columns_in_df1 or missing_columns_in_df2:
             return False
         
         return True 

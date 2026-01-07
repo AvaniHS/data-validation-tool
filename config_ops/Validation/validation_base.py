@@ -1,15 +1,11 @@
-"""Base classes and mixins for configuration validation."""
-
 import os
 from typing import Dict, Any, List, Optional
 import pandas as pd
 from .config_validation_contracts import IValidator, IFileValidator, IConfigValidator
 from validation.exceptions import InvalidConfigurationError
-from constants import CSV_EXTENSION
 
 
 class BaseValidator(IValidator):
-    """Base validator with common functionality"""
     
     def __init__(self):
         self.errors: List[str] = []
@@ -39,7 +35,6 @@ class BaseValidator(IValidator):
 
 
 class FileValidatorMixin(IFileValidator):
-    """Mixin providing file validation functionality"""
     
     def validate_file_exists(self, file_path: str, file_label: str) -> bool:
         if not os.path.exists(file_path):
@@ -59,20 +54,9 @@ class FileValidatorMixin(IFileValidator):
             self.add_error(f"Permission denied: Cannot access directory {file_dir} ({file_label})")
             return False
         return True
-    
-    def read_dataframe(self, file_path: str, sheet_name: Optional[str] = None) -> Optional[pd.DataFrame]:
-        try:
-            if file_path.endswith(CSV_EXTENSION):
-                return pd.read_csv(file_path)
-            else:
-                return pd.read_excel(file_path, sheet_name=sheet_name, engine='openpyxl')
-        except Exception as e:
-            self.add_error(f"Error reading file '{file_path}': {str(e)}")
-            return None
 
 
 class ConfigValidatorMixin(IConfigValidator):
-    """Mixin providing configuration validation functionality"""
     
     def validate_required_fields(self, config: Dict[str, Any], required_fields: List[str]) -> bool:
         missing_fields = [field for field in required_fields if field not in config]

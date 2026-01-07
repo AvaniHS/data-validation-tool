@@ -9,7 +9,7 @@ DATA VALIDATION TOOL - CONFIGURATION FILE
 ======================================================================
 
 VALIDATION RULES:
-1. file_format: Must be ".csv", ".xlsx", or "mixed"
+1. file_format: Must be ".csv", ".xlsx", ".json", or "mixed"
 2. number_of_files: Must be 1 or 2
 3. When number_of_files = 1: file_format must be ".xlsx", file2_path = "NA"
 4. When number_of_files = 2: file2_path is required
@@ -24,7 +24,7 @@ VALIDATION RULES:
 ======================================================================
 
 MANDATORY FIELDS - Required for all configurations
-"file_format": ".csv",           // CHOICES: ".csv", ".xlsx", "mixed"
+"file_format": ".csv",           // CHOICES: ".csv", ".xlsx", ".json", "mixed"
 "number_of_files": 2,            // CHOICES: 1 (one Excel file with two sheets) or 2 (two separate files)
 "file1_path": "path/before_migration.csv",  // Path to your first dataset file
 "file2_path": "path/after_migration.csv",   // Path to second file (use "NA" if number_of_files = 1)
@@ -100,7 +100,10 @@ OPTIONAL FIELDS - Use "NA" or empty arrays/objects if not needed
 
 OPTIONAL - Metric lists for additional analysis
 "file1_metric_list": ["metric1", "metric2", "metric3"],    // Array of metrics for file1
-"file2_metric_list": ["metric1", "metric2", "metric3"]     // Array of metrics for file2
+"file2_metric_list": ["metric1", "metric2", "metric3"],    // Array of metrics for file2
+
+OPTIONAL - Join analysis settings
+"detailed_join_analysis": "no"                              // CHOICES: "yes" or "no" - Enable detailed join analysis
 
 ======================================================================
 CONFIGURATION EXAMPLES:
@@ -118,7 +121,11 @@ EXAMPLE 3: One Excel File with Two Sheets
 "file_format": ".xlsx", "number_of_files": 1
 "file2_path": "NA", "file1_sheet1": "Before", "file1_sheet2": "After", "file2_sheet": "NA"
 
-EXAMPLE 4: Mixed Format (CSV + Excel)
+EXAMPLE 4: Two JSON Files
+"file_format": ".json", "number_of_files": 2
+"file1_sheet1": "NA", "file1_sheet2": "NA", "file2_sheet": "NA"
+
+EXAMPLE 5: Mixed Format (CSV + Excel + JSON)
 "file_format": "mixed", "number_of_files": 2
 "file1_sheet1": "NA" (CSV), "file1_sheet2": "NA", "file2_sheet": "Sheet1" (Excel)
 

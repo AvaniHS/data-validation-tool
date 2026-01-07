@@ -143,10 +143,6 @@ docker run -v $(pwd)/data:/app/data data-validation-tool python run_validation.p
 4. Add tests
 5. Submit a pull request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 🆘 Support
 
 - **Documentation**: Check the [documentation](documentation/) folder

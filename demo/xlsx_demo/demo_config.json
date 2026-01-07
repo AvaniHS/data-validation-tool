@@ -1,0 +1,47 @@
+{
+    "file_format": ".xlsx",
+    "number_of_files": 1,
+    "file1_path": "demo/xlsx_demo/sales_demo_data.xlsx",
+    "file2_path": "NA",
+    "file1_sheet1": "Q1_Before",
+    "file1_sheet2": "Q1_After",
+    "file2_sheet": "NA",
+    "output_path": "demo/xlsx_demo/validation_results.xlsx",
+    "output_sheet": "Validation_Summary",
+    "column_mapping": {
+        "Month_No": "Month_No",
+        "Reporter_HQ_ID": "Reporter_HQ_ID",
+        "Buyer_HQ_ID": "Buyer_HQ_ID",
+        "Customer_ID": "Customer_ID",
+        "Product_Code": "Product_Code",
+        "Region": "Region",
+        "Sales_Amount": "Sales_Amount",
+        "Quantity_Sold": "Quantity_Sold",
+        "Discount_Percent": "Discount_Percent",
+        "Sales_Rep": "Sales_Rep"
+    },
+    "additional_columns_file1": ["Profit_Margin", "Commission"],
+    "additional_columns_file1_types": ["numeric", "numeric"],
+    "additional_columns_file2": ["Profit_Margin", "Commission"],
+    "additional_columns_file2_types": ["numeric", "numeric"],
+    "join_keys": {
+        "Month_No": "Month_No",
+        "Reporter_HQ_ID": "Reporter_HQ_ID",
+        "Buyer_HQ_ID": "Buyer_HQ_ID",
+        "Customer_ID": "Customer_ID",
+        "Product_Code": "Product_Code"
+    },
+    "join_keys_types": {
+        "Month_No": "numeric",
+        "Reporter_HQ_ID": "string",
+        "Buyer_HQ_ID": "string",
+        "Customer_ID": "string",
+        "Product_Code": "string"
+    },
+    "aggregation": {
+        "sum": ["Sales_Amount", "Quantity_Sold", "Profit_Margin", "Commission"]
+    },
+    "file1_metric_list": ["Sales_Amount", "Quantity_Sold", "Profit_Margin", "Commission"],
+    "file2_metric_list": ["Sales_Amount", "Quantity_Sold", "Profit_Margin", "Commission"],
+    "detailed_join_analysis": "yes"
+}

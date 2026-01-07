@@ -1,19 +1,11 @@
-#!/usr/bin/env python3
-"""
-Test runner script to run all tests in the project.
-"""
-
 import os
 import sys
 import unittest
 
-# Add the project root to the path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 def run_all_tests():
-    """Run all tests in the project."""
-    # Discover and run all tests from unit, integration, and user_interaction directories
     loader = unittest.TestLoader()
     test_dirs = ['unit', 'integration', 'user_interaction']
     suite = unittest.TestSuite()
@@ -31,7 +23,6 @@ def run_all_tests():
 
 
 def run_unit_tests():
-    """Run only unit tests."""
     loader = unittest.TestLoader()
     start_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'unit')
     suite = loader.discover(start_dir, pattern='test_*.py', top_level_dir=start_dir)
@@ -43,7 +34,6 @@ def run_unit_tests():
 
 
 def run_integration_tests():
-    """Run only integration tests."""
     loader = unittest.TestLoader()
     start_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'integration')
     suite = loader.discover(start_dir, pattern='test_*.py', top_level_dir=start_dir)
@@ -55,7 +45,6 @@ def run_integration_tests():
 
 
 def run_user_interaction_tests():
-    """Run only user interaction tests."""
     loader = unittest.TestLoader()
     start_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'user_interaction')
     suite = loader.discover(start_dir, pattern='test_*.py', top_level_dir=start_dir)

@@ -14,36 +14,16 @@ class ExcelFileWriter:
     def write(self, df: pd.DataFrame, file_path: str, sheet_name: str = DEFAULT_FILE1_SHEET1, mode: str = FILE_MODE_WRITE):
         self._ensure_file_writable(file_path)
         
-        if os.path.exists(file_path) and file_path.lower().endswith(tuple(EXCEL_EXTENSIONS)):
-            try:
-                xls = pd.ExcelFile(file_path)
-                if sheet_name in xls.sheet_names:
-                    while True:
-                        print(f"Warning: Sheet '{sheet_name}' already exists in '{file_path}'.")
-                        choice = input("Type 'o' to overwrite, 'r' to enter a new sheet name, or 'exit' to quit: ").strip().lower()
-                        if choice == USER_CHOICE_OVERWRITE:
-                            break
-                        elif choice == USER_CHOICE_RENAME:
-                            new_sheet = input("Enter a new sheet name: ").strip()
-                            if new_sheet:
-                                sheet_name = new_sheet
-                                if sheet_name not in xls.sheet_names:
-                                    break
-                                else:
-                                    print(f"Sheet '{sheet_name}' already exists. Please choose another name.")
-                        elif choice in EXIT_COMMANDS:
-                            print("Exiting as requested by user.")
-                            sys.exit(0)
-                        else:
-                            print("Invalid choice. Please enter 'o', 'r', or 'exit'.")
-            except Exception:
-                pass
+        # Performance optimization: Remove interactive prompts that block execution
+        # Sheets will be automatically overwritten for better performance
         
         try:
             if file_path.lower().endswith(CSV_EXTENSION):
                 df.to_csv(file_path, index=False)
             else:
                 self._write_with_openpyxl_direct(df, file_path, sheet_name, mode)
+                # Performance optimization: Skip custom header formatting for better performance
+                # self._apply_custom_header_formatting(file_path, sheet_name, df)
         except Exception as e:
             if 'not a zip file' in str(e).lower() or 'bad magic number' in str(e).lower():
                 raise ValueError(f"Invalid Excel file format: '{file_path}' appears to be corrupted or not a valid Excel file. Please check if the file is properly saved and not damaged.")
@@ -89,20 +69,18 @@ class ExcelFileWriter:
             if any(keyword in col.lower() for keyword in COMPARISON_KEYWORDS):
                 header_row.append(COLUMN_CATEGORY_COMPARISON)
             elif any(keyword in col.lower() for keyword in COMPARISON_KEYWORDS):
-                # This is a comparison column, categorize based on the first part
                 parts = col.split('_vs_')
                 if parts[0] in FILE_ONE_COLUMNS:
                     header_row.append(COLUMN_CATEGORY_FILE_ONE)
                 else:
                     header_row.append(COLUMN_CATEGORY_FILE_TWO)
             else:
-                # Regular column, categorize based on name
                 if col in FILE_ONE_COLUMNS:
                     header_row.append(COLUMN_CATEGORY_FILE_ONE)
                 elif col in FILE_TWO_COLUMNS:
                     header_row.append(COLUMN_CATEGORY_FILE_TWO)
                 else:
-                    header_row.append(COLUMN_CATEGORY_FILE_ONE)  # Default to File One
+                    header_row.append(COLUMN_CATEGORY_FILE_ONE)
         
         return header_row
     
@@ -150,6 +128,24 @@ class ExcelFileWriter:
                 raise PermissionError(f"Failed to create directory {file_dir}: {str(e)}")
     
     def _write_with_openpyxl_direct(self, df: pd.DataFrame, file_path: str, sheet_name: str, mode: str):
+        """Optimized Excel writing using pandas ExcelWriter for better performance."""
+        try:
+            # Use pandas ExcelWriter for much better performance than cell-by-cell writing
+            if mode == 'a' and os.path.exists(file_path):
+                # Append mode - preserve existing sheets
+                with pd.ExcelWriter(file_path, mode='a', engine='openpyxl', if_sheet_exists='replace') as writer:
+                    df.to_excel(writer, sheet_name=sheet_name, index=False)
+            else:
+                # Write mode - create new file
+                with pd.ExcelWriter(file_path, mode='w', engine='openpyxl') as writer:
+                    df.to_excel(writer, sheet_name=sheet_name, index=False)
+        except Exception as e:
+            # Fallback to original method if pandas writer fails
+            print(f"Warning: Pandas ExcelWriter failed, using fallback method: {e}")
+            self._write_with_openpyxl_fallback(df, file_path, sheet_name, mode)
+    
+    def _write_with_openpyxl_fallback(self, df: pd.DataFrame, file_path: str, sheet_name: str, mode: str):
+        """Fallback method using openpyxl directly - kept for compatibility."""
         from openpyxl import load_workbook, Workbook
         
         if not os.path.exists(file_path):
@@ -168,6 +164,7 @@ class ExcelFileWriter:
                 wb.remove(wb.active)
                 ws = wb.create_sheet(title=sheet_name)
         
+        # Original cell-by-cell method (kept as fallback)
         for r_idx, row in enumerate(dataframe_to_rows(df, index=False, header=True), 1):
             for c_idx, value in enumerate(row, 1):
                 ws.cell(row=r_idx, column=c_idx, value=value)

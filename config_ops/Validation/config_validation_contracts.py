@@ -1,12 +1,9 @@
-"""Configuration validation contracts and interfaces."""
-
 from abc import ABC, abstractmethod
 from typing import Dict, Any, List, Optional
 import pandas as pd
 
 
 class IValidator(ABC):
-    """Interface for all validators"""
     
     @abstractmethod
     def validate(self, config: Dict[str, Any]) -> None:
@@ -38,7 +35,6 @@ class IValidator(ABC):
 
 
 class IFileValidator(IValidator):
-    """Interface for file-related validations"""
     
     @abstractmethod
     def validate_file_exists(self, file_path: str, file_label: str) -> bool:
@@ -47,14 +43,9 @@ class IFileValidator(IValidator):
     @abstractmethod
     def validate_file_readable(self, file_path: str, file_label: str) -> bool:
         pass
-    
-    @abstractmethod
-    def read_dataframe(self, file_path: str, sheet_name: Optional[str] = None) -> Optional[pd.DataFrame]:
-        pass
 
 
 class IConfigValidator(IValidator):
-    """Interface for configuration-related validations"""
     
     @abstractmethod
     def validate_required_fields(self, config: Dict[str, Any], required_fields: List[str]) -> bool:

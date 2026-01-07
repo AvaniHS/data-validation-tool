@@ -2,21 +2,21 @@ import os
 from typing import Dict, Type
 from .csv_handler import CSVHandler
 from .excel_handler import ExcelHandler
-from constants import CSV_EXTENSION, EXCEL_EXTENSIONS
+from .json_handler import JSONHandler
+from constants import CSV_EXTENSION, JSON_EXTENSION, EXCEL_EXTENSIONS
 
 
 class FileTypeFactory:
-    """Factory for creating file handlers based on file extension"""
     
     _handlers: Dict[str, Type] = {
         CSV_EXTENSION: CSVHandler,
-        EXCEL_EXTENSIONS[0]: ExcelHandler,  # .xlsx
-        EXCEL_EXTENSIONS[1]: ExcelHandler   # .xls
+        JSON_EXTENSION: JSONHandler,
+        EXCEL_EXTENSIONS[0]: ExcelHandler,
+        EXCEL_EXTENSIONS[1]: ExcelHandler
     }
     
     @classmethod
     def create_handler(cls, file_path: str):
-        """Create appropriate handler based on file extension"""
         _, ext = os.path.splitext(file_path)
         
         if ext not in cls._handlers:

@@ -1,8 +1,3 @@
-"""
-Data preparation module for loading and preparing data frames from input files.
-Follows OOP, SOLID principles, and separation of concerns.
-"""
-
 from typing import Dict, Any, Tuple, Optional, List
 import pandas as pd
 import os
@@ -20,17 +15,14 @@ from constants import DEFAULT_FILE1_SHEET1, DEFAULT_FILE1_SHEET2, DEFAULT_FILE2_
 
 
 class DataValidator(IDataValidator):
-    """Concrete implementation of data validation"""
     
     def validate_configuration(self, config: Dict[str, Any]) -> None:
-        """Validate configuration parameters"""
         required_fields = ['file1_path', 'number_of_files']
         
         for field in required_fields:
             if field not in config:
                 raise InvalidConfigurationError(f"Missing required field: {field}")
         
-        # Validate file paths
         if not os.path.exists(config['file1_path']):
             raise FileNotFoundError(f"File not found: {config['file1_path']}")
         
@@ -42,7 +34,6 @@ class DataValidator(IDataValidator):
                 raise FileNotFoundError(f"File not found: {file2_path}")
     
     def validate_dataframe(self, df: pd.DataFrame, name: str) -> None:
-        """Validate dataframe structure and content"""
         if df is None:
             raise DataPreparationError(f"{name} dataframe is None")
         
@@ -54,10 +45,8 @@ class DataValidator(IDataValidator):
 
 
 class DataLoader(IDataLoader):
-    """Concrete implementation of data loading"""
     
     def load_single_file_two_sheets(self, file_path: str, sheet1: str, sheet2: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
-        """Load two sheets from a single file"""
         try:
             df1, df2 = read_two_sheets_from_one_file(file_path, sheet1, sheet2)
             return df1, df2
@@ -65,7 +54,6 @@ class DataLoader(IDataLoader):
             raise DataPreparationError(f"Failed to load sheets from {file_path}: {str(e)}")
     
     def load_two_separate_files(self, file1_path: str, file2_path: str, sheet1: str, sheet2: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
-        """Load data from two separate files"""
         try:
             df1 = read_file(file1_path, sheet1)
             df2 = read_file(file2_path, sheet2)
@@ -75,25 +63,21 @@ class DataLoader(IDataLoader):
 
 
 class DataCleaner(IDataCleaner):
-    """Concrete implementation of data cleaning"""
     
     def clean_dataframe(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Clean and prepare dataframe"""
         df = df.copy()
         
-        # Remove unnamed columns
         df = self._remove_unnamed_columns(df)
         
-        # Clean currency values
         df = self._clean_currency_values(df)
         
-        # Reset index
+        df = self._clean_numeric_columns_with_special_chars(df)
+        
         df = df.reset_index(drop=True)
         
         return df
     
     def _remove_unnamed_columns(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Remove unnamed columns from dataframe"""
         unnamed_cols = [col for col in df.columns if 'Unnamed' in str(col)]
         if unnamed_cols:
             df = df.drop(columns=unnamed_cols)
@@ -101,67 +85,96 @@ class DataCleaner(IDataCleaner):
         return df
     
     def _clean_currency_values(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Clean currency values in dataframe"""
         for col in df.columns:
             if df[col].dtype == 'object':
-                # Remove currency symbols and convert to numeric
-                df[col] = df[col].astype(str).str.replace(r'[$,€£¥₹]', '', regex=True)
-                df[col] = df[col].str.replace(',', '', regex=False)
+                # Only clean columns that contain literal dollar signs
+                has_dollar = any('$' in str(val) for val in df[col].values if pd.notna(val))
+                if has_dollar:
+                    df[col] = df[col].astype(str).str.replace('$', '').str.replace(',', '')
+                    try:
+                        df[col] = pd.to_numeric(df[col], errors='coerce')
+                    except:
+                        pass
+        return df
+    
+    def _clean_numeric_columns_with_special_chars(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Clean special characters (carriage returns, newlines, etc.) from columns that should be numeric."""
+        for col in df.columns:
+            if df[col].dtype == 'object':
+                # Check if column contains numeric values with special characters
+                sample_values = df[col].dropna().head(10)
+                has_special_chars = False
+                has_numeric_content = False
                 
-                # Try to convert to numeric
-                try:
-                    df[col] = pd.to_numeric(df[col])
-                except (ValueError, TypeError):
-                    # Keep original value if conversion fails
-                    pass
-        
+                for val in sample_values:
+                    val_str = str(val)
+                    # Check for special characters that might prevent numeric conversion
+                    if any(char in val_str for char in ['_x000D_', '\n', '\r', '\t', '\x0D', '\x0A']):
+                        has_special_chars = True
+                    # Check if value looks numeric after cleaning
+                    cleaned = val_str.replace('_x000D_', '').replace('\n', '').replace('\r', '').replace('\t', '').strip()
+                    try:
+                        float(cleaned)
+                        has_numeric_content = True
+                    except (ValueError, TypeError):
+                        pass
+                
+                # If column has special chars but contains numeric content, clean it
+                if has_special_chars and has_numeric_content:
+                    df[col] = df[col].astype(str)
+                    # Remove carriage return/newline markers and actual newlines
+                    df[col] = df[col].str.replace('_x000D_', '', regex=False)
+                    df[col] = df[col].str.replace('\n', '', regex=False)
+                    df[col] = df[col].str.replace('\r', '', regex=False)
+                    df[col] = df[col].str.replace('\t', '', regex=False)
+                    df[col] = df[col].str.strip()
+                    
+                    # Try to convert to numeric
+                    try:
+                        df[col] = pd.to_numeric(df[col], errors='coerce')
+                    except (ValueError, TypeError):
+                        pass
+                    
         return df
 
 
 class TypeDetectionService(ITypeDetector):
-    """Concrete implementation of type detection"""
     
     def detect_and_validate_join_key_types(self, config: Dict[str, Any], df1: pd.DataFrame, df2: pd.DataFrame) -> Dict[str, str]:
-        """Detect and validate join key types"""
-        try:
-            # Detect types using TypeDetector
-            detected_types = TypeDetector.detect_join_key_types(config, df1, df2)
-            
-            # Validate compatibility
-            is_compatible, _ = TypeDetector.validate_join_key_compatibility(config, df1, df2)
-            
-            if not is_compatible:
-                print("⚠️  Warning: Some join key compatibility issues detected")
-            
-            # Update config with detected types
-            self._update_config_with_detected_types(config, detected_types)
-            
-            return detected_types
-            
-        except Exception as e:
-            print(f"⚠️  Warning: Failed to detect join key types: {str(e)}")
-            return {}
+        join_keys = config.get('join_keys', {})
+        detected_types = {}
+        
+        for key1, key2 in join_keys.items():
+            if key1 in df1.columns and key2 in df2.columns:
+                df1_type = self._detect_column_type(df1[key1])
+                df2_type = self._detect_column_type(df2[key2])
+                
+                if df1_type == df2_type:
+                    detected_types[key1] = df1_type
+                else:
+                    detected_types[key1] = 'mixed'
+            else:
+                detected_types[key1] = 'unknown'
+        
+        self._update_config_with_detected_types(config, detected_types)
+        return detected_types
+    
+    def _detect_column_type(self, column: pd.Series) -> str:
+        if pd.api.types.is_numeric_dtype(column):
+            return 'numeric'
+        else:
+            return 'non_numeric'
     
     def _update_config_with_detected_types(self, config: Dict[str, Any], detected_types: Dict[str, str]) -> None:
-        """Update configuration with detected types"""
-        join_keys_types = config.get('join_keys_types', {})
+        if 'join_keys_types' not in config:
+            config['join_keys_types'] = {}
         
-        if join_keys_types == DEFAULT_NA_VALUE or not join_keys_types:
-            config['join_keys_types'] = detected_types
-            print(f"✓ Auto-detected join key types: {detected_types}")
-        else:
-            # Fill in any "NA" values with detected types
-            updated_types = join_keys_types.copy()
-            for key, detected_type in detected_types.items():
-                if key in updated_types and updated_types[key] == DEFAULT_NA_VALUE:
-                    updated_types[key] = detected_type
-                    print(f"✓ Auto-detected type for '{key}': {detected_type}")
-            
-            config['join_keys_types'] = updated_types
+        for key, detected_type in detected_types.items():
+            if key in config['join_keys_types'] and config['join_keys_types'][key] == 'NA':
+                config['join_keys_types'][key] = detected_type
 
 
 class DataPreparer(IDataPreparer):
-    """Concrete implementation of data preparation"""
     
     def __init__(self):
         self._validator = DataValidator()
@@ -170,56 +183,28 @@ class DataPreparer(IDataPreparer):
         self._type_detector = TypeDetectionService()
     
     def prepare_data_frames(self, config: Dict[str, Any]) -> Tuple[pd.DataFrame, pd.DataFrame]:
-        """
-        Prepare two data frames from input files based on configuration
+        self._validator.validate_configuration(config)
         
-        Args:
-            config: Configuration dictionary containing file paths and settings
-            
-        Returns:
-            Tuple of (dataframe1, dataframe2) loaded from input files
-            
-        Raises:
-            DataPreparationError: If data loading fails
-            InvalidConfigurationError: If configuration is invalid
-            FileNotFoundError: If input files are not found
-        """
-        try:
-            # Validate configuration
-            self._validator.validate_configuration(config)
-            
-            # Extract configuration parameters
-            file1_path = config['file1_path']
-            file2_path = config.get('file2_path')
-            file1_sheet1 = config.get('file1_sheet1', DEFAULT_FILE1_SHEET1)
-            file1_sheet2 = config.get('file1_sheet2', DEFAULT_FILE1_SHEET2)
-            file2_sheet = config.get('file2_sheet', DEFAULT_FILE2_SHEET)
-            number_of_files = config['number_of_files']
-            
-            # Load data based on configuration
-            if number_of_files == 1:
-                df1, df2 = self._loader.load_single_file_two_sheets(file1_path, file1_sheet1, file1_sheet2)
-            else:
-                df1, df2 = self._loader.load_two_separate_files(file1_path, file2_path, file1_sheet1, file2_sheet)
-            
-            # Validate loaded dataframes
-            self._validator.validate_dataframe(df1, "First")
-            self._validator.validate_dataframe(df2, "Second")
-            
-            # Clean dataframes
-            df1 = self._cleaner.clean_dataframe(df1)
-            df2 = self._cleaner.clean_dataframe(df2)
-            
-            # Detect and validate join key types
-            self._type_detector.detect_and_validate_join_key_types(config, df1, df2)
-            
-            print(f"✓ Data preparation completed successfully")
-            print(f"  DataFrame 1: {df1.shape[0]} rows, {df1.shape[1]} columns")
-            print(f"  DataFrame 2: {df2.shape[0]} rows, {df2.shape[1]} columns")
-            
-            return df1, df2
-                
-        except (InvalidConfigurationError, FileNotFoundError):
-            raise
-        except Exception as e:
-            raise DataPreparationError(f"Failed to prepare data frames: {str(e)}") 
+        if config['number_of_files'] == 1:
+            df1, df2 = self._loader.load_single_file_two_sheets(
+                config['file1_path'],
+                config.get('file1_sheet1', DEFAULT_FILE1_SHEET1),
+                config.get('file1_sheet2', DEFAULT_FILE1_SHEET2)
+            )
+        else:
+            df1, df2 = self._loader.load_two_separate_files(
+                config['file1_path'],
+                config['file2_path'],
+                config.get('file1_sheet1', DEFAULT_FILE1_SHEET1),
+                config.get('file2_sheet', DEFAULT_FILE2_SHEET)
+            )
+        
+        self._validator.validate_dataframe(df1, "First")
+        self._validator.validate_dataframe(df2, "Second")
+        
+        df1 = self._cleaner.clean_dataframe(df1)
+        df2 = self._cleaner.clean_dataframe(df2)
+        
+        self._type_detector.detect_and_validate_join_key_types(config, df1, df2)
+        
+        return df1, df2 

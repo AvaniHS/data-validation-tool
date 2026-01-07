@@ -1,0 +1,26 @@
+2025-09-11 17:48:58 | ERROR    | dataframe_reader     | _log_with_extra | Error reading file 'demo/file1_before.csv': [Errno 2] No such file or directory: 'demo/file1_before.csv' | Exception: [Errno 2] No such file or directory: 'demo/file1_before.csv' | Traceback: Traceback (most recent call last):
+  File "D:\Projects\TL\Projects\data-validation-tool\services\file_handler\dataframe_reader.py", line 19, in read_dataframe
+    return self._read_csv(file_path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\TL\Projects\data-validation-tool\services\file_handler\dataframe_reader.py", line 35, in _read_csv
+    df = pd.read_csv(file_path)
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\avani.hs\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\parsers\readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\avani.hs\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\parsers\readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\avani.hs\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\parsers\readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\avani.hs\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\parsers\readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "C:\Users\avani.hs\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\common.py", line 873, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'demo/file1_before.csv'
+
+2025-09-11 17:48:58 | ERROR    | main_pipeline        | _log_with_extra | Failed validation_pipeline | Exception: Pipeline execution failed: Configuration validation failed: Configuration validation error: [Errno 2] No such file or directory: 'demo/file1_before.csv' | Traceback: NoneType: None
+

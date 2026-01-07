@@ -1,13 +1,11 @@
-# File Extensions and Formats
-SUPPORTED_EXTENSIONS = ['.csv', '.xlsx', '.xls']
-VALID_FILE_FORMATS = ['.csv', '.xlsx', 'mixed']
+SUPPORTED_EXTENSIONS = ['.csv', '.xlsx', '.xls', '.json']
+VALID_FILE_FORMATS = ['.csv', '.xlsx', '.json', 'mixed']
 CSV_EXTENSION = '.csv'
+JSON_EXTENSION = '.json'
 EXCEL_EXTENSIONS = ['.xlsx', '.xls']
 
-# File Counts
 VALID_NUMBER_OF_FILES = [1, 2]
 
-# Aggregation Types
 VALID_AGGREGATION_TYPES = ['sum', 'avg', 'count', 'min', 'max']
 AGGREGATION_SUM = 'sum'
 AGGREGATION_AVG = 'avg'
@@ -15,7 +13,6 @@ AGGREGATION_COUNT = 'count'
 AGGREGATION_MIN = 'min'
 AGGREGATION_MAX = 'max'
 
-# Default Values
 DEFAULT_OUTPUT_PATH = 'comparison_results.xlsx'
 DEFAULT_OUTPUT_SHEET = 'Results'
 DEFAULT_FILE1_SHEET1 = 'Sheet1'
@@ -23,42 +20,33 @@ DEFAULT_FILE1_SHEET2 = 'Sheet2'
 DEFAULT_FILE2_SHEET = 'Sheet1'
 DEFAULT_NA_VALUE = 'NA'
 
-# File Modes
 FILE_MODE_WRITE = 'w'
 FILE_MODE_APPEND = 'a'
 FILE_MODE_READ = 'r'
 
-# Exit Commands
 EXIT_COMMANDS = ['exit', 'quit', 'q']
 EXIT_MESSAGE = "Type exit, quit, q to quit at any time."
 
-# User Choice Commands
 USER_CHOICE_OVERWRITE = 'o'
 USER_CHOICE_RENAME = 'r'
 USER_CHOICE_YES = 'y'
 USER_CHOICE_NO = 'n'
 USER_CHOICE_ENTER = 'e'
 
-# User Choice Lists
 YES_CHOICES = ['y', 'yes', '']
 NO_CHOICES = ['n', 'no']
 ENTER_CHOICES = ['e', 'enter']
 
-# Column Categories for Header Formatting
 COLUMN_CATEGORY_FILE_ONE = 'File One'
 COLUMN_CATEGORY_FILE_TWO = 'File Two'
 COLUMN_CATEGORY_COMPARISON = 'Comparison'
 
-# File One Column Identifiers
 FILE_ONE_COLUMNS = ['customer_id', 'product_id', 'quantity', 'price']
 
-# File Two Column Identifiers
 FILE_TWO_COLUMNS = ['qty', 'amount', 'product_code']
 
-# Comparison Column Keywords
 COMPARISON_KEYWORDS = ['diff', 'delta', '_vs_']
 
-# Validation Messages
 VALIDATION_MESSAGES = {
     'CONFIG_VALIDATED': '✓ Configuration file validated successfully',
     'FILE_NOT_FOUND': 'File not found: {}',
@@ -71,7 +59,6 @@ VALIDATION_MESSAGES = {
     'FIX_CONFIG_AND_RETRY': 'Please fix the configuration file and try again.'
 }
 
-# Console Messages
 CONSOLE_MESSAGES = {
     'WELCOME': 'DATA VALIDATION TOOL',
     'FILE_INPUT_SECTION': '=== File Input ===',
@@ -81,7 +68,41 @@ CONSOLE_MESSAGES = {
     'DATASET_SUMMARY_FOOTER': '=== END SUMMARY ==='
 }
 
-# Error Messages
+# Pipeline Messages
+PIPELINE_HEADER = "DATA VALIDATION PIPELINE"
+PIPELINE_BORDER_WIDTH = 80
+SAMPLE_CONFIG_HEADER = "Sample Configuration Format:"
+SAMPLE_CONFIG_BORDER_WIDTH = 50
+SAMPLE_CONFIG_FOOTER = "For more examples, see files in tests/sample/ directory"
+INTERACTIVE_MODE_HEADER = "🚀 Starting Data Validation Tool in Interactive Mode"
+INTERACTIVE_MODE_BORDER_WIDTH = 60
+EXIT_MESSAGE = "👋 Exiting..."
+CONFIG_FILE_NOT_FOUND = "Configuration file not found:"
+VALIDATION_ERROR = "Error during validation:"
+
+# Environment Variables
+LOG_LEVEL_ENV = 'LOG_LEVEL'
+LOG_DIR_ENV = 'LOG_DIR'
+DEFAULT_LOG_LEVEL = 'INFO'
+DEFAULT_LOG_DIR = 'logs'
+
+# Exit Codes
+EXIT_SUCCESS = 0
+EXIT_ERROR = 1
+
+# Help Text
+HELP_DESCRIPTION = "Data Validation Tool - Complete pipeline for data comparison and validation"
+HELP_EXAMPLES = """
+Examples:
+  python run_validation.py --config config.json
+  
+  python run_validation.py --sample-config
+  
+  python run_validation.py
+  
+  python run_validation.py --config tests/sample/config_two_csv_files.json
+"""
+
 ERROR_MESSAGES = {
     'MISSING_REQUIRED_FIELDS': 'Missing required fields in configuration: {}',
     'INVALID_FILE_FORMAT': 'Invalid file_format: {}. Must be {}.',
@@ -126,14 +147,12 @@ ERROR_MESSAGES = {
     'JOIN_KEYS_TYPES_MISMATCH': 'join_keys_types must have the same keys as join_keys'
 }
 
-# Example Messages
 EXAMPLE_MESSAGES = {
     'JSON_MAPPING_EXAMPLE': 'Example: {"column1": "column2", "column3": "column4"}',
     'COLUMN_NUMBERS_EXAMPLE': 'Example: 1,3,5 or just press Enter to skip',
     'EXIT_COMMAND': 'Type \'exit\' to quit'
 }
 
-# File Paths
 PATHS = {
     'TEMPLATES_DIR': 'config_ops/templates/',
     'TESTS_SAMPLE_DIR': 'tests/sample/',
