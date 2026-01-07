@@ -5,7 +5,7 @@ Implements clean, SOLID-compliant join analysis functionality.
 
 import pandas as pd
 import numpy as np
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
 from dataclasses import dataclass
 import os
 
@@ -89,7 +89,7 @@ class JoinAnalysisGenerator(IJoinAnalysisGenerator):
                 return pd.DataFrame()
             
             # Generate analysis results
-            analysis_results = self._analyze_join_keys(validation_df, join_keys)
+            analysis_results = self._analyze_join_keys(validation_df, join_keys, config)
             
             if not analysis_results:
                 print(f"✓ No failed joins found - all join keys are matching perfectly!")
@@ -108,21 +108,67 @@ class JoinAnalysisGenerator(IJoinAnalysisGenerator):
         except Exception as e:
             raise DataValidationError(f"Failed to generate join analysis: {str(e)}")
     
-    def _analyze_join_keys(self, validation_df: pd.DataFrame, join_keys: Dict[str, str]) -> List[Dict[str, Any]]:
+    def _get_column_suffixes(self, df: pd.DataFrame, config: Dict[str, Any] = None) -> Tuple[str, str]:
+        """Get column suffixes from dataframe attrs or generate from config."""
+        if hasattr(df, 'attrs') and 'left_suffix' in df.attrs and 'right_suffix' in df.attrs:
+            return df.attrs['left_suffix'], df.attrs['right_suffix']
+        
+        if config:
+            import os
+            number_of_files = config.get('number_of_files', 2)
+            
+            if number_of_files == 1:
+                sheet1 = config.get('file1_sheet1', 'Sheet1')
+                sheet2 = config.get('file1_sheet2', 'Sheet2')
+                left_suffix = f"_{self._sanitize_name(sheet1)}"
+                right_suffix = f"_{self._sanitize_name(sheet2)}"
+            else:
+                sheet1 = config.get('file1_sheet1', '')
+                sheet2 = config.get('file2_sheet', '')
+                
+                if sheet1 and sheet2:
+                    left_suffix = f"_{self._sanitize_name(sheet1)}"
+                    right_suffix = f"_{self._sanitize_name(sheet2)}"
+                else:
+                    file1_path = config.get('file1_path', '')
+                    file2_path = config.get('file2_path', '')
+                    file1_name = os.path.splitext(os.path.basename(file1_path))[0] if file1_path else 'file1'
+                    file2_name = os.path.splitext(os.path.basename(file2_path))[0] if file2_path else 'file2'
+                    left_suffix = f"_{self._sanitize_name(file1_name)}"
+                    right_suffix = f"_{self._sanitize_name(file2_name)}"
+            
+            return left_suffix, right_suffix
+        
+        return '_file1', '_file2'
+    
+    def _sanitize_name(self, name: str) -> str:
+        """Sanitize file/sheet name for use as column suffix."""
+        if not name:
+            return 'file'
+        sanitized = name.replace(' ', '_').replace('-', '_').replace('.', '_')
+        sanitized = ''.join(c if c.isalnum() or c == '_' else '_' for c in sanitized)
+        sanitized = sanitized.strip('_')[:50]
+        return sanitized if sanitized else 'file'
+    
+    def _analyze_join_keys(self, validation_df: pd.DataFrame, join_keys: Dict[str, str], 
+                          config: Dict[str, Any] = None) -> List[Dict[str, Any]]:
         """Analyze join keys for mismatches - optimized version."""
         # Performance optimization: Early return for empty data
         if validation_df.empty:
             return []
         
+        # Get suffixes from dataframe attrs or generate from config
+        left_suffix, right_suffix = self._get_column_suffixes(validation_df, config)
+        
         # Get all join key columns once (optimization)
-        all_join_key_cols = self._get_all_join_key_columns(validation_df, join_keys)
+        all_join_key_cols = self._get_all_join_key_columns(validation_df, join_keys, left_suffix, right_suffix)
         
         # Performance optimization: Use vectorized operations where possible
         all_failed_indices = set()
         
         for left_key, right_key in join_keys.items():
-            left_col = f"{left_key}_file1"
-            right_col = f"{right_key}_file2"
+            left_col = f"{left_key}{left_suffix}"
+            right_col = f"{right_key}{right_suffix}"
             
             if left_col not in validation_df.columns or right_col not in validation_df.columns:
                 continue
@@ -148,7 +194,7 @@ class JoinAnalysisGenerator(IJoinAnalysisGenerator):
         failed_rows_df = validation_df.loc[list(all_failed_indices)]
         
         for idx, row in failed_rows_df.iterrows():
-            analysis_results = self._create_failed_join_rows(row, all_join_key_cols, idx)
+            analysis_results = self._create_failed_join_rows(row, all_join_key_cols, idx, left_suffix, right_suffix)
             
             # Process each individual key-value pair
             for analysis_result in analysis_results:
@@ -174,29 +220,31 @@ class JoinAnalysisGenerator(IJoinAnalysisGenerator):
         
         return results
     
-    def _get_all_join_key_columns(self, validation_df: pd.DataFrame, join_keys: Dict[str, str]) -> List[str]:
+    def _get_all_join_key_columns(self, validation_df: pd.DataFrame, join_keys: Dict[str, str], 
+                                  left_suffix: str, right_suffix: str) -> List[str]:
         """Get all join key columns from the validation DataFrame."""
         join_key_cols = []
         for left_key, right_key in join_keys.items():
-            left_col = f"{left_key}_file1"
-            right_col = f"{right_key}_file2"
+            left_col = f"{left_key}{left_suffix}"
+            right_col = f"{right_key}{right_suffix}"
             if left_col in validation_df.columns:
                 join_key_cols.append(left_col)
             if right_col in validation_df.columns:
                 join_key_cols.append(right_col)
         return join_key_cols
     
-    def _create_failed_join_rows(self, row: pd.Series, join_key_cols: List[str], row_index: int) -> List[Dict[str, Any]]:
+    def _create_failed_join_rows(self, row: pd.Series, join_key_cols: List[str], row_index: int, 
+                                 left_suffix: str = '_file1', right_suffix: str = '_file2') -> List[Dict[str, Any]]:
         """Create multiple rows with individual key-value pairs for failed joins."""
         results = []
         
-        # Separate File1 and File2 columns
-        file1_cols = [col for col in join_key_cols if col.endswith('_file1')]
-        file2_cols = [col for col in join_key_cols if col.endswith('_file2')]
+        # Separate File1 and File2 columns using dynamic suffixes
+        file1_cols = [col for col in join_key_cols if col.endswith(left_suffix)]
+        file2_cols = [col for col in join_key_cols if col.endswith(right_suffix)]
         
         # Create pairs of matching keys
-        file1_keys = [col.replace('_file1', '') for col in file1_cols]
-        file2_keys = [col.replace('_file2', '') for col in file2_cols]
+        file1_keys = [col[:-len(left_suffix)] if col.endswith(left_suffix) else col for col in file1_cols]
+        file2_keys = [col[:-len(right_suffix)] if col.endswith(right_suffix) else col for col in file2_cols]
         
         # Create individual rows for each key-value pair
         for i, (file1_col, file2_col) in enumerate(zip(file1_cols, file2_cols)):
@@ -230,21 +278,15 @@ class JoinAnalysisGenerator(IJoinAnalysisGenerator):
     def _get_failed_join_rows(self, validation_df: pd.DataFrame, left_key: str, right_key: str, 
                              left_col: str, right_col: str) -> pd.DataFrame:
         """Get rows where the join failed for this specific key pair."""
-        # Check if there's a comparison column for this key pair
-        comparison_col = f"{left_key}_vs_{right_key}_comparison"
-        
-        if comparison_col in validation_df.columns:
-            # Use comparison column to find failed rows
-            failed_mask = validation_df[comparison_col] == 'no match'
-            return validation_df[failed_mask]
-        else:
-            # Fallback: find rows where one value is missing or values don't match
-            failed_mask = (
-                validation_df[left_col].isna() | 
-                validation_df[right_col].isna() |
-                (validation_df[left_col].astype(str).str.strip() != validation_df[right_col].astype(str).str.strip())
-            )
-            return validation_df[failed_mask]
+        # Always use fallback logic to detect value mismatches
+        # This catches cases where join succeeds positionally but values don't match
+        failed_mask = (
+            validation_df[left_col].isna() | 
+            validation_df[right_col].isna() |
+            (validation_df[left_col].astype(str).str.strip() != validation_df[right_col].astype(str).str.strip())
+        )
+        print(f"Found {failed_mask.sum()} failed rows for {left_key} vs {right_key}")
+        return validation_df[failed_mask]
     
 
 
@@ -292,7 +334,7 @@ class JoinAnalysisOutputHandler(IJoinAnalysisOutputHandler):
         try:
             base_path = os.path.splitext(output_path)[0]
             file_extension = os.path.splitext(output_path)[1]
-            join_analysis_path = f"{base_path}_joinanalysis{file_extension}"
+            join_analysis_path = f"{base_path}_join_analysis{file_extension}"
             
             if file_extension == '.csv':
                 join_analysis_df.to_csv(join_analysis_path, index=False)
@@ -300,7 +342,7 @@ class JoinAnalysisOutputHandler(IJoinAnalysisOutputHandler):
                 join_analysis_df.to_json(join_analysis_path, orient='records', indent=2)
             else:
                 # Default to CSV for unknown formats
-                join_analysis_path = f"{base_path}_joinanalysis.csv"
+                join_analysis_path = f"{base_path}_join_analysis.csv"
                 join_analysis_df.to_csv(join_analysis_path, index=False)
             
             print(f"✓ Join analysis written to: {join_analysis_path}")

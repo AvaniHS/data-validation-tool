@@ -1,0 +1,16 @@
+1)CSV 
+py run_validation.py --config demo/csv_demo/simple_demo_config.json
+
+2) xlsx
+py run_validation.py --config demo\xlsx_demo\demo_config.json
+
+3)Json
+py run_validation.py --config demo\json_demo\json_demo_config.json
+
+
+4) actual: py run_validation.py 
+D:\\Projects\\HP-RnA(CSP-nextgen) ReportingAnd Analytics+Customer and Sales Performance\\KYC\\Jira\\CSPNG-2783_ChannelVault_data_validation\\CSPNG-2791_HWcMPS\\config.json
+
+is there any max limit.
+data connection.
+UI.

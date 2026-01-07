@@ -50,6 +50,48 @@ class OutputConfigExtractor(IOutputConfigExtractor):
 
 class DataFormatter(IDataFormatter):
     
+    def _get_column_suffixes(self, df: pd.DataFrame, config: Dict[str, Any] = None) -> Tuple[str, str]:
+        """Get column suffixes from dataframe attrs or generate from config."""
+        if hasattr(df, 'attrs') and 'left_suffix' in df.attrs and 'right_suffix' in df.attrs:
+            return df.attrs['left_suffix'], df.attrs['right_suffix']
+        
+        if config:
+            import os
+            number_of_files = config.get('number_of_files', 2)
+            
+            if number_of_files == 1:
+                sheet1 = config.get('file1_sheet1', 'Sheet1')
+                sheet2 = config.get('file1_sheet2', 'Sheet2')
+                left_suffix = f"_{self._sanitize_name(sheet1)}"
+                right_suffix = f"_{self._sanitize_name(sheet2)}"
+            else:
+                sheet1 = config.get('file1_sheet1', '')
+                sheet2 = config.get('file2_sheet', '')
+                
+                if sheet1 and sheet2:
+                    left_suffix = f"_{self._sanitize_name(sheet1)}"
+                    right_suffix = f"_{self._sanitize_name(sheet2)}"
+                else:
+                    file1_path = config.get('file1_path', '')
+                    file2_path = config.get('file2_path', '')
+                    file1_name = os.path.splitext(os.path.basename(file1_path))[0] if file1_path else 'file1'
+                    file2_name = os.path.splitext(os.path.basename(file2_path))[0] if file2_path else 'file2'
+                    left_suffix = f"_{self._sanitize_name(file1_name)}"
+                    right_suffix = f"_{self._sanitize_name(file2_name)}"
+            
+            return left_suffix, right_suffix
+        
+        return '_file1', '_file2'
+    
+    def _sanitize_name(self, name: str) -> str:
+        """Sanitize file/sheet name for use as column suffix."""
+        if not name:
+            return 'file'
+        sanitized = name.replace(' ', '_').replace('-', '_').replace('.', '_')
+        sanitized = ''.join(c if c.isalnum() or c == '_' else '_' for c in sanitized)
+        sanitized = sanitized.strip('_')[:50]
+        return sanitized if sanitized else 'file'
+    
     def format_dataframe(self, df: pd.DataFrame, config: Dict[str, Any]) -> pd.DataFrame:
         """Intelligently optimized dataframe formatting for performance."""
         # Performance optimization: Smart formatting based on dataset size
@@ -77,6 +119,12 @@ class DataFormatter(IDataFormatter):
         if 'JoinKeys' not in df.columns:
             return df
         
+        # Check if detailed delta analysis is enabled
+        detailed_delta_analysis = config.get('detailed_metric_delta_analysis', '').lower() == 'yes'
+        
+        # Get suffixes from dataframe attrs or generate from config
+        left_suffix, right_suffix = self._get_column_suffixes(df, config)
+        
         # Use the same join key extraction logic as the joiner
         from validation.data_joiner import JoinKeyExtractor
         extractor = JoinKeyExtractor()
@@ -91,33 +139,33 @@ class DataFormatter(IDataFormatter):
         
         join_keys_column = ['JoinKeys'] if 'JoinKeys' in all_columns else []
         
-        all_file1_columns = [col for col in all_columns if col.endswith('_file1')]
+        all_file1_columns = [col for col in all_columns if col.endswith(left_suffix)]
         
-        file1_join_key_columns = [col for col in all_file1_columns if col[:-6] in left_keys]
-        file1_metric_columns = [col for col in all_file1_columns if col[:-6] in metric_columns]
+        file1_join_key_columns = [col for col in all_file1_columns if col[:-len(left_suffix)] in left_keys]
+        file1_metric_columns = [col for col in all_file1_columns if col[:-len(left_suffix)] in metric_columns]
         file1_other_columns = [col for col in all_file1_columns if col not in file1_join_key_columns and col not in file1_metric_columns]
         
-        all_file2_columns = [col for col in all_columns if col.endswith('_file2')]
+        all_file2_columns = [col for col in all_columns if col.endswith(right_suffix)]
         
         file2_join_key_columns = []
         file2_other_columns = []
         file2_metric_columns = []
         
         for file1_column in file1_join_key_columns:
-            base_column = file1_column[:-6]
-            file2_column = base_column + '_file2'
+            base_column = file1_column[:-len(left_suffix)]
+            file2_column = base_column + right_suffix
             if file2_column in all_file2_columns:
                 file2_join_key_columns.append(file2_column)
         
         for file1_column in file1_other_columns:
-            base_column = file1_column[:-6]
-            file2_column = base_column + '_file2'
+            base_column = file1_column[:-len(left_suffix)]
+            file2_column = base_column + right_suffix
             if file2_column in all_file2_columns:
                 file2_other_columns.append(file2_column)
         
         for file1_column in file1_metric_columns:
-            base_column = file1_column[:-6]
-            file2_column = base_column + '_file2'
+            base_column = file1_column[:-len(left_suffix)]
+            file2_column = base_column + right_suffix
             if file2_column in all_file2_columns:
                 file2_metric_columns.append(file2_column)
         
@@ -126,45 +174,67 @@ class DataFormatter(IDataFormatter):
         validation_metric_columns = []
         
         for file1_column in file1_join_key_columns:
-            base_column = file1_column[:-6]
-            comparison_column = base_column + '_vs_' + base_column + '_comparison'
-            delta_column = base_column + '_vs_' + base_column + '_delta'
-            percentage_delta_column = base_column + '_vs_' + base_column + '_delta%'
+            base_column = file1_column[:-len(left_suffix)]
+            # Find corresponding file2 column name from column mapping
+            file2_column_name = column_mapping.get(base_column, base_column)
+            # Construct comparison column name with suffixes
+            comparison_column = f"{base_column}{left_suffix}_vs_{file2_column_name}{right_suffix}_comparison"
             
             if comparison_column in all_columns:
                 validation_join_key_columns.append(comparison_column)
-            if delta_column in all_columns:
-                validation_join_key_columns.append(delta_column)
-            if percentage_delta_column in all_columns:
-                validation_join_key_columns.append(percentage_delta_column)
+            
+            # Only add delta columns if detailed_metric_delta_analysis is enabled
+            if detailed_delta_analysis:
+                delta_column = f"{base_column}{left_suffix}_vs_{file2_column_name}{right_suffix}_delta"
+                percentage_delta_column = f"{base_column}{left_suffix}_vs_{file2_column_name}{right_suffix}_delta%"
+                if delta_column in all_columns:
+                    validation_join_key_columns.append(delta_column)
+                if percentage_delta_column in all_columns:
+                    validation_join_key_columns.append(percentage_delta_column)
         
         for file1_column in file1_other_columns:
-            base_column = file1_column[:-6]
-            comparison_column = base_column + '_vs_' + base_column + '_comparison'
-            delta_column = base_column + '_vs_' + base_column + '_delta'
-            percentage_delta_column = base_column + '_vs_' + base_column + '_delta%'
+            base_column = file1_column[:-len(left_suffix)]
+            # Find corresponding file2 column name from column mapping
+            file2_column_name = column_mapping.get(base_column, base_column)
+            # Construct comparison column name with suffixes
+            comparison_column = f"{base_column}{left_suffix}_vs_{file2_column_name}{right_suffix}_comparison"
             
             if comparison_column in all_columns:
                 validation_other_columns.append(comparison_column)
-            if delta_column in all_columns:
-                validation_other_columns.append(delta_column)
-            if percentage_delta_column in all_columns:
-                validation_other_columns.append(percentage_delta_column)
+            
+            # Only add delta columns if detailed_metric_delta_analysis is enabled
+            if detailed_delta_analysis:
+                delta_column = f"{base_column}{left_suffix}_vs_{file2_column_name}{right_suffix}_delta"
+                percentage_delta_column = f"{base_column}{left_suffix}_vs_{file2_column_name}{right_suffix}_delta%"
+                if delta_column in all_columns:
+                    validation_other_columns.append(delta_column)
+                if percentage_delta_column in all_columns:
+                    validation_other_columns.append(percentage_delta_column)
         
         for file1_column in file1_metric_columns:
-            base_column = file1_column[:-6]
-            comparison_column = base_column + '_vs_' + base_column + '_comparison'
-            delta_column = base_column + '_vs_' + base_column + '_delta'
-            percentage_delta_column = base_column + '_vs_' + base_column + '_delta%'
+            base_column = file1_column[:-len(left_suffix)]
+            # Find corresponding file2 column name from column mapping
+            file2_column_name = column_mapping.get(base_column, base_column)
+            # Construct comparison column name with suffixes
+            comparison_column = f"{base_column}{left_suffix}_vs_{file2_column_name}{right_suffix}_comparison"
             
             if comparison_column in all_columns:
                 validation_metric_columns.append(comparison_column)
-            if delta_column in all_columns:
-                validation_metric_columns.append(delta_column)
-            if percentage_delta_column in all_columns:
-                validation_metric_columns.append(percentage_delta_column)
+            
+            # Only add delta columns if detailed_metric_delta_analysis is enabled
+            if detailed_delta_analysis:
+                delta_column = f"{base_column}{left_suffix}_vs_{file2_column_name}{right_suffix}_delta"
+                percentage_delta_column = f"{base_column}{left_suffix}_vs_{file2_column_name}{right_suffix}_delta%"
+                if delta_column in all_columns:
+                    validation_metric_columns.append(delta_column)
+                if percentage_delta_column in all_columns:
+                    validation_metric_columns.append(percentage_delta_column)
         
-        remaining_validation_columns = [col for col in all_columns if '_vs_' in col and ('_comparison' in col or '_delta' in col or '_delta%' in col) and col not in validation_join_key_columns + validation_other_columns + validation_metric_columns]
+        # Find remaining validation columns (only comparison columns, or include delta if enabled)
+        if detailed_delta_analysis:
+            remaining_validation_columns = [col for col in all_columns if '_vs_' in col and ('_comparison' in col or '_delta' in col or '_delta%' in col) and col not in validation_join_key_columns + validation_other_columns + validation_metric_columns]
+        else:
+            remaining_validation_columns = [col for col in all_columns if '_vs_' in col and '_comparison' in col and col not in validation_join_key_columns + validation_other_columns + validation_metric_columns]
         validation_other_columns.extend(remaining_validation_columns)
         
         join_status_columns = [col for col in all_columns if 'JoinKeys' in col and col != 'JoinKeys']

@@ -1,0 +1,36 @@
+{
+  "file_format": ".json",
+  "number_of_files": 2,
+  "file1_path": "D:\\Projects\\TL\\Projects\\data-validation-tool\\demo\\json_demo\\file1_before.json",
+  "file2_path": "D:\\Projects\\TL\\Projects\\data-validation-tool\\demo\\json_demo\\file2_after.json",
+  "file1_sheet1": "NA",
+  "file1_sheet2": "NA",
+  "file2_sheet": "NA",
+  "output_path": "D:\\Projects\\TL\\Projects\\data-validation-tool\\demo\\json_demo\\json_validation_results.json",
+  "output_sheet": "Validation_Summary",
+  "column_mapping": {
+    "ID": "ID",
+    "Name": "Name",
+    "Department": "Department",
+    "Salary": "Salary",
+    "Bonus": "Bonus"
+  },
+  "additional_columns_file1": [],
+  "additional_columns_file1_types": [],
+  "additional_columns_file2": [],
+  "additional_columns_file2_types": [],
+  "join_keys": {
+    "ID": "ID",
+    "Name": "Name"
+  },
+  "join_keys_types": {
+    "ID": "numeric",
+    "Name": "string"
+  },
+  "aggregation": {
+    "sum": ["Salary", "Bonus"]
+  },
+  "file1_metric_list": ["Salary", "Bonus"],
+  "file2_metric_list": ["Salary", "Bonus"],
+  "detailed_join_analysis": "yes"
+}

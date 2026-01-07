@@ -5,7 +5,7 @@ import pandas as pd
 
 class IComparisonStrategy(ABC):
     @abstractmethod
-    def compare(self, value1: Any, value2: Any) -> Tuple[str, Optional[float]]:
+    def compare(self, value1: Any, value2: Any) -> Tuple[str, Optional[float], Optional[float]]:
         pass
 
 
@@ -29,7 +29,7 @@ class IComparisonConfigExtractor(ABC):
 
 class IComparisonStrategySelector(ABC):
     @abstractmethod
-    def select_strategy(self, series1: pd.Series, series2: pd.Series, config: Dict[str, Any], file1_col: str) -> IComparisonStrategy:
+    def select_strategy(self, series1: pd.Series, series2: pd.Series, config: Dict[str, Any], file1_col: str, file2_col: str = None) -> IComparisonStrategy:
         pass
 
 

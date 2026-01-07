@@ -1,0 +1,30 @@
+[
+  {
+    "File_1_keys":"ID",
+    "File_2_keys":"ID",
+    "File1_Value":"NULL",
+    "File2_Value":"99",
+    "count":1
+  },
+  {
+    "File_1_keys":"ID",
+    "File_2_keys":"ID",
+    "File1_Value":"3",
+    "File2_Value":"NULL",
+    "count":1
+  },
+  {
+    "File_1_keys":"Name",
+    "File_2_keys":"Name",
+    "File1_Value":"NULL",
+    "File2_Value":"Franklin",
+    "count":1
+  },
+  {
+    "File_1_keys":"Name",
+    "File_2_keys":"Name",
+    "File1_Value":"Charlie",
+    "File2_Value":"NULL",
+    "count":1
+  }
+]

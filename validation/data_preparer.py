@@ -71,6 +71,8 @@ class DataCleaner(IDataCleaner):
         
         df = self._clean_currency_values(df)
         
+        df = self._clean_numeric_columns_with_special_chars(df)
+        
         df = df.reset_index(drop=True)
         
         return df
@@ -93,6 +95,46 @@ class DataCleaner(IDataCleaner):
                         df[col] = pd.to_numeric(df[col], errors='coerce')
                     except:
                         pass
+        return df
+    
+    def _clean_numeric_columns_with_special_chars(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Clean special characters (carriage returns, newlines, etc.) from columns that should be numeric."""
+        for col in df.columns:
+            if df[col].dtype == 'object':
+                # Check if column contains numeric values with special characters
+                sample_values = df[col].dropna().head(10)
+                has_special_chars = False
+                has_numeric_content = False
+                
+                for val in sample_values:
+                    val_str = str(val)
+                    # Check for special characters that might prevent numeric conversion
+                    if any(char in val_str for char in ['_x000D_', '\n', '\r', '\t', '\x0D', '\x0A']):
+                        has_special_chars = True
+                    # Check if value looks numeric after cleaning
+                    cleaned = val_str.replace('_x000D_', '').replace('\n', '').replace('\r', '').replace('\t', '').strip()
+                    try:
+                        float(cleaned)
+                        has_numeric_content = True
+                    except (ValueError, TypeError):
+                        pass
+                
+                # If column has special chars but contains numeric content, clean it
+                if has_special_chars and has_numeric_content:
+                    df[col] = df[col].astype(str)
+                    # Remove carriage return/newline markers and actual newlines
+                    df[col] = df[col].str.replace('_x000D_', '', regex=False)
+                    df[col] = df[col].str.replace('\n', '', regex=False)
+                    df[col] = df[col].str.replace('\r', '', regex=False)
+                    df[col] = df[col].str.replace('\t', '', regex=False)
+                    df[col] = df[col].str.strip()
+                    
+                    # Try to convert to numeric
+                    try:
+                        df[col] = pd.to_numeric(df[col], errors='coerce')
+                    except (ValueError, TypeError):
+                        pass
+                    
         return df
 
 

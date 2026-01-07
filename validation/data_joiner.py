@@ -89,42 +89,124 @@ class JoinKeyValidator(IJoinKeyValidator):
 class JoinExecutor(IJoinExecutor):
     
     def execute_join(self, df1: pd.DataFrame, df2: pd.DataFrame, 
-                    left_keys: List[str], right_keys: List[str]) -> pd.DataFrame:
+                    left_keys: List[str], right_keys: List[str], 
+                    config: Dict[str, Any] = None) -> pd.DataFrame:
         try:
-            left_suffix = '_file1'
-            right_suffix = '_file2'
+            left_suffix, right_suffix = self._generate_column_suffixes(config)
             
             df1_copy = df1.copy()
             df2_copy = df2.copy()
             
-            # Rename join keys to force suffixed columns
-            for left_key, right_key in zip(left_keys, right_keys):
-                df1_copy = df1_copy.rename(columns={left_key: f"{left_key}{left_suffix}"})
-                df2_copy = df2_copy.rename(columns={right_key: f"{right_key}{right_suffix}"})
-                
-                # Convert to string for consistent joining
-                df1_copy[f"{left_key}{left_suffix}"] = df1_copy[f"{left_key}{left_suffix}"].astype(str)
-                df2_copy[f"{right_key}{right_suffix}"] = df2_copy[f"{right_key}{right_suffix}"].astype(str)
+            # Rename ALL columns in both dataframes to add suffixes
+            df1_copy.columns = [f"{col}{left_suffix}" for col in df1_copy.columns]
+            df2_copy.columns = [f"{col}{right_suffix}" for col in df2_copy.columns]
             
             # Create new key lists with suffixed names
             left_keys_suffixed = [f"{key}{left_suffix}" for key in left_keys]
             right_keys_suffixed = [f"{key}{right_suffix}" for key in right_keys]
             
+            # Normalize join key values before merging
+            for left_key_suffixed, right_key_suffixed in zip(left_keys_suffixed, right_keys_suffixed):
+                df1_copy[left_key_suffixed] = self._normalize_join_key_for_string_comparison(
+                    df1_copy[left_key_suffixed]
+                )
+                df2_copy[right_key_suffixed] = self._normalize_join_key_for_string_comparison(
+                    df2_copy[right_key_suffixed]
+                )
+            
+            # Perform merge - no need for suffixes parameter since all columns already have suffixes
             joined_df = df1_copy.merge(
                 df2_copy,
                 left_on=left_keys_suffixed,
                 right_on=right_keys_suffixed,
-                how='outer',
-                suffixes=(left_suffix, right_suffix)
+                how='outer'
             )
             
             joined_df = self._remove_unnamed_columns(joined_df)
-            joined_df = self._add_join_keys_status(joined_df, left_keys, right_keys)
+            joined_df = self._add_join_keys_status(joined_df, left_keys, right_keys, left_suffix, right_suffix)
+            
+            # Store suffixes in joined_df attributes for use by other components
+            joined_df.attrs['left_suffix'] = left_suffix
+            joined_df.attrs['right_suffix'] = right_suffix
             
             return joined_df
             
         except Exception as e:
             raise DataJoiningError(f"Failed to execute join: {str(e)}")
+    
+    def _generate_column_suffixes(self, config: Dict[str, Any] = None) -> Tuple[str, str]:
+        """Generate column suffixes from file or sheet names."""
+        if config is None:
+            return '_file1', '_file2'
+        
+        import os
+        
+        number_of_files = config.get('number_of_files', 2)
+        
+        if number_of_files == 1:
+            # Single file with two sheets - use sheet names
+            sheet1 = config.get('file1_sheet1', 'Sheet1')
+            sheet2 = config.get('file1_sheet2', 'Sheet2')
+            left_suffix = f"_{self._sanitize_name(sheet1)}"
+            right_suffix = f"_{self._sanitize_name(sheet2)}"
+        else:
+            # Two separate files - use file names or sheet names
+            file1_path = config.get('file1_path', '')
+            file2_path = config.get('file2_path', '')
+            
+            # Try to use sheet names first, fall back to file names
+            sheet1 = config.get('file1_sheet1', '')
+            sheet2 = config.get('file2_sheet', '')
+            
+            if sheet1 and sheet2:
+                left_suffix = f"_{self._sanitize_name(sheet1)}"
+                right_suffix = f"_{self._sanitize_name(sheet2)}"
+            else:
+                # Use file names
+                file1_name = os.path.splitext(os.path.basename(file1_path))[0] if file1_path else 'file1'
+                file2_name = os.path.splitext(os.path.basename(file2_path))[0] if file2_path else 'file2'
+                left_suffix = f"_{self._sanitize_name(file1_name)}"
+                right_suffix = f"_{self._sanitize_name(file2_name)}"
+        
+        return left_suffix, right_suffix
+    
+    def _sanitize_name(self, name: str) -> str:
+        """Sanitize file/sheet name for use as column suffix."""
+        if not name:
+            return 'file'
+        # Replace invalid characters for column names
+        sanitized = name.replace(' ', '_').replace('-', '_').replace('.', '_')
+        sanitized = ''.join(c if c.isalnum() or c == '_' else '_' for c in sanitized)
+        # Remove leading/trailing underscores and limit length
+        sanitized = sanitized.strip('_')[:50]
+        return sanitized if sanitized else 'file'
+    
+    def _normalize_join_key_for_string_comparison(self, series: pd.Series) -> pd.Series:
+        """Normalize join key values to ensure consistent string comparison.
+        
+        Handles cases where int64 and float64 values need to match:
+        - Converts numeric values to int (if possible) to remove .0 suffix
+        - Then converts to string and strips whitespace
+        - Handles NaN values appropriately
+        """
+        try:
+            # Try to convert to numeric first
+            numeric_series = pd.to_numeric(series, errors='coerce')
+            
+            # Convert to string, then remove trailing .0 for whole numbers
+            # This handles both int64 and float64 cases
+            result = numeric_series.astype(str)
+            # Remove .0 suffix for whole numbers (e.g., "1062617.0" -> "1062617")
+            result = result.str.replace(r'\.0$', '', regex=True)
+            # Handle NaN values (they become "nan" string)
+            result = result.replace('nan', None)
+            # Strip whitespace
+            result = result.str.strip() if hasattr(result, 'str') else result
+            
+            return result
+        except (ValueError, TypeError):
+            # If conversion fails, just convert to string and strip
+            return series.astype(str).str.strip()
     
     def _remove_unnamed_columns(self, df: pd.DataFrame) -> pd.DataFrame:
         unnamed_cols = [col for col in df.columns if 'Unnamed' in str(col)]
@@ -132,13 +214,14 @@ class JoinExecutor(IJoinExecutor):
             df = df.drop(columns=unnamed_cols)
         return df
     
-    def _add_join_keys_status(self, df: pd.DataFrame, left_keys: List[str], right_keys: List[str]) -> pd.DataFrame:
+    def _add_join_keys_status(self, df: pd.DataFrame, left_keys: List[str], right_keys: List[str], 
+                              left_suffix: str, right_suffix: str) -> pd.DataFrame:
         # Create a combined join status column
         df['Join_status'] = 'matched'
         
         # Check for any suffixed columns to determine status
-        file1_cols = [col for col in df.columns if col.endswith('_file1')]
-        file2_cols = [col for col in df.columns if col.endswith('_file2')]
+        file1_cols = [col for col in df.columns if col.endswith(left_suffix)]
+        file2_cols = [col for col in df.columns if col.endswith(right_suffix)]
         
         if file1_cols and file2_cols:
             # Use the first available suffixed column to determine status
@@ -155,8 +238,8 @@ class JoinExecutor(IJoinExecutor):
                 # Check if all join key values match
                 all_match = True
                 for left_key, right_key in zip(left_keys, right_keys):
-                    left_key_col = f"{left_key}_file1"
-                    right_key_col = f"{right_key}_file2"
+                    left_key_col = f"{left_key}{left_suffix}"
+                    right_key_col = f"{right_key}{right_suffix}"
                     if left_key_col in df.columns and right_key_col in df.columns:
                         if not (df.loc[both_present, left_key_col] == df.loc[both_present, right_key_col]).all():
                             all_match = False
@@ -204,7 +287,7 @@ class DataJoiner(IDataJoiner):
         
         self._key_validator.validate_join_keys(df1, df2, left_keys, right_keys)
         
-        joined_df = self._join_executor.execute_join(df1, df2, left_keys, right_keys)
+        joined_df = self._join_executor.execute_join(df1, df2, left_keys, right_keys, config)
         
         self._result_validator.validate_join_result(joined_df, df1, df2)
         

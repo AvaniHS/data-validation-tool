@@ -22,7 +22,8 @@ class IJoinExecutor(ABC):
     
     @abstractmethod
     def execute_join(self, df1: pd.DataFrame, df2: pd.DataFrame, 
-                    left_keys: List[str], right_keys: List[str]) -> pd.DataFrame:
+                    left_keys: List[str], right_keys: List[str], 
+                    config: Dict[str, Any] = None) -> pd.DataFrame:
         pass
 
 
