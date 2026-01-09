@@ -114,6 +114,9 @@ class ComparisonStrategySelector(IComparisonStrategySelector):
             if strategy_type in self._available_strategies:
                 return self._available_strategies[strategy_type]
         
+        if self._is_join_key(config, file1_col, file2_col):
+            return self._available_strategies['string']
+        
         is_metric = self.is_column_metric(config, file1_col, file2_col)
         if is_metric:
             return self._available_strategies['numeric']
@@ -123,7 +126,28 @@ class ComparisonStrategySelector(IComparisonStrategySelector):
         else:
             return self._available_strategies['string']
     
+    def _is_join_key(self, config: Dict[str, Any], file1_col: str, file2_col: str = None) -> bool:
+        from constants import DEFAULT_NA_VALUE
+        join_keys = config.get('join_keys', {})
+        
+        if not join_keys or join_keys == DEFAULT_NA_VALUE:
+            return False
+        
+        if not isinstance(join_keys, dict):
+            return False
+        
+        if file1_col in join_keys:
+            return True
+        
+        if file2_col and file2_col in join_keys.values():
+            return True
+        
+        return False
+    
     def is_column_metric(self, config: Dict[str, Any], file1_col: str, file2_col: str = None) -> bool:
+        if self._is_join_key(config, file1_col, file2_col):
+            return False
+        
         file1_metrics = config.get('file1_metric_list', [])
         file2_metrics = config.get('file2_metric_list', [])
         
