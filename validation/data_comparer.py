@@ -19,18 +19,61 @@ from constants import DEFAULT_NA_VALUE
 
 class StringComparisonStrategy(IComparisonStrategy):
     def compare(self, value1: Any, value2: Any) -> Tuple[str, Optional[float], Optional[float]]:
+        is_blank1 = self._is_blank(value1)
+        is_blank2 = self._is_blank(value2)
+        
+        if is_blank1 and is_blank2:
+            return "no match", 100.0, 100.0
+        
+        if is_blank1 or is_blank2:
+            return "no match", 100.0, 100.0
+        
         if pd.isna(value1) and pd.isna(value2):
-            return "match", 0.0, 0.0
+            return "no match", 100.0, 100.0
+        
         if pd.isna(value1) or pd.isna(value2):
             return "no match", 100.0, 100.0
         
-        normalized_value1 = str(value1).strip().lower()
-        normalized_value2 = str(value2).strip().lower()
+        normalized_value1 = self._normalize_string(value1)
+        normalized_value2 = self._normalize_string(value2)
         
         if normalized_value1 == normalized_value2:
             return "match", 0.0, 0.0
         else:
             return "no match", 100.0, 100.0
+    
+    def _is_blank(self, value: Any) -> bool:
+        if pd.isna(value):
+            return True
+        if value is None:
+            return True
+        value_str = str(value).strip()
+        if len(value_str) == 0:
+            return True
+        import re
+        value_str = value_str.replace('_x000D_', '')
+        value_str = re.sub(r'[\r\n\t\s]+', '', value_str)
+        return len(value_str) == 0
+    
+    def _normalize_string(self, value: Any) -> str:
+        import re
+        import unicodedata
+        
+        if pd.isna(value) or value is None:
+            return ""
+        
+        value_str = str(value)
+        
+        value_str = value_str.replace('_x000D_', '')
+        value_str = value_str.replace('\x00', '')
+        value_str = unicodedata.normalize('NFKC', value_str)
+        
+        value_str = re.sub(r'[\r\n\t]+', ' ', value_str)
+        value_str = re.sub(r'[\u00A0\u2000-\u200B\u202F\u205F\u3000]+', ' ', value_str)
+        value_str = re.sub(r'\s+', ' ', value_str)
+        value_str = value_str.strip().lower()
+        
+        return value_str
 
 
 class NumericComparisonStrategy(INumericComparisonStrategy):
@@ -121,10 +164,7 @@ class ComparisonStrategySelector(IComparisonStrategySelector):
         if is_metric:
             return self._available_strategies['numeric']
         
-        if self._is_numeric_series(series1) and self._is_numeric_series(series2):
-            return self._available_strategies['numeric']
-        else:
-            return self._available_strategies['string']
+        return self._available_strategies['string']
     
     def _is_join_key(self, config: Dict[str, Any], file1_col: str, file2_col: str = None) -> bool:
         from constants import DEFAULT_NA_VALUE
@@ -248,9 +288,14 @@ class ComparisonExecutor(IComparisonExecutor):
                 actual_file2_column = file2_suffixed_column if file2_suffixed_column in df.columns else file2_column
                 
                 if actual_file1_column not in df.columns or actual_file2_column not in df.columns:
+                    comparison_column_name = f"{file1_column}{left_suffix}_vs_{file2_column}{right_suffix}_comparison"
                     print(f"⚠️  Warning: Column mapping {file1_column} -> {file2_column} not found in dataframe")
-                    print(f"  Looking for: {actual_file1_column}, {actual_file2_column}")
-                    print(f"  Available columns: {list(df.columns)}")
+                    print(f"  Expected file1 column: {actual_file1_column} (tried: {file1_suffixed_column} or {file1_column})")
+                    print(f"  Expected file2 column: {actual_file2_column} (tried: {file2_suffixed_column} or {file2_column})")
+                    print(f"  Available columns matching '{file1_column}': {[col for col in df.columns if file1_column.lower() in col.lower()]}")
+                    print(f"  Available columns matching '{file2_column}': {[col for col in df.columns if file2_column.lower() in col.lower()]}")
+                    print(f"  All available columns: {list(df.columns)[:20]}..." if len(df.columns) > 20 else f"  All available columns: {list(df.columns)}")
+                    print(f"  Comparison column '{comparison_column_name}' will not be created")
                     continue
                 
                 selected_strategy = strategy_selector.select_strategy(

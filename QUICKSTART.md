@@ -29,7 +29,7 @@ pip install -r requirements.txt
 python run_validation.py --help
 
 # Run with sample data
-python run_validation.py --config tests/sample/config_two_csv_files.json
+python run_validation.py --config demo/csv_demo/simple_demo_config.json
 ```
 
 ## 🎯 Your First Validation
@@ -90,17 +90,17 @@ The tool will guide you through:
 
 ### Compare Two CSV Files
 ```bash
-python run_validation.py --config tests/sample/config_two_csv_files.json
+python run_validation.py --config demo/csv_demo/simple_demo_config.json
 ```
 
 ### Compare Excel Sheets
 ```bash
-python run_validation.py --config tests/sample/config_single_excel_file.json
+python run_validation.py --config demo/xlsx_demo/demo_config.json
 ```
 
-### With Aggregation
+### Compare JSON Files
 ```bash
-python run_validation.py --config tests/sample/config_with_aggregation.json
+python run_validation.py --config demo/json_demo/json_demo_config.json
 ```
 
 ## 🔧 Configuration Examples
@@ -190,7 +190,7 @@ pip install --user -r requirements.txt
 
 - **Detailed Setup**: Read [SETUP.md](SETUP.md) for comprehensive installation
 - **User Guide**: Check [documentation/README.md](documentation/README.md) for advanced features
-- **Examples**: Browse [tests/sample/](tests/sample/) for more configuration examples
+- **Examples**: Browse [demo/](demo/) for more configuration examples
 - **Troubleshooting**: See [INSTALLATION.md](INSTALLATION.md) for detailed troubleshooting
 
 ## 🆘 Need Help?
