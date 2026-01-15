@@ -133,7 +133,7 @@ class DataFormatter(IDataFormatter):
         column_mapping = config.get('column_mapping', {})
         aggregation = config.get('aggregation', {})
         
-        metric_columns = self._get_metric_columns_from_config(aggregation, left_keys, right_keys)
+        metric_columns = self._get_metric_columns_from_config(config, aggregation, left_keys, right_keys)
         
         all_columns = list(df.columns)
         
@@ -266,8 +266,28 @@ class DataFormatter(IDataFormatter):
         
         return reorganized_dataframe
     
-    def _get_metric_columns_from_config(self, aggregation: Dict[str, Any], left_keys: List[str], right_keys: List[str]) -> List[str]:
+    def _get_metric_columns_from_config(self, config: Dict[str, Any], aggregation: Dict[str, Any], left_keys: List[str], right_keys: List[str]) -> List[str]:
         metric_columns = []
+        
+        file1_metric_list = config.get('file1_metric_list', [])
+        file2_metric_list = config.get('file2_metric_list', [])
+        
+        if isinstance(file1_metric_list, list):
+            for metric in file1_metric_list:
+                if metric not in left_keys and metric not in metric_columns:
+                    metric_columns.append(metric)
+        
+        if isinstance(file2_metric_list, list):
+            column_mapping = config.get('column_mapping', {})
+            for file2_metric in file2_metric_list:
+                mapped_file1_metric = None
+                for file1_col, file2_col in column_mapping.items():
+                    if file2_col == file2_metric:
+                        mapped_file1_metric = file1_col
+                        break
+                
+                if mapped_file1_metric and mapped_file1_metric not in left_keys and mapped_file1_metric not in metric_columns:
+                    metric_columns.append(mapped_file1_metric)
         
         if not aggregation or aggregation == 'NA':
             return metric_columns
@@ -277,12 +297,16 @@ class DataFormatter(IDataFormatter):
             for aggregation_type, columns in file1_columns.items():
                 if columns and columns != 'NA':
                     if isinstance(columns, list):
-                        metric_columns.extend(columns)
+                        for column in columns:
+                            if column not in left_keys and column not in metric_columns:
+                                metric_columns.append(column)
                     elif isinstance(columns, str):
-                        metric_columns.append(columns)
+                        if columns not in left_keys and columns not in metric_columns:
+                            metric_columns.append(columns)
         
         file2_columns = aggregation.get('file2_columns', {})
         if isinstance(file2_columns, dict):
+            column_mapping = config.get('column_mapping', {})
             for aggregation_type, columns in file2_columns.items():
                 if columns and columns != 'NA':
                     if isinstance(columns, list):
@@ -290,18 +314,32 @@ class DataFormatter(IDataFormatter):
                             if column in right_keys:
                                 for left_key, right_key in zip(left_keys, right_keys):
                                     if right_key == column:
-                                        metric_columns.append(left_key)
+                                        if left_key not in metric_columns:
+                                            metric_columns.append(left_key)
                                         break
                             else:
-                                metric_columns.append(column)
+                                mapped_file1_col = None
+                                for file1_col, file2_col in column_mapping.items():
+                                    if file2_col == column:
+                                        mapped_file1_col = file1_col
+                                        break
+                                if mapped_file1_col and mapped_file1_col not in left_keys and mapped_file1_col not in metric_columns:
+                                    metric_columns.append(mapped_file1_col)
                     elif isinstance(columns, str):
                         if columns in right_keys:
                             for left_key, right_key in zip(left_keys, right_keys):
                                 if right_key == columns:
-                                    metric_columns.append(left_key)
+                                    if left_key not in metric_columns:
+                                        metric_columns.append(left_key)
                                     break
                         else:
-                            metric_columns.append(columns)
+                            mapped_file1_col = None
+                            for file1_col, file2_col in column_mapping.items():
+                                if file2_col == columns:
+                                    mapped_file1_col = file1_col
+                                    break
+                            if mapped_file1_col and mapped_file1_col not in left_keys and mapped_file1_col not in metric_columns:
+                                metric_columns.append(mapped_file1_col)
         
         seen_columns = set()
         unique_metric_columns = []
