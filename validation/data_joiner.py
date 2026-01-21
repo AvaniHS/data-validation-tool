@@ -114,6 +114,9 @@ class JoinExecutor(IJoinExecutor):
                     df2_copy[right_key_suffixed]
                 )
             
+            # Check for potential Cartesian product before joining
+            self._validate_join_keys_uniqueness(df1_copy, df2_copy, left_keys_suffixed, right_keys_suffixed)
+            
             # Perform merge - no need for suffixes parameter since all columns already have suffixes
             joined_df = df1_copy.merge(
                 df2_copy,
@@ -207,6 +210,42 @@ class JoinExecutor(IJoinExecutor):
         except (ValueError, TypeError):
             # If conversion fails, just convert to string and strip
             return series.astype(str).str.strip()
+    
+    def _validate_join_keys_uniqueness(self, df1: pd.DataFrame, df2: pd.DataFrame, 
+                                      left_keys: List[str], right_keys: List[str]) -> None:
+        """Validate join keys to prevent Cartesian product issues."""
+        try:
+            df1_key_combos = df1[left_keys].drop_duplicates()
+            df2_key_combos = df2[right_keys].drop_duplicates()
+            
+            df1_unique_count = len(df1_key_combos)
+            df1_total_count = len(df1)
+            df2_unique_count = len(df2_key_combos)
+            df2_total_count = len(df2)
+            
+            df1_duplicate_ratio = df1_total_count / df1_unique_count if df1_unique_count > 0 else 0
+            df2_duplicate_ratio = df2_total_count / df2_unique_count if df2_unique_count > 0 else 0
+            
+            estimated_result_size = df1_unique_count * df2_unique_count
+            
+            if df1_duplicate_ratio > 1.1 or df2_duplicate_ratio > 1.1:
+                print(f"⚠️  Warning: Join keys have duplicate values")
+                print(f"  File1: {df1_total_count:,} rows, {df1_unique_count:,} unique key combinations (ratio: {df1_duplicate_ratio:.2f})")
+                print(f"  File2: {df2_total_count:,} rows, {df2_unique_count:,} unique key combinations (ratio: {df2_duplicate_ratio:.2f})")
+                print(f"  Estimated result size: {estimated_result_size:,} rows")
+                
+                if estimated_result_size > 10_000_000:
+                    raise DataJoiningError(
+                        f"Join would create approximately {estimated_result_size:,} rows (Cartesian product detected). "
+                        f"This exceeds safe limits and would require ~{estimated_result_size * 8 / 1024**3:.2f} GB of memory. "
+                        f"Please ensure join keys are unique or use aggregation to reduce data size first."
+                    )
+                elif estimated_result_size > 1_000_000:
+                    print(f"  ⚠️  Large result set expected. This may take significant time and memory.")
+        except Exception as e:
+            if isinstance(e, DataJoiningError):
+                raise
+            print(f"⚠️  Warning: Could not validate join key uniqueness: {str(e)}")
     
     def _remove_unnamed_columns(self, df: pd.DataFrame) -> pd.DataFrame:
         unnamed_cols = [col for col in df.columns if 'Unnamed' in str(col)]

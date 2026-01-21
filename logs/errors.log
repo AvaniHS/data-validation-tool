@@ -195,3 +195,9 @@ ValueError: Worksheet named 'MasterFiltered' not found
     raise ValueError(f"Worksheet named '{name}' not found")
 ValueError: Worksheet named 'MasterFiltered' not found
 
+2026-01-19 07:45:19 | ERROR    | main_pipeline        | _log_with_extra | Failed validation_pipeline | Exception: Pipeline execution failed: Failed to execute join: Unable to allocate 1.83 GiB for an array with shape (245484981, 1) and data type object | Traceback: NoneType: None
+
+2026-01-19 07:55:30 | ERROR    | main_pipeline        | _log_with_extra | Failed validation_pipeline | Exception: Pipeline execution failed: Failed to execute join: Join would create approximately 53,732,043,600 rows (Cartesian product detected). This exceeds safe limits and would require ~400.33 GB of memory. Please ensure join keys are unique or use aggregation to reduce data size first. | Traceback: NoneType: None
+
+2026-01-19 08:17:38 | ERROR    | main_pipeline        | _log_with_extra | Failed validation_pipeline | Exception: Pipeline execution failed: Failed to execute join: Join would create approximately 53,732,043,600 rows (Cartesian product detected). This exceeds safe limits and would require ~400.33 GB of memory. Please ensure join keys are unique or use aggregation to reduce data size first. | Traceback: NoneType: None
+

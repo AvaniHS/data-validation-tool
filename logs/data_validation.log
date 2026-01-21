@@ -2473,3 +2473,555 @@ ValueError: Worksheet named 'MasterFiltered' not found
 2026-01-03 16:48:04 | INFO     | session              | log_session_end | Total duration: 1.27 seconds
 2026-01-03 16:48:04 | INFO     | session              | log_session_end | Session end time: 2026-01-03T16:48:04.927896
 2026-01-03 16:48:04 | INFO     | session              | log_session_end | ================================================================================
+2026-01-07 21:20:28 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 224 rows × 4 columns
+2026-01-07 21:20:28 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 258 rows × 4 columns
+2026-01-07 21:20:28 | INFO     | session              | log_session_start | ================================================================================
+2026-01-07 21:20:28 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260107_212028
+2026-01-07 21:20:28 | INFO     | session              | log_session_start | ================================================================================
+2026-01-07 21:20:28 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation13/config.json
+2026-01-07 21:20:28 | INFO     | session              | log_session_start | Session start time: 2026-01-07T21:20:28.165174
+2026-01-07 21:20:28 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation13/config.json
+2026-01-07 21:20:28 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-07 21:20:28 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 224 rows × 4 columns
+2026-01-07 21:20:28 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 258 rows × 4 columns
+2026-01-07 21:20:29 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.52s
+2026-01-07 21:20:29 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.53s
+2026-01-07 21:20:29 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-07 21:20:29 | INFO     | session              | log_session_end | Total duration: 1.53 seconds
+2026-01-07 21:20:29 | INFO     | session              | log_session_end | Session end time: 2026-01-07T21:20:29.700721
+2026-01-07 21:20:29 | INFO     | session              | log_session_end | ================================================================================
+2026-01-07 21:28:42 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 224 rows × 4 columns
+2026-01-07 21:28:42 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 258 rows × 4 columns
+2026-01-07 21:28:42 | INFO     | session              | log_session_start | ================================================================================
+2026-01-07 21:28:42 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260107_212842
+2026-01-07 21:28:42 | INFO     | session              | log_session_start | ================================================================================
+2026-01-07 21:28:42 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation13/config.json
+2026-01-07 21:28:42 | INFO     | session              | log_session_start | Session start time: 2026-01-07T21:28:42.922650
+2026-01-07 21:28:42 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation13/config.json
+2026-01-07 21:28:42 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-07 21:28:43 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 224 rows × 4 columns
+2026-01-07 21:28:43 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 258 rows × 4 columns
+2026-01-07 21:28:44 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.08s
+2026-01-07 21:28:44 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.09s
+2026-01-07 21:28:44 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-07 21:28:44 | INFO     | session              | log_session_end | Total duration: 1.09 seconds
+2026-01-07 21:28:44 | INFO     | session              | log_session_end | Session end time: 2026-01-07T21:28:44.007320
+2026-01-07 21:28:44 | INFO     | session              | log_session_end | ================================================================================
+2026-01-07 21:32:53 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 224 rows × 4 columns
+2026-01-07 21:32:53 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 258 rows × 4 columns
+2026-01-07 21:32:53 | INFO     | session              | log_session_start | ================================================================================
+2026-01-07 21:32:53 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260107_213253
+2026-01-07 21:32:53 | INFO     | session              | log_session_start | ================================================================================
+2026-01-07 21:32:53 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation13/config.json
+2026-01-07 21:32:53 | INFO     | session              | log_session_start | Session start time: 2026-01-07T21:32:53.360424
+2026-01-07 21:32:53 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation13/config.json
+2026-01-07 21:32:53 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-07 21:32:53 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 224 rows × 4 columns
+2026-01-07 21:32:53 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 258 rows × 4 columns
+2026-01-07 21:32:53 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 0.63s
+2026-01-07 21:32:53 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 0.63s
+2026-01-07 21:32:53 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-07 21:32:53 | INFO     | session              | log_session_end | Total duration: 0.63 seconds
+2026-01-07 21:32:53 | INFO     | session              | log_session_end | Session end time: 2026-01-07T21:32:53.993337
+2026-01-07 21:32:53 | INFO     | session              | log_session_end | ================================================================================
+2026-01-08 15:53:58 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 224 rows × 4 columns
+2026-01-08 15:53:58 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 258 rows × 4 columns
+2026-01-08 15:53:58 | INFO     | session              | log_session_start | ================================================================================
+2026-01-08 15:53:58 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260108_155358
+2026-01-08 15:53:58 | INFO     | session              | log_session_start | ================================================================================
+2026-01-08 15:53:58 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation13/config.json
+2026-01-08 15:53:58 | INFO     | session              | log_session_start | Session start time: 2026-01-08T15:53:58.598928
+2026-01-08 15:53:58 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation13/config.json
+2026-01-08 15:53:58 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-08 15:53:58 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 224 rows × 4 columns
+2026-01-08 15:53:58 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 258 rows × 4 columns
+2026-01-08 15:53:58 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 0.32s
+2026-01-08 15:53:58 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 0.33s
+2026-01-08 15:53:58 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-08 15:53:58 | INFO     | session              | log_session_end | Total duration: 0.33 seconds
+2026-01-08 15:53:58 | INFO     | session              | log_session_end | Session end time: 2026-01-08T15:53:58.927543
+2026-01-08 15:53:58 | INFO     | session              | log_session_end | ================================================================================
+2026-01-08 15:54:55 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 5 columns
+2026-01-08 15:54:55 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 258 rows × 5 columns
+2026-01-08 15:55:25 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 5 columns
+2026-01-08 15:55:25 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 258 rows × 5 columns
+2026-01-08 15:55:25 | INFO     | session              | log_session_start | ================================================================================
+2026-01-08 15:55:25 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260108_155525
+2026-01-08 15:55:25 | INFO     | session              | log_session_start | ================================================================================
+2026-01-08 15:55:25 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation14/config.json
+2026-01-08 15:55:25 | INFO     | session              | log_session_start | Session start time: 2026-01-08T15:55:25.908837
+2026-01-08 15:55:25 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation14/config.json
+2026-01-08 15:55:25 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-08 15:55:25 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 5 columns
+2026-01-08 15:55:25 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 258 rows × 5 columns
+2026-01-08 15:55:26 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 0.27s
+2026-01-08 15:55:26 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 0.27s
+2026-01-08 15:55:26 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-08 15:55:26 | INFO     | session              | log_session_end | Total duration: 0.27 seconds
+2026-01-08 15:55:26 | INFO     | session              | log_session_end | Session end time: 2026-01-08T15:55:26.177730
+2026-01-08 15:55:26 | INFO     | session              | log_session_end | ================================================================================
+2026-01-08 16:40:10 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 6 columns
+2026-01-08 16:40:11 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 258 rows × 6 columns
+2026-01-08 16:40:11 | INFO     | session              | log_session_start | ================================================================================
+2026-01-08 16:40:11 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260108_164011
+2026-01-08 16:40:11 | INFO     | session              | log_session_start | ================================================================================
+2026-01-08 16:40:11 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation15/config.json
+2026-01-08 16:40:11 | INFO     | session              | log_session_start | Session start time: 2026-01-08T16:40:11.011883
+2026-01-08 16:40:11 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation15/config.json
+2026-01-08 16:40:11 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-08 16:40:11 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 6 columns
+2026-01-08 16:40:11 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 258 rows × 6 columns
+2026-01-08 16:40:11 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 0.31s
+2026-01-08 16:40:11 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 0.31s
+2026-01-08 16:40:11 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-08 16:40:11 | INFO     | session              | log_session_end | Total duration: 0.31 seconds
+2026-01-08 16:40:11 | INFO     | session              | log_session_end | Session end time: 2026-01-08T16:40:11.321875
+2026-01-08 16:40:11 | INFO     | session              | log_session_end | ================================================================================
+2026-01-11 12:28:07 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 5 columns
+2026-01-11 12:28:07 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 255 rows × 5 columns
+2026-01-11 12:30:21 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 5 columns
+2026-01-11 12:30:22 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 255 rows × 5 columns
+2026-01-11 12:30:22 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 12:30:22 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260111_123022
+2026-01-11 12:30:22 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 12:30:22 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation16/config.json
+2026-01-11 12:30:22 | INFO     | session              | log_session_start | Session start time: 2026-01-11T12:30:22.748684
+2026-01-11 12:30:22 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation16/config.json
+2026-01-11 12:30:22 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-11 12:30:22 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 5 columns
+2026-01-11 12:30:23 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 255 rows × 5 columns
+2026-01-11 12:30:40 | WARNING  | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' failed after 18.12s: 0
+2026-01-11 12:30:49 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 5 columns
+2026-01-11 12:30:50 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 255 rows × 5 columns
+2026-01-11 12:30:50 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 12:30:50 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260111_123050
+2026-01-11 12:30:50 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 12:30:50 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation16/config.json
+2026-01-11 12:30:50 | INFO     | session              | log_session_start | Session start time: 2026-01-11T12:30:50.074589
+2026-01-11 12:30:50 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation16/config.json
+2026-01-11 12:30:50 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-11 12:30:50 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 5 columns
+2026-01-11 12:30:50 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 255 rows × 5 columns
+2026-01-11 12:30:51 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.73s
+2026-01-11 12:30:51 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.74s
+2026-01-11 12:30:51 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-11 12:30:51 | INFO     | session              | log_session_end | Total duration: 1.74 seconds
+2026-01-11 12:30:51 | INFO     | session              | log_session_end | Session end time: 2026-01-11T12:30:51.809112
+2026-01-11 12:30:51 | INFO     | session              | log_session_end | ================================================================================
+2026-01-11 12:33:42 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 5 columns
+2026-01-11 12:33:42 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 255 rows × 5 columns
+2026-01-11 12:33:42 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 12:33:42 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260111_123342
+2026-01-11 12:33:42 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 12:33:42 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation16/config.json
+2026-01-11 12:33:42 | INFO     | session              | log_session_start | Session start time: 2026-01-11T12:33:42.751650
+2026-01-11 12:33:42 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation16/config.json
+2026-01-11 12:33:42 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-11 12:33:42 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 5 columns
+2026-01-11 12:33:43 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 255 rows × 5 columns
+2026-01-11 12:33:44 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.48s
+2026-01-11 12:33:44 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.48s
+2026-01-11 12:33:44 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-11 12:33:44 | INFO     | session              | log_session_end | Total duration: 1.48 seconds
+2026-01-11 12:33:44 | INFO     | session              | log_session_end | Session end time: 2026-01-11T12:33:44.232905
+2026-01-11 12:33:44 | INFO     | session              | log_session_end | ================================================================================
+2026-01-11 12:35:45 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 5 columns
+2026-01-11 12:35:45 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 255 rows × 5 columns
+2026-01-11 12:35:45 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 12:35:45 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260111_123545
+2026-01-11 12:35:45 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 12:35:45 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation16/config.json
+2026-01-11 12:35:45 | INFO     | session              | log_session_start | Session start time: 2026-01-11T12:35:45.661935
+2026-01-11 12:35:45 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation16/config.json
+2026-01-11 12:35:45 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-11 12:35:45 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 5 columns
+2026-01-11 12:35:46 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 255 rows × 5 columns
+2026-01-11 12:35:47 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.53s
+2026-01-11 12:35:47 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.53s
+2026-01-11 12:35:47 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-11 12:35:47 | INFO     | session              | log_session_end | Total duration: 1.53 seconds
+2026-01-11 12:35:47 | INFO     | session              | log_session_end | Session end time: 2026-01-11T12:35:47.194539
+2026-01-11 12:35:47 | INFO     | session              | log_session_end | ================================================================================
+2026-01-11 12:45:29 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 5 columns
+2026-01-11 12:45:29 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 255 rows × 5 columns
+2026-01-11 12:45:29 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 12:45:29 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260111_124529
+2026-01-11 12:45:29 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 12:45:29 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation16/config.json
+2026-01-11 12:45:29 | INFO     | session              | log_session_start | Session start time: 2026-01-11T12:45:29.859474
+2026-01-11 12:45:29 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation16/config.json
+2026-01-11 12:45:29 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-11 12:45:29 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 5 columns
+2026-01-11 12:45:29 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 255 rows × 5 columns
+2026-01-11 12:45:30 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 0.34s
+2026-01-11 12:45:30 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 0.34s
+2026-01-11 12:45:30 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-11 12:45:30 | INFO     | session              | log_session_end | Total duration: 0.34 seconds
+2026-01-11 12:45:30 | INFO     | session              | log_session_end | Session end time: 2026-01-11T12:45:30.197946
+2026-01-11 12:45:30 | INFO     | session              | log_session_end | ================================================================================
+2026-01-11 12:47:44 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 5 columns
+2026-01-11 12:47:45 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 255 rows × 5 columns
+2026-01-11 12:47:45 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 12:47:45 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260111_124745
+2026-01-11 12:47:45 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 12:47:45 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation16/config.json
+2026-01-11 12:47:45 | INFO     | session              | log_session_start | Session start time: 2026-01-11T12:47:45.055406
+2026-01-11 12:47:45 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation16/config.json
+2026-01-11 12:47:45 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-11 12:47:45 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 240 rows × 5 columns
+2026-01-11 12:47:45 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 255 rows × 5 columns
+2026-01-11 12:47:46 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.29s
+2026-01-11 12:47:46 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.30s
+2026-01-11 12:47:46 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-11 12:47:46 | INFO     | session              | log_session_end | Total duration: 1.30 seconds
+2026-01-11 12:47:46 | INFO     | session              | log_session_end | Session end time: 2026-01-11T12:47:46.357976
+2026-01-11 12:47:46 | INFO     | session              | log_session_end | ================================================================================
+2026-01-11 13:25:12 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 244 rows × 6 columns
+2026-01-11 13:25:12 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 255 rows × 6 columns
+2026-01-11 13:25:12 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 13:25:12 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260111_132512
+2026-01-11 13:25:12 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 13:25:12 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation16/config.json
+2026-01-11 13:25:12 | INFO     | session              | log_session_start | Session start time: 2026-01-11T13:25:12.747500
+2026-01-11 13:25:12 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation16/config.json
+2026-01-11 13:25:12 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-11 13:25:12 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 244 rows × 6 columns
+2026-01-11 13:25:12 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 255 rows × 6 columns
+2026-01-11 13:25:13 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.08s
+2026-01-11 13:25:13 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.09s
+2026-01-11 13:25:13 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-11 13:25:13 | INFO     | session              | log_session_end | Total duration: 1.09 seconds
+2026-01-11 13:25:13 | INFO     | session              | log_session_end | Session end time: 2026-01-11T13:25:13.839952
+2026-01-11 13:25:13 | INFO     | session              | log_session_end | ================================================================================
+2026-01-11 14:39:10 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 132 rows × 6 columns
+2026-01-11 14:39:10 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 130 rows × 6 columns
+2026-01-11 14:39:10 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 14:39:10 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260111_143910
+2026-01-11 14:39:10 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 14:39:10 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation17/config.json
+2026-01-11 14:39:10 | INFO     | session              | log_session_start | Session start time: 2026-01-11T14:39:10.662486
+2026-01-11 14:39:10 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation17/config.json
+2026-01-11 14:39:10 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-11 14:39:10 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 132 rows × 6 columns
+2026-01-11 14:39:10 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 130 rows × 6 columns
+2026-01-11 14:39:55 | WARNING  | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' failed after 44.74s: 0
+2026-01-11 14:40:05 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 132 rows × 6 columns
+2026-01-11 14:40:05 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 130 rows × 6 columns
+2026-01-11 14:40:05 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 14:40:05 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260111_144005
+2026-01-11 14:40:05 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 14:40:05 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation17/config.json
+2026-01-11 14:40:05 | INFO     | session              | log_session_start | Session start time: 2026-01-11T14:40:05.205760
+2026-01-11 14:40:05 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation17/config.json
+2026-01-11 14:40:05 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-11 14:40:05 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 132 rows × 6 columns
+2026-01-11 14:40:05 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 130 rows × 6 columns
+2026-01-11 14:40:05 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 0.56s
+2026-01-11 14:40:05 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 0.57s
+2026-01-11 14:40:05 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-11 14:40:05 | INFO     | session              | log_session_end | Total duration: 0.57 seconds
+2026-01-11 14:40:05 | INFO     | session              | log_session_end | Session end time: 2026-01-11T14:40:05.769953
+2026-01-11 14:40:05 | INFO     | session              | log_session_end | ================================================================================
+2026-01-11 14:56:07 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 45 rows × 6 columns
+2026-01-11 14:56:07 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 7 rows × 6 columns
+2026-01-11 14:56:07 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 14:56:07 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260111_145607
+2026-01-11 14:56:07 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 14:56:07 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation18/config.json
+2026-01-11 14:56:07 | INFO     | session              | log_session_start | Session start time: 2026-01-11T14:56:07.351700
+2026-01-11 14:56:07 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation18/config.json
+2026-01-11 14:56:07 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-11 14:56:07 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 45 rows × 6 columns
+2026-01-11 14:56:07 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 7 rows × 6 columns
+2026-01-11 14:56:07 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 0.36s
+2026-01-11 14:56:07 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 0.36s
+2026-01-11 14:56:07 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-11 14:56:07 | INFO     | session              | log_session_end | Total duration: 0.36 seconds
+2026-01-11 14:56:07 | INFO     | session              | log_session_end | Session end time: 2026-01-11T14:56:07.712801
+2026-01-11 14:56:07 | INFO     | session              | log_session_end | ================================================================================
+2026-01-11 15:05:55 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 2 rows × 6 columns
+2026-01-11 15:05:55 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 1 rows × 6 columns
+2026-01-11 15:05:55 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 15:05:55 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260111_150555
+2026-01-11 15:05:55 | INFO     | session              | log_session_start | ================================================================================
+2026-01-11 15:05:55 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation19/config.json
+2026-01-11 15:05:55 | INFO     | session              | log_session_start | Session start time: 2026-01-11T15:05:55.841966
+2026-01-11 15:05:55 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation19/config.json
+2026-01-11 15:05:55 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-11 15:05:56 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 2 rows × 6 columns
+2026-01-11 15:05:56 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 1 rows × 6 columns
+2026-01-11 15:05:56 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 0.82s
+2026-01-11 15:05:56 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 0.92s
+2026-01-11 15:05:56 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-11 15:05:56 | INFO     | session              | log_session_end | Total duration: 0.92 seconds
+2026-01-11 15:05:56 | INFO     | session              | log_session_end | Session end time: 2026-01-11T15:05:56.667783
+2026-01-11 15:05:56 | INFO     | session              | log_session_end | ================================================================================
+2026-01-19 07:41:32 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 275186 rows × 14 columns
+2026-01-19 07:42:08 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 283797 rows × 21 columns
+2026-01-19 07:42:08 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 07:42:08 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260119_074208
+2026-01-19 07:42:08 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 07:42:08 | INFO     | session              | log_session_start | Configuration file: D:/Projects/HP-RnA(CSP-nextgen) ReportingAnd Analytics+Customer and Sales Performance/KYC/Data valiation/Validation1/config.json
+2026-01-19 07:42:08 | INFO     | session              | log_session_start | Session start time: 2026-01-19T07:42:08.115230
+2026-01-19 07:42:08 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/HP-RnA(CSP-nextgen) ReportingAnd Analytics+Customer and Sales Performance/KYC/Data valiation/Validation1/config.json
+2026-01-19 07:42:08 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-19 07:42:29 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 275186 rows × 14 columns
+2026-01-19 07:43:03 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 283797 rows × 21 columns
+2026-01-19 07:45:19 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 191.18s
+2026-01-19 07:45:19 | ERROR    | main_pipeline        | _log_with_extra | Failed validation_pipeline | Exception: Pipeline execution failed: Failed to execute join: Unable to allocate 1.83 GiB for an array with shape (245484981, 1) and data type object | Traceback: NoneType: None
+
+2026-01-19 07:45:19 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: FAILED
+2026-01-19 07:45:19 | INFO     | session              | log_session_end | Total duration: 191.20 seconds
+2026-01-19 07:45:19 | INFO     | session              | log_session_end | Session end time: 2026-01-19T07:45:19.337847
+2026-01-19 07:45:19 | INFO     | session              | log_session_end | ================================================================================
+2026-01-19 07:53:06 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 275186 rows × 14 columns
+2026-01-19 07:53:38 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 283797 rows × 21 columns
+2026-01-19 07:53:38 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 07:53:38 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260119_075338
+2026-01-19 07:53:38 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 07:53:38 | INFO     | session              | log_session_start | Configuration file: D:/Projects/HP-RnA(CSP-nextgen) ReportingAnd Analytics+Customer and Sales Performance/KYC/Data valiation/Validation1/config.json
+2026-01-19 07:53:38 | INFO     | session              | log_session_start | Session start time: 2026-01-19T07:53:38.461319
+2026-01-19 07:53:38 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/HP-RnA(CSP-nextgen) ReportingAnd Analytics+Customer and Sales Performance/KYC/Data valiation/Validation1/config.json
+2026-01-19 07:53:38 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-19 07:53:57 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 275186 rows × 14 columns
+2026-01-19 07:54:29 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 283797 rows × 21 columns
+2026-01-19 07:55:30 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 112.51s
+2026-01-19 07:55:30 | ERROR    | main_pipeline        | _log_with_extra | Failed validation_pipeline | Exception: Pipeline execution failed: Failed to execute join: Join would create approximately 53,732,043,600 rows (Cartesian product detected). This exceeds safe limits and would require ~400.33 GB of memory. Please ensure join keys are unique or use aggregation to reduce data size first. | Traceback: NoneType: None
+
+2026-01-19 07:55:30 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: FAILED
+2026-01-19 07:55:30 | INFO     | session              | log_session_end | Total duration: 112.51 seconds
+2026-01-19 07:55:30 | INFO     | session              | log_session_end | Session end time: 2026-01-19T07:55:30.969023
+2026-01-19 07:55:30 | INFO     | session              | log_session_end | ================================================================================
+2026-01-19 08:15:12 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 275186 rows × 14 columns
+2026-01-19 08:15:45 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 283797 rows × 21 columns
+2026-01-19 08:15:45 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 08:15:45 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260119_081545
+2026-01-19 08:15:45 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 08:15:45 | INFO     | session              | log_session_start | Configuration file: D:/Projects/HP-RnA(CSP-nextgen) ReportingAnd Analytics+Customer and Sales Performance/KYC/Data valiation/Validation1/config.json
+2026-01-19 08:15:45 | INFO     | session              | log_session_start | Session start time: 2026-01-19T08:15:45.318337
+2026-01-19 08:15:45 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/HP-RnA(CSP-nextgen) ReportingAnd Analytics+Customer and Sales Performance/KYC/Data valiation/Validation1/config.json
+2026-01-19 08:15:45 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-19 08:16:04 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 275186 rows × 14 columns
+2026-01-19 08:16:36 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 283797 rows × 21 columns
+2026-01-19 08:17:38 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 113.64s
+2026-01-19 08:17:38 | ERROR    | main_pipeline        | _log_with_extra | Failed validation_pipeline | Exception: Pipeline execution failed: Failed to execute join: Join would create approximately 53,732,043,600 rows (Cartesian product detected). This exceeds safe limits and would require ~400.33 GB of memory. Please ensure join keys are unique or use aggregation to reduce data size first. | Traceback: NoneType: None
+
+2026-01-19 08:17:38 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: FAILED
+2026-01-19 08:17:38 | INFO     | session              | log_session_end | Total duration: 113.64 seconds
+2026-01-19 08:17:38 | INFO     | session              | log_session_end | Session end time: 2026-01-19T08:17:38.960507
+2026-01-19 08:17:38 | INFO     | session              | log_session_end | ================================================================================
+2026-01-19 08:20:05 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 275186 rows × 14 columns
+2026-01-19 08:20:41 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 283797 rows × 21 columns
+2026-01-19 08:20:41 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 08:20:41 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260119_082041
+2026-01-19 08:20:41 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 08:20:41 | INFO     | session              | log_session_start | Configuration file: D:/Projects/HP-RnA(CSP-nextgen) ReportingAnd Analytics+Customer and Sales Performance/KYC/Data valiation/Validation1/config.json
+2026-01-19 08:20:41 | INFO     | session              | log_session_start | Session start time: 2026-01-19T08:20:41.242871
+2026-01-19 08:20:41 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/HP-RnA(CSP-nextgen) ReportingAnd Analytics+Customer and Sales Performance/KYC/Data valiation/Validation1/config.json
+2026-01-19 08:20:41 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-19 08:21:00 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 275186 rows × 14 columns
+2026-01-19 08:21:32 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 283797 rows × 21 columns
+2026-01-19 08:33:03 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 741.98s
+2026-01-19 08:33:03 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 742.01s
+2026-01-19 08:33:03 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-19 08:33:03 | INFO     | session              | log_session_end | Total duration: 742.01 seconds
+2026-01-19 08:33:03 | INFO     | session              | log_session_end | Session end time: 2026-01-19T08:33:03.261075
+2026-01-19 08:33:03 | INFO     | session              | log_session_end | ================================================================================
+2026-01-19 15:43:46 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 31 rows × 45 columns
+2026-01-19 15:43:46 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 89 rows × 25 columns
+2026-01-19 15:46:12 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 31 rows × 45 columns
+2026-01-19 15:46:12 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 89 rows × 25 columns
+2026-01-19 15:47:26 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 31 rows × 45 columns
+2026-01-19 15:47:26 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 89 rows × 25 columns
+2026-01-19 15:47:26 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 15:47:26 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260119_154726
+2026-01-19 15:47:26 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 15:47:26 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation20/config.json
+2026-01-19 15:47:26 | INFO     | session              | log_session_start | Session start time: 2026-01-19T15:47:26.556480
+2026-01-19 15:47:26 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation20/config.json
+2026-01-19 15:47:26 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-19 15:47:32 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 31 rows × 45 columns
+2026-01-19 15:47:32 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 89 rows × 25 columns
+2026-01-19 15:47:57 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 30.61s
+2026-01-19 15:47:57 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 30.61s
+2026-01-19 15:47:57 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-19 15:47:57 | INFO     | session              | log_session_end | Total duration: 30.61 seconds
+2026-01-19 15:47:57 | INFO     | session              | log_session_end | Session end time: 2026-01-19T15:47:57.166325
+2026-01-19 15:47:57 | INFO     | session              | log_session_end | ================================================================================
+2026-01-19 15:49:51 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 31 rows × 45 columns
+2026-01-19 15:49:51 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 89 rows × 25 columns
+2026-01-19 15:49:51 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 15:49:51 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260119_154951
+2026-01-19 15:49:51 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 15:49:51 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation20/config.json
+2026-01-19 15:49:51 | INFO     | session              | log_session_start | Session start time: 2026-01-19T15:49:51.490335
+2026-01-19 15:49:51 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation20/config.json
+2026-01-19 15:49:51 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-19 15:49:54 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 31 rows × 45 columns
+2026-01-19 15:49:54 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 89 rows × 25 columns
+2026-01-19 15:50:01 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 9.58s
+2026-01-19 15:50:01 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 9.59s
+2026-01-19 15:50:01 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-19 15:50:01 | INFO     | session              | log_session_end | Total duration: 9.59 seconds
+2026-01-19 15:50:01 | INFO     | session              | log_session_end | Session end time: 2026-01-19T15:50:01.075727
+2026-01-19 15:50:01 | INFO     | session              | log_session_end | ================================================================================
+2026-01-19 17:07:08 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-19 17:07:08 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 89 rows × 25 columns
+2026-01-19 17:07:08 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 17:07:08 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260119_170708
+2026-01-19 17:07:08 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 17:07:08 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation20/config.json
+2026-01-19 17:07:08 | INFO     | session              | log_session_start | Session start time: 2026-01-19T17:07:08.279116
+2026-01-19 17:07:08 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation20/config.json
+2026-01-19 17:07:08 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-19 17:07:08 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-19 17:07:08 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 89 rows × 25 columns
+2026-01-19 17:07:09 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 0.83s
+2026-01-19 17:07:09 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 0.84s
+2026-01-19 17:07:09 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-19 17:07:09 | INFO     | session              | log_session_end | Total duration: 0.84 seconds
+2026-01-19 17:07:09 | INFO     | session              | log_session_end | Session end time: 2026-01-19T17:07:09.114798
+2026-01-19 17:07:09 | INFO     | session              | log_session_end | ================================================================================
+2026-01-19 18:47:23 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-19 18:47:23 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 261 rows × 27 columns
+2026-01-19 18:49:21 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-19 18:49:21 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 261 rows × 27 columns
+2026-01-19 18:49:21 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 18:49:21 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260119_184921
+2026-01-19 18:49:21 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 18:49:21 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation21/config.json
+2026-01-19 18:49:21 | INFO     | session              | log_session_start | Session start time: 2026-01-19T18:49:21.505479
+2026-01-19 18:49:21 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation21/config.json
+2026-01-19 18:49:21 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-19 18:49:21 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-19 18:49:21 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 261 rows × 27 columns
+2026-01-19 18:49:22 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.05s
+2026-01-19 18:49:22 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.06s
+2026-01-19 18:49:22 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-19 18:49:22 | INFO     | session              | log_session_end | Total duration: 1.06 seconds
+2026-01-19 18:49:22 | INFO     | session              | log_session_end | Session end time: 2026-01-19T18:49:22.562656
+2026-01-19 18:49:22 | INFO     | session              | log_session_end | ================================================================================
+2026-01-19 21:43:36 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-19 21:43:36 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 261 rows × 28 columns
+2026-01-19 21:44:31 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-19 21:44:31 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 261 rows × 28 columns
+2026-01-19 21:44:31 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 21:44:31 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260119_214431
+2026-01-19 21:44:31 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 21:44:31 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation22/config.json
+2026-01-19 21:44:31 | INFO     | session              | log_session_start | Session start time: 2026-01-19T21:44:31.252255
+2026-01-19 21:44:31 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation22/config.json
+2026-01-19 21:44:31 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-19 21:44:31 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-19 21:44:31 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 261 rows × 28 columns
+2026-01-19 21:44:32 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.49s
+2026-01-19 21:44:32 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.49s
+2026-01-19 21:44:32 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-19 21:44:32 | INFO     | session              | log_session_end | Total duration: 1.49 seconds
+2026-01-19 21:44:32 | INFO     | session              | log_session_end | Session end time: 2026-01-19T21:44:32.739563
+2026-01-19 21:44:32 | INFO     | session              | log_session_end | ================================================================================
+2026-01-19 22:10:23 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-19 22:10:23 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 261 rows × 28 columns
+2026-01-19 22:10:23 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 22:10:23 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260119_221023
+2026-01-19 22:10:23 | INFO     | session              | log_session_start | ================================================================================
+2026-01-19 22:10:23 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation22/config.json
+2026-01-19 22:10:23 | INFO     | session              | log_session_start | Session start time: 2026-01-19T22:10:23.946624
+2026-01-19 22:10:23 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation22/config.json
+2026-01-19 22:10:23 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-19 22:10:24 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-19 22:10:24 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 261 rows × 28 columns
+2026-01-19 22:10:25 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.75s
+2026-01-19 22:10:25 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.75s
+2026-01-19 22:10:25 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-19 22:10:25 | INFO     | session              | log_session_end | Total duration: 1.75 seconds
+2026-01-19 22:10:25 | INFO     | session              | log_session_end | Session end time: 2026-01-19T22:10:25.699785
+2026-01-19 22:10:25 | INFO     | session              | log_session_end | ================================================================================
+2026-01-20 12:18:03 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-20 12:18:03 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 121 rows × 36 columns
+2026-01-20 12:19:35 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-20 12:19:35 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 121 rows × 36 columns
+2026-01-20 12:23:09 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-20 12:23:09 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 121 rows × 36 columns
+2026-01-20 12:24:21 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-20 12:24:21 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 121 rows × 36 columns
+2026-01-20 12:24:21 | INFO     | session              | log_session_start | ================================================================================
+2026-01-20 12:24:21 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260120_122421
+2026-01-20 12:24:21 | INFO     | session              | log_session_start | ================================================================================
+2026-01-20 12:24:21 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation23/config.json
+2026-01-20 12:24:21 | INFO     | session              | log_session_start | Session start time: 2026-01-20T12:24:21.351644
+2026-01-20 12:24:21 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation23/config.json
+2026-01-20 12:24:21 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-20 12:24:21 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-20 12:24:21 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 121 rows × 36 columns
+2026-01-20 12:24:32 | WARNING  | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' failed after 11.33s: 0
+2026-01-20 12:24:38 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-20 12:24:38 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 121 rows × 36 columns
+2026-01-20 12:24:38 | INFO     | session              | log_session_start | ================================================================================
+2026-01-20 12:24:38 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260120_122438
+2026-01-20 12:24:38 | INFO     | session              | log_session_start | ================================================================================
+2026-01-20 12:24:38 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation23/config.json
+2026-01-20 12:24:38 | INFO     | session              | log_session_start | Session start time: 2026-01-20T12:24:38.901976
+2026-01-20 12:24:38 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation23/config.json
+2026-01-20 12:24:38 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-20 12:24:38 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-20 12:24:39 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 121 rows × 36 columns
+2026-01-20 12:24:40 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.16s
+2026-01-20 12:24:40 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.17s
+2026-01-20 12:24:40 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-20 12:24:40 | INFO     | session              | log_session_end | Total duration: 1.17 seconds
+2026-01-20 12:24:40 | INFO     | session              | log_session_end | Session end time: 2026-01-20T12:24:40.068012
+2026-01-20 12:24:40 | INFO     | session              | log_session_end | ================================================================================
+2026-01-20 12:26:40 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-20 12:26:40 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 121 rows × 36 columns
+2026-01-20 12:26:40 | INFO     | session              | log_session_start | ================================================================================
+2026-01-20 12:26:40 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260120_122640
+2026-01-20 12:26:40 | INFO     | session              | log_session_start | ================================================================================
+2026-01-20 12:26:40 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation23/config.json
+2026-01-20 12:26:40 | INFO     | session              | log_session_start | Session start time: 2026-01-20T12:26:40.629117
+2026-01-20 12:26:40 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation23/config.json
+2026-01-20 12:26:40 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-20 12:26:40 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-20 12:26:40 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 121 rows × 36 columns
+2026-01-20 12:26:41 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.02s
+2026-01-20 12:26:41 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.03s
+2026-01-20 12:26:41 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-20 12:26:41 | INFO     | session              | log_session_end | Total duration: 1.03 seconds
+2026-01-20 12:26:41 | INFO     | session              | log_session_end | Session end time: 2026-01-20T12:26:41.655127
+2026-01-20 12:26:41 | INFO     | session              | log_session_end | ================================================================================
+2026-01-20 16:45:44 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-20 16:45:44 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 245 rows × 35 columns
+2026-01-20 16:50:28 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-20 16:50:28 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 245 rows × 25 columns
+2026-01-20 16:50:28 | INFO     | session              | log_session_start | ================================================================================
+2026-01-20 16:50:28 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260120_165028
+2026-01-20 16:50:28 | INFO     | session              | log_session_start | ================================================================================
+2026-01-20 16:50:28 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation24/config.json
+2026-01-20 16:50:28 | INFO     | session              | log_session_start | Session start time: 2026-01-20T16:50:28.254776
+2026-01-20 16:50:28 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation24/config.json
+2026-01-20 16:50:28 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-20 16:50:28 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 237 rows × 45 columns
+2026-01-20 16:50:28 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 245 rows × 25 columns
+2026-01-20 16:50:29 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.59s
+2026-01-20 16:50:29 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.59s
+2026-01-20 16:50:29 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-20 16:50:29 | INFO     | session              | log_session_end | Total duration: 1.59 seconds
+2026-01-20 16:50:29 | INFO     | session              | log_session_end | Session end time: 2026-01-20T16:50:29.847972
+2026-01-20 16:50:29 | INFO     | session              | log_session_end | ================================================================================
+2026-01-20 17:48:33 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 294 rows × 45 columns
+2026-01-20 17:48:33 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 245 rows × 25 columns
+2026-01-20 17:48:33 | INFO     | session              | log_session_start | ================================================================================
+2026-01-20 17:48:33 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260120_174833
+2026-01-20 17:48:33 | INFO     | session              | log_session_start | ================================================================================
+2026-01-20 17:48:33 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation24/config.json
+2026-01-20 17:48:33 | INFO     | session              | log_session_start | Session start time: 2026-01-20T17:48:33.717470
+2026-01-20 17:48:33 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation24/config.json
+2026-01-20 17:48:33 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-20 17:48:33 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 294 rows × 45 columns
+2026-01-20 17:48:33 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 245 rows × 25 columns
+2026-01-20 17:48:36 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 2.40s
+2026-01-20 17:48:36 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 2.41s
+2026-01-20 17:48:36 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-20 17:48:36 | INFO     | session              | log_session_end | Total duration: 2.41 seconds
+2026-01-20 17:48:36 | INFO     | session              | log_session_end | Session end time: 2026-01-20T17:48:36.122187
+2026-01-20 17:48:36 | INFO     | session              | log_session_end | ================================================================================

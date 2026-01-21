@@ -306,6 +306,9 @@ class ComparisonExecutor(IComparisonExecutor):
                 delta_results = []
                 percentage_delta_results = []
                 
+                detailed_delta_analysis = config.get('detailed_metric_delta_analysis', '').lower() == 'yes'
+                is_metric = strategy_selector.is_column_metric(config, file1_column, file2_column)
+                
                 for row_index in range(len(df)):
                     value_from_file1 = df.loc[row_index, actual_file1_column]
                     value_from_file2 = df.loc[row_index, actual_file2_column]
@@ -314,16 +317,16 @@ class ComparisonExecutor(IComparisonExecutor):
                     delta_results.append(delta_value)
                     percentage_delta_results.append(percentage_delta_value)
                     
-                    comparison_results.append(comparison_result)
+                    if is_metric and not detailed_delta_analysis:
+                        comparison_results.append(delta_value)
+                    else:
+                        comparison_results.append(comparison_result)
                 
                 # Include suffixes in comparison column names to show source file/sheet
                 comparison_column_name = f"{file1_column}{left_suffix}_vs_{file2_column}{right_suffix}_comparison"
                 result_dataframe[comparison_column_name] = comparison_results
                 
                 # Only create delta columns if detailed_metric_delta_analysis is set to "yes" and column is a metric
-                detailed_delta_analysis = config.get('detailed_metric_delta_analysis', '').lower() == 'yes'
-                is_metric = strategy_selector.is_column_metric(config, file1_column, file2_column)
-                
                 if detailed_delta_analysis and is_metric:
                     delta_column_name = f"{file1_column}{left_suffix}_vs_{file2_column}{right_suffix}_delta"
                     percentage_delta_column_name = f"{file1_column}{left_suffix}_vs_{file2_column}{right_suffix}_delta%"
