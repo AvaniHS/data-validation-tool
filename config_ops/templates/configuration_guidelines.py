@@ -47,20 +47,22 @@ MANDATORY - Column mapping between datasets
 },
 
 OPTIONAL FIELDS - Use "NA" or empty arrays/objects if not needed
-"additional_columns_file1": ["date", "region", "category"],  // Extra columns from file1 to include
-"additional_columns_file1_types": ["non_numeric", "non_numeric", "non_numeric"],  // Data types for additional columns file1
-"additional_columns_file2": ["transaction_date", "location", "product_category"],  // Extra columns from file2
-"additional_columns_file2_types": ["non_numeric", "non_numeric", "non_numeric"],  // Data types for additional columns file2
+"additional_columns_file1": {  // Extra columns from file1 to include (key-value pairs: column name -> type)
+    "date": "non_numeric",
+    "region": "non_numeric",
+    "category": "non_numeric"
+},
+"additional_columns_file2": {  // Extra columns from file2 (key-value pairs: column name -> type)
+    "transaction_date": "non_numeric",
+    "location": "non_numeric",
+    "product_category": "non_numeric"
+},
 
 "join_keys": {                    // Columns to join datasets on (use "NA" if not needed)
     "customer_id": "customer_id",  // Primary keys for joining
     "product_id": "product_code"   // Must exist in both datasets
 },
-
-"join_keys_types": {              // Data types for join keys (optional)
-    "customer_id": "non_numeric",  // CHOICES: "numeric", "non_numeric", or "NA" for dynamic detection
-    "product_id": "NA"             // Use "NA" to automatically detect data type from the data
-},
+// Note: join_keys_types is automatically detected by the system and does not need to be specified
 
 "aggregation": {                   // Aggregation settings (optional - if not specified, all non-join columns will be auto-grouped)
     "file1_columns": {             // Aggregation for file1 columns

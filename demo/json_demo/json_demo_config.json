@@ -15,17 +15,11 @@
     "Salary": "Salary",
     "Bonus": "Bonus"
   },
-  "additional_columns_file1": [],
-  "additional_columns_file1_types": [],
-  "additional_columns_file2": [],
-  "additional_columns_file2_types": [],
+  "additional_columns_file1": {},
+  "additional_columns_file2": {},
   "join_keys": {
     "ID": "ID",
     "Name": "Name"
-  },
-  "join_keys_types": {
-    "ID": "numeric",
-    "Name": "string"
   },
   "aggregation": {
     "sum": ["Salary", "Bonus"]

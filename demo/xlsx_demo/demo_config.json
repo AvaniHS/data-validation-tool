@@ -20,23 +20,20 @@
         "Discount_Percent": "Discount_Percent",
         "Sales_Rep": "Sales_Rep"
     },
-    "additional_columns_file1": ["Profit_Margin", "Commission"],
-    "additional_columns_file1_types": ["numeric", "numeric"],
-    "additional_columns_file2": ["Profit_Margin", "Commission"],
-    "additional_columns_file2_types": ["numeric", "numeric"],
+    "additional_columns_file1": {
+        "Profit_Margin": "numeric",
+        "Commission": "numeric"
+    },
+    "additional_columns_file2": {
+        "Profit_Margin": "numeric",
+        "Commission": "numeric"
+    },
     "join_keys": {
         "Month_No": "Month_No",
         "Reporter_HQ_ID": "Reporter_HQ_ID",
         "Buyer_HQ_ID": "Buyer_HQ_ID",
         "Customer_ID": "Customer_ID",
         "Product_Code": "Product_Code"
-    },
-    "join_keys_types": {
-        "Month_No": "numeric",
-        "Reporter_HQ_ID": "string",
-        "Buyer_HQ_ID": "string",
-        "Customer_ID": "string",
-        "Product_Code": "string"
     },
     "aggregation": {
         "sum": ["Sales_Amount", "Quantity_Sold", "Profit_Margin", "Commission"]

@@ -100,5 +100,5 @@ class SchemaValidator(BaseValidator, ConfigValidatorMixin):
     def _validate_additional_columns_schema(self, config: Dict[str, Any]) -> None:
         for field in ['additional_columns_file1', 'additional_columns_file2']:
             if field in config and config[field] != DEFAULT_NA_VALUE:
-                if not isinstance(config[field], list):
-                    self.add_error(f"{field} must be a list") 
+                if not isinstance(config[field], (list, dict)):
+                    self.add_error(f"{field} must be a list or a dictionary (object)") 

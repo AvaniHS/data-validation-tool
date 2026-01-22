@@ -3025,3 +3025,74 @@ ValueError: Worksheet named 'MasterFiltered' not found
 2026-01-20 17:48:36 | INFO     | session              | log_session_end | Total duration: 2.41 seconds
 2026-01-20 17:48:36 | INFO     | session              | log_session_end | Session end time: 2026-01-20T17:48:36.122187
 2026-01-20 17:48:36 | INFO     | session              | log_session_end | ================================================================================
+2026-01-22 16:37:00 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 294 rows × 45 columns
+2026-01-22 16:37:01 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 245 rows × 25 columns
+2026-01-22 16:37:01 | INFO     | session              | log_session_start | ================================================================================
+2026-01-22 16:37:01 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260122_163701
+2026-01-22 16:37:01 | INFO     | session              | log_session_start | ================================================================================
+2026-01-22 16:37:01 | INFO     | session              | log_session_start | Configuration file: C:/Users/avani.hs/Downloads/config (5).json
+2026-01-22 16:37:01 | INFO     | session              | log_session_start | Session start time: 2026-01-22T16:37:01.008938
+2026-01-22 16:37:01 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=C:/Users/avani.hs/Downloads/config (5).json
+2026-01-22 16:37:01 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-22 16:37:01 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 294 rows × 45 columns
+2026-01-22 16:37:01 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 245 rows × 25 columns
+2026-01-22 16:37:02 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.35s
+2026-01-22 16:37:02 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.35s
+2026-01-22 16:37:02 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-22 16:37:02 | INFO     | session              | log_session_end | Total duration: 1.35 seconds
+2026-01-22 16:37:02 | INFO     | session              | log_session_end | Session end time: 2026-01-22T16:37:02.358712
+2026-01-22 16:37:02 | INFO     | session              | log_session_end | ================================================================================
+2026-01-22 18:07:31 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 294 rows × 45 columns
+2026-01-22 18:07:32 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 245 rows × 25 columns
+2026-01-22 18:07:32 | INFO     | session              | log_session_start | ================================================================================
+2026-01-22 18:07:32 | INFO     | session              | log_session_start | NEW VALIDATION SESSION STARTED - ID: 20260122_180732
+2026-01-22 18:07:32 | INFO     | session              | log_session_start | ================================================================================
+2026-01-22 18:07:32 | INFO     | session              | log_session_start | Configuration file: D:/Projects/Vodaphone/Data comparision request/Validation24/config.json
+2026-01-22 18:07:32 | INFO     | session              | log_session_start | Session start time: 2026-01-22T18:07:32.006979
+2026-01-22 18:07:32 | INFO     | main_pipeline        | _log_with_extra | Starting validation_pipeline | config_path=D:/Projects/Vodaphone/Data comparision request/Validation24/config.json
+2026-01-22 18:07:32 | INFO     | performance          | __enter__       | Starting operation: main_pipeline.pipeline_execution
+2026-01-22 18:07:32 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Starting pipeline execution
+2026-01-22 18:07:32 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Processing configuration...
+2026-01-22 18:07:32 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 294 rows × 45 columns
+2026-01-22 18:07:32 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 245 rows × 25 columns
+2026-01-22 18:07:32 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Configuration processing successful
+2026-01-22 18:07:32 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Preparing data frames...
+2026-01-22 18:07:32 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Data preparation successful - df1: (294, 45), df2: (245, 24)
+2026-01-22 18:07:32 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Join key types detection completed during data preparation
+2026-01-22 18:07:32 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Applying file1 aggregation...
+2026-01-22 18:07:32 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | File1 aggregation completed - shape: (294, 45)
+2026-01-22 18:07:32 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Applying file2 aggregation...
+2026-01-22 18:07:32 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | File2 aggregation completed - shape: (245, 24)
+2026-01-22 18:07:32 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Joining data frames...
+2026-01-22 18:07:32 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Data joining successful - shape: (356, 70)
+2026-01-22 18:07:32 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Applying final aggregation...
+2026-01-22 18:07:32 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Final aggregation successful - shape: (356, 70)
+2026-01-22 18:07:32 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Applying comparison...
+2026-01-22 18:07:32 | INFO     | DataComparer         | _log_with_extra | Starting comparison for 16 column pairs
+2026-01-22 18:07:32 | INFO     | DataComparer         | _log_with_extra | Data comparison completed successfully
+2026-01-22 18:07:32 | INFO     | DataComparer         | _log_with_extra | Original dataframe: 356 rows, 70 columns
+2026-01-22 18:07:32 | INFO     | DataComparer         | _log_with_extra | Comparison result: 356 rows, 86 columns
+2026-01-22 18:07:32 | INFO     | DataComparer         | _log_with_extra | Column mappings: 16 pairs compared
+2026-01-22 18:07:32 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Data comparison successful - shape: (356, 86)
+2026-01-22 18:07:32 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Writing output file...
+2026-01-22 18:07:33 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Output file written successfully
+2026-01-22 18:07:33 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Generating join analysis...
+2026-01-22 18:07:33 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | No join analysis required
+2026-01-22 18:07:33 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Pipeline execution completed successfully
+2026-01-22 18:07:33 | INFO     | performance          | __exit__        | Operation 'main_pipeline.pipeline_execution' completed in 1.74s
+2026-01-22 18:07:33 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | ================================================================================
+2026-01-22 18:07:33 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | PIPELINE COMPLETED SUCCESSFULLY!
+2026-01-22 18:07:33 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | ================================================================================
+2026-01-22 18:07:33 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Final Results:
+2026-01-22 18:07:33 | INFO     | ValidationPipelineOrchestrator | _log_with_extra |   Input files: D:/Projects/Vodaphone/Data comparision request/Validation24/Comparision.xlsx, 
+2026-01-22 18:07:33 | INFO     | ValidationPipelineOrchestrator | _log_with_extra |   Output file: D:/Projects/Vodaphone/Data comparision request/Validation24/Comparision.xlsx
+2026-01-22 18:07:33 | INFO     | ValidationPipelineOrchestrator | _log_with_extra |   Final dataframe: 356 rows × 86 columns
+2026-01-22 18:07:33 | INFO     | ValidationPipelineOrchestrator | _log_with_extra |   Comparison columns: 0
+2026-01-22 18:07:33 | INFO     | ValidationPipelineOrchestrator | _log_with_extra | Data validation completed successfully!
+2026-01-22 18:07:33 | INFO     | main_pipeline        | _log_with_extra | Completed validation_pipeline in 1.74s
+2026-01-22 18:07:33 | INFO     | session              | log_session_end | VALIDATION SESSION COMPLETED - STATUS: SUCCESS
+2026-01-22 18:07:33 | INFO     | session              | log_session_end | Total duration: 1.74 seconds
+2026-01-22 18:07:33 | INFO     | session              | log_session_end | Session end time: 2026-01-22T18:07:33.746521
+2026-01-22 18:07:33 | INFO     | session              | log_session_end | ================================================================================
+2026-01-22 18:09:18 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 294 rows × 45 columns
+2026-01-22 18:09:18 | INFO     | dataframe_reader     | _log_with_extra | Successfully read Excel: 245 rows × 25 columns

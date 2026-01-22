@@ -166,12 +166,7 @@ class TypeDetectionService(ITypeDetector):
             return 'non_numeric'
     
     def _update_config_with_detected_types(self, config: Dict[str, Any], detected_types: Dict[str, str]) -> None:
-        if 'join_keys_types' not in config:
-            config['join_keys_types'] = {}
-        
-        for key, detected_type in detected_types.items():
-            if key in config['join_keys_types'] and config['join_keys_types'][key] == 'NA':
-                config['join_keys_types'][key] = detected_type
+        config['join_keys_types'] = detected_types.copy()
 
 
 class DataPreparer(IDataPreparer):

@@ -22,13 +22,8 @@ def get_sample_configuration() -> Dict[str, Any]:
         "join_keys": {
             "key1": "key1"
         },
-        "join_keys_types": {
-            "key1": "NA"
-        },
-        "additional_columns_file1": "NA",
-        "additional_columns_file1_types": "NA",
-        "additional_columns_file2": "NA",
-        "additional_columns_file2_types": "NA",
+        "additional_columns_file1": {},
+        "additional_columns_file2": {},
         "aggregation": "NA",
         "file1_metric_list": [],
         "file2_metric_list": [],

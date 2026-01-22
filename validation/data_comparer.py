@@ -15,6 +15,7 @@ from validation.interfaces.comparison_strategies import (
 from validation.interfaces.dataframe_validator import IDataFrameValidator
 from validation.validators import DataFrameValidator
 from constants import DEFAULT_NA_VALUE
+from services.logging import get_logger
 
 
 class StringComparisonStrategy(IComparisonStrategy):
@@ -227,6 +228,13 @@ class ComparisonStrategySelector(IComparisonStrategySelector):
 
 
 class ComparisonExecutor(IComparisonExecutor):
+    """
+    Executes comparison operations on dataframes using strategy pattern.
+    """
+    
+    def __init__(self):
+        self._logger = get_logger(self.__class__.__name__)
+    
     def _get_column_suffixes(self, df: pd.DataFrame, config: Dict[str, Any]) -> Tuple[str, str]:
         """Get column suffixes from dataframe attrs or generate from config."""
         # Try to get from dataframe attributes first
@@ -289,13 +297,16 @@ class ComparisonExecutor(IComparisonExecutor):
                 
                 if actual_file1_column not in df.columns or actual_file2_column not in df.columns:
                     comparison_column_name = f"{file1_column}{left_suffix}_vs_{file2_column}{right_suffix}_comparison"
-                    print(f"⚠️  Warning: Column mapping {file1_column} -> {file2_column} not found in dataframe")
-                    print(f"  Expected file1 column: {actual_file1_column} (tried: {file1_suffixed_column} or {file1_column})")
-                    print(f"  Expected file2 column: {actual_file2_column} (tried: {file2_suffixed_column} or {file2_column})")
-                    print(f"  Available columns matching '{file1_column}': {[col for col in df.columns if file1_column.lower() in col.lower()]}")
-                    print(f"  Available columns matching '{file2_column}': {[col for col in df.columns if file2_column.lower() in col.lower()]}")
-                    print(f"  All available columns: {list(df.columns)[:20]}..." if len(df.columns) > 20 else f"  All available columns: {list(df.columns)}")
-                    print(f"  Comparison column '{comparison_column_name}' will not be created")
+                    self._logger.warning(f"Column mapping {file1_column} -> {file2_column} not found in dataframe")
+                    self._logger.debug(f"Expected file1 column: {actual_file1_column} (tried: {file1_suffixed_column} or {file1_column})")
+                    self._logger.debug(f"Expected file2 column: {actual_file2_column} (tried: {file2_suffixed_column} or {file2_column})")
+                    matching_file1 = [col for col in df.columns if file1_column.lower() in col.lower()]
+                    matching_file2 = [col for col in df.columns if file2_column.lower() in col.lower()]
+                    self._logger.debug(f"Available columns matching '{file1_column}': {matching_file1}")
+                    self._logger.debug(f"Available columns matching '{file2_column}': {matching_file2}")
+                    all_cols = list(df.columns)[:20] if len(df.columns) > 20 else list(df.columns)
+                    self._logger.debug(f"All available columns: {all_cols}")
+                    self._logger.warning(f"Comparison column '{comparison_column_name}' will not be created")
                     continue
                 
                 selected_strategy = strategy_selector.select_strategy(
@@ -335,26 +346,54 @@ class ComparisonExecutor(IComparisonExecutor):
             
             return result_dataframe
             
+        except (ValueError, KeyError, TypeError) as e:
+            self._logger.error(f"Comparison failed due to data error: {str(e)}", exception=e)
+            raise DataComparisonError(f"Failed to execute comparison: {str(e)}") from e
         except Exception as e:
-            raise DataComparisonError(f"Failed to execute comparison: {str(e)}")
+            self._logger.error(f"Unexpected error during comparison: {str(e)}", exception=e)
+            raise DataComparisonError(f"Unexpected error during comparison: {str(e)}") from e
 
 
 
 
 
 class ComparisonResultValidator(IComparisonResultValidator):
+    """
+    Validates comparison results to ensure data integrity.
+    """
+    
+    def __init__(self):
+        self._logger = get_logger(self.__class__.__name__)
+    
     def validate_result(self, result_df: pd.DataFrame, original_df: pd.DataFrame) -> None:
+        """
+        Validate that the comparison result is valid.
+        
+        Args:
+            result_df: The comparison result dataframe
+            original_df: The original dataframe before comparison
+        
+        Raises:
+            DataComparisonError: If the result is invalid
+        """
         if result_df is None:
+            self._logger.error("Comparison result is None")
             raise DataComparisonError("Comparison result is None")
         
         if result_df.empty:
-            print("⚠️  Warning: Comparison resulted in empty dataframe")
+            self._logger.warning("Comparison resulted in empty dataframe")
         
         if len(result_df) != len(original_df):
-            raise DataComparisonError(f"Comparison result has different number of rows ({len(result_df)}) than original ({len(original_df)})")
+            error_msg = f"Comparison result has different number of rows ({len(result_df)}) than original ({len(original_df)})"
+            self._logger.error(error_msg)
+            raise DataComparisonError(error_msg)
 
 
 class DataComparer(IDataComparer):
+    """
+    Main comparer class that orchestrates comparison operations.
+    """
+    
     def __init__(self):
         self._dataframe_validator: IDataFrameValidator = DataFrameValidator()
         self._config_validator: IComparisonConfigValidator = ComparisonConfigValidator()
@@ -362,30 +401,47 @@ class DataComparer(IDataComparer):
         self._strategy_selector: IComparisonStrategySelector = ComparisonStrategySelector()
         self._executor: IComparisonExecutor = ComparisonExecutor()
         self._result_validator: IComparisonResultValidator = ComparisonResultValidator()
+        self._logger = get_logger(self.__class__.__name__)
     
     def compare_mapped_columns(self, df: pd.DataFrame, config: Dict[str, Any]) -> pd.DataFrame:
+        """
+        Compare mapped columns between two dataframes.
+        
+        Args:
+            df: The dataframe containing both file1 and file2 columns
+            config: The configuration dictionary
+        
+        Returns:
+            Dataframe with comparison results
+        
+        Raises:
+            DataComparisonError: If comparison fails
+            InvalidConfigurationError: If configuration is invalid
+        """
         try:
             self._dataframe_validator.validate_dataframe(df)
             self._config_validator.validate_configuration(config)
             column_mapping = self._config_extractor.extract_column_mapping(config)
             
             if not column_mapping:
-                print("✓ No comparison required")
+                self._logger.info("No comparison required")
                 return df
             
+            self._logger.info(f"Starting comparison for {len(column_mapping)} column pairs")
             comparison_result = self._executor.execute_comparison(df, column_mapping, self._strategy_selector, config)
             self._result_validator.validate_result(comparison_result, df)
             
-            print(f"✓ Data comparison completed successfully")
-            print(f"  Original dataframe: {len(df)} rows, {len(df.columns)} columns")
-            print(f"  Comparison result: {len(comparison_result)} rows, {len(comparison_result.columns)} columns")
-            print(f"  Column mappings: {len(column_mapping)} pairs compared")
+            self._logger.info(f"Data comparison completed successfully")
+            self._logger.info(f"Original dataframe: {len(df)} rows, {len(df.columns)} columns")
+            self._logger.info(f"Comparison result: {len(comparison_result)} rows, {len(comparison_result.columns)} columns")
+            self._logger.info(f"Column mappings: {len(column_mapping)} pairs compared")
             
             return comparison_result
             
         except (InvalidConfigurationError, DataComparisonError):
             raise
         except Exception as e:
-            raise DataComparisonError(f"Failed to compare mapped columns: {str(e)}")
+            self._logger.error(f"Failed to compare mapped columns: {str(e)}", exception=e)
+            raise DataComparisonError(f"Failed to compare mapped columns: {str(e)}") from e
     
  

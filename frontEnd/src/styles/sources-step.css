@@ -1,0 +1,40 @@
+.setup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.file-paths {
+  margin-top: 16px;
+}
+
+.upload-files-grid {
+  gap: 16px;
+}
+
+.sheet-names-grid {
+  gap: 16px;
+}
+
+.output-settings {
+  display: grid;
+  gap: 16px;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox-input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.checkbox-label {
+  font-size: 14px;
+  color: #111827;
+  cursor: pointer;
+}

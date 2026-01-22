@@ -81,19 +81,24 @@ class DataValidator(BaseValidator, ConfigValidatorMixin):
             return
         
         additional_cols = config[field_name]
-        if not isinstance(additional_cols, list):
-            self.add_error(f"{field_name} must be a list")
-            return
         
-        missing_columns = []
-        for col in additional_cols:
-            if col not in file_columns:
-                missing_columns.append(col)
-        
-        if missing_columns:
-            self.add_error(f"Missing additional columns in {field_name}: {', '.join(missing_columns)}")
+        if isinstance(additional_cols, dict):
+            column_names = list(additional_cols.keys())
+            missing_columns = [col for col in column_names if col not in file_columns]
+            
+            if missing_columns:
+                self.add_error(f"Missing additional columns in {field_name}: {', '.join(missing_columns)}")
+            else:
+                self.add_warning(f"Additional columns validation passed: {len(column_names)} from {field_name}")
+        elif isinstance(additional_cols, list):
+            missing_columns = [col for col in additional_cols if col not in file_columns]
+            
+            if missing_columns:
+                self.add_error(f"Missing additional columns in {field_name}: {', '.join(missing_columns)}")
+            else:
+                self.add_warning(f"Additional columns validation passed: {len(additional_cols)} from {field_name}")
         else:
-            self.add_warning(f"Additional columns validation passed: {len(additional_cols)} from {field_name}")
+            self.add_error(f"{field_name} must be a list or a dictionary (object)")
     
     def _validate_aggregation_columns(self, config: Dict[str, Any], file1_columns: set, file2_columns: set) -> None:
         aggregation = config.get('aggregation', {})

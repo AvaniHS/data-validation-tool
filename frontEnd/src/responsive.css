@@ -1,0 +1,118 @@
+/* Responsive Design Utilities */
+
+/* Mobile-first approach - Base styles are for mobile (320px+) */
+
+/* Responsive grid utilities - defaults to single column for mobile */
+.responsive-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* Mobile-specific adjustments (max-width: 767px) */
+@media (max-width: 767px) {
+  /* Stack grid columns on mobile - already single column by default */
+  .responsive-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Adjust main padding */
+  main {
+    padding: 12px !important;
+  }
+
+  /* Adjust header padding */
+  header {
+    padding: 10px 12px !important;
+  }
+
+  /* Adjust header font size */
+  header > div {
+    font-size: 14px !important;
+  }
+
+  /* Adjust step container height for mobile */
+  [style*="minHeight: calc(100vh - 250px)"] {
+    min-height: calc(100vh - 200px) !important;
+    max-height: calc(100vh - 200px) !important;
+    gap: 16px !important;
+  }
+
+  /* Adjust config preview height and padding for mobile */
+  /* Keep the pre element's own scrolling, but adjust height for mobile */
+  pre.config-preview-pre {
+    min-height: calc(100vh - 300px) !important;
+    max-height: calc(100vh - 300px) !important;
+    padding: 16px !important;
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+    overflow-y: auto !important;
+    overflow-x: auto !important;
+  }
+  
+  /* Remove overflow from StepContainer on mobile when it contains ConfigPreview */
+  div[style*="minHeight: calc(100vh - 250px)"]:has(pre.config-preview-pre) {
+    overflow-y: visible !important;
+    max-height: none !important;
+    min-height: auto !important;
+  }
+
+  /* Adjust footer padding */
+  footer {
+    padding: 10px !important;
+  }
+}
+
+/* Apply the double scrollbar fix to ALL screen sizes */
+/* Disable StepContainer overflow when it contains ConfigPreview to prevent double scrollbars */
+/* The pre element should handle its own scrolling */
+div[style*="minHeight: calc(100vh - 250px)"]:has(.config-preview-pre),
+div[style*="min-height: calc(100vh - 250px)"]:has(.config-preview-pre) {
+  overflow-y: visible !important;
+  max-height: none !important;
+  min-height: auto !important;
+}
+
+/* Alternative approach: Target StepContainer that directly contains Card with ConfigPreview */
+/* This works even if :has() is not supported in older browsers */
+div[style*="display: grid"][style*="gridTemplateColumns: 1fr"]:has(> div > div > .config-preview-pre) {
+  overflow-y: visible !important;
+  max-height: none !important;
+  min-height: auto !important;
+}
+
+/* Tablet-specific adjustments (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Two columns on tablet */
+  .responsive-grid-2 {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  main {
+    padding: 14px !important;
+  }
+}
+
+/* Desktop and up (1024px+) */
+@media (min-width: 1024px) {
+  /* Two columns on desktop */
+  .responsive-grid-2 {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* Ensure maxWidth doesn't break on small screens */
+@media (max-width: 1200px) {
+  main[style*="maxWidth: 1200"] {
+    max-width: 100% !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  
+  header > div[style*="maxWidth: 1200"],
+  footer > div[style*="maxWidth: 1200"] {
+    max-width: 100% !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+}

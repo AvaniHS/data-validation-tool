@@ -9,7 +9,6 @@ class TypeDetector:
     @staticmethod
     def detect_join_key_types(config: Dict[str, Any], df1: pd.DataFrame, df2: pd.DataFrame) -> Dict[str, str]:
         join_keys = config.get('join_keys', {})
-        join_keys_types = config.get('join_keys_types', {})
         
         if not join_keys or join_keys == DEFAULT_NA_VALUE:
             return {}
@@ -17,11 +16,6 @@ class TypeDetector:
         detected_types = {}
         
         for file1_key, file2_key in join_keys.items():
-            if join_keys_types and file1_key in join_keys_types:
-                if join_keys_types[file1_key] != DEFAULT_NA_VALUE:
-                    detected_types[file1_key] = join_keys_types[file1_key]
-                    continue
-            
             detected_type1 = TypeDetector._detect_column_type(df1, file1_key)
             detected_type2 = TypeDetector._detect_column_type(df2, file2_key)
             

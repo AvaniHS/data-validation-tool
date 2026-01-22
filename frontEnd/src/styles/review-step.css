@@ -1,0 +1,10 @@
+.review-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20;
+  width: 100%;
+  min-width: 0;
+  overflow: visible;
+  box-sizing: border-box;
+  align-content: start;
+}
